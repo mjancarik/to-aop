@@ -1,0 +1,168 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`createPattern method for class should call pattern.beforeMethod and pattern.afterMethod 1`] = `
+Array [
+  Object {
+    "args": Array [
+      Object {},
+      1,
+    ],
+    "object": A {
+      "constructor": [Function],
+      "method": [Function],
+    },
+    "property": "method",
+    "target": [Function],
+  },
+]
+`;
+
+exports[`createPattern method for class should call pattern.beforeMethod and pattern.afterMethod 2`] = `
+Array [
+  Object {
+    "args": Array [
+      Object {},
+      1,
+    ],
+    "object": A {
+      "constructor": [Function],
+      "method": [Function],
+    },
+    "payload": "method",
+    "property": "method",
+    "target": [Function],
+  },
+]
+`;
+
+exports[`createPattern method for class should call pattern.beforeMethod and pattern.afterMethod after class is instanced 1`] = `
+Array [
+  Object {
+    "args": Array [
+      Object {},
+      1,
+    ],
+    "object": A {},
+    "property": "method",
+    "target": [Function],
+  },
+]
+`;
+
+exports[`createPattern method for class should call pattern.beforeMethod and pattern.afterMethod after class is instanced 2`] = `
+Array [
+  Object {
+    "args": Array [
+      Object {},
+      1,
+    ],
+    "object": A {},
+    "payload": "method",
+    "property": "method",
+    "target": [Function],
+  },
+]
+`;
+
+exports[`createPattern method for class should call pattern.beforeMethod and pattern.afterMethod for extended class 1`] = `
+Array [
+  Object {
+    "args": Array [
+      Object {},
+      1,
+    ],
+    "object": A {
+      "variable": "method",
+    },
+    "property": "method",
+    "target": [Function],
+  },
+]
+`;
+
+exports[`createPattern method for class should call pattern.beforeMethod and pattern.afterMethod for extended class 2`] = `
+Array [
+  Object {
+    "args": Array [
+      Object {},
+      1,
+    ],
+    "object": A {
+      "variable": "method",
+    },
+    "payload": "method",
+    "property": "method",
+    "target": [Function],
+  },
+]
+`;
+
+exports[`createPattern method for class should call pattern.beforeMethod and pattern.afterMethod for extended classes with same ancestor 1`] = `
+Array [
+  Object {
+    "args": Array [
+      Object {},
+      1,
+    ],
+    "object": A {},
+    "property": "method",
+    "target": [Function],
+  },
+]
+`;
+
+exports[`createPattern method for class should call pattern.beforeMethod and pattern.afterMethod for extended classes with same ancestor 2`] = `
+Array [
+  Object {
+    "args": Array [
+      Object {},
+      1,
+    ],
+    "object": A {},
+    "payload": "method",
+    "property": "method",
+    "target": [Function],
+  },
+]
+`;
+
+exports[`createPattern method for instance should call pattern.beforeMethod and pattern.afterMethod 1`] = `
+Array [
+  Object {
+    "args": Array [
+      Object {},
+      1,
+    ],
+    "object": A {
+      "variable": undefined,
+      Symbol(WoveOriginalTarget): true,
+    },
+    "property": "method",
+    "target": A {
+      "variable": undefined,
+      Symbol(WoveOriginalTarget): true,
+    },
+  },
+]
+`;
+
+exports[`createPattern method for instance should call pattern.beforeMethod and pattern.afterMethod 2`] = `
+Array [
+  Object {
+    "args": Array [
+      Object {},
+      1,
+    ],
+    "object": A {
+      "variable": undefined,
+      Symbol(WoveOriginalTarget): true,
+    },
+    "payload": undefined,
+    "property": "method",
+    "target": A {
+      "variable": undefined,
+      Symbol(WoveOriginalTarget): true,
+    },
+  },
+]
+`;

@@ -1,0 +1,102 @@
+{
+    "name": "to-aop",
+    "version": "0.0.1",
+    "description": "Library for aspect-oriented programming with JavaScript using ES6 Proxy",
+    "main": "lib/toAOP.js",
+    "module": "es/toAOP.js",
+    "scripts": {
+        "preversion": "npm test && npm run lint && npm run build",
+        "postversion": "npm run build && npm run changelog && git commit -am $npm_package_version && git tag $npm_package_version && git push && git push --tags && npm publish",
+        "lint": "node_modules/.bin/eslint -c ./.eslintrc.js --fix './**/*.{js,jsx}' --ignore-path ./.prettierignore",
+        "test": "node_modules/.bin/jest --no-watchman",
+        "build:commonjs": "cross-env NODE_ENV=cjs rollup -c -o lib/toAOP.js",
+        "build:es": "cross-env NODE_ENV=es rollup -c -o es/toAOP.js",
+        "build": "npm run build:commonjs && npm run build:es",
+        "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 1",
+        "precommit": "npm run lint",
+        "commitmsg": "node_modules/.bin/commitlint -e $GIT_PARAMS",
+        "commit": "node_modules/.bin/git-cz"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/mjancarik/to-aop.git"
+    },
+    "keywords": ["aspect", "advice", "pointcut", "join-point",
+        "aspect-oriented", "aspect-oriented-programming", "aspects", "aop",
+        "javascript", "ES6", "Proxy"
+    ],
+    "author": "Miroslav Jancarik",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/mjancarik/to-aop/issues"
+    },
+    "publishConfig": {
+        "registry": "https://registry.npmjs.org/"
+    },
+    "homepage": "https://github.com/mjancarik/to-aop#readme",
+    "devDependencies": {
+        "@commitlint/cli": "^7.0.0",
+        "@commitlint/config-conventional": "^7.0.1",
+        "babel-core": "^6.26.0",
+        "babel-eslint": "^8.2.2",
+        "babel-jest": "^23.4.0",
+        "babel-plugin-external-helpers": "^6.22.0",
+        "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
+        "babel-preset-env": "^1.6.1",
+        "commitizen": "^2.9.6",
+        "conventional-changelog-cli": "^2.0.1",
+        "coveralls": "^3.0.0",
+        "cross-env": "^5.1.4",
+        "cz-conventional-changelog": "^2.1.0",
+        "eslint": "^5.2.0",
+        "eslint-config-last": "^0.0.5",
+        "eslint-config-prettier": "^2.9.0",
+        "eslint-plugin-jasmine": "^2.9.3",
+        "eslint-plugin-jest": "^21.18.0",
+        "eslint-plugin-prettier": "^2.6.0",
+        "eslint-plugin-react": "^7.7.0",
+        "husky": "^0.14.3",
+        "jest": "^23.4.1",
+        "jsdom": "^11.7.0",
+        "prettier": "^1.11.1",
+        "rollup": "^0.63.4",
+        "rollup-plugin-babel": "^3.0.3",
+        "rollup-plugin-commonjs": "^9.1.0",
+        "rollup-plugin-node-resolve": "^3.3.0",
+        "rollup-plugin-uglify": "^4.0.0",
+        "to-mock": "^1.2.1"
+    },
+    "jest": {
+        "bail": false,
+        "verbose": true,
+        "testEnvironment": "node",
+        "coverageThreshold": {
+            "global": {
+                "functions": 30,
+                "lines": 30,
+                "statements": 30
+            }
+        },
+        "collectCoverageFrom": [
+            "<rootDir>/src/**/*.{js,jsx}"
+        ],
+        "setupFiles": [
+            "<rootDir>/setupJest.js"
+        ],
+        "modulePaths": [
+            "<rootDir>/"
+        ],
+        "testRegex": "(/__tests__/.*|(\\.|/)(Spec))\\.jsx?$"
+    },
+    "dependencies": {},
+    "browserify": {
+        "transform": [
+            "babelify"
+        ]
+    },
+    "config": {
+        "commitizen": {
+            "path": "node_modules/cz-conventional-changelog"
+        }
+    }
+}
