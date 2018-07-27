@@ -1,6 +1,6 @@
 {
     "name": "to-aop",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "Library for aspect-oriented programming with JavaScript using ES6 Proxy",
     "main": "lib/toAOP.js",
     "module": "es/toAOP.js",
@@ -21,9 +21,18 @@
         "type": "git",
         "url": "git+https://github.com/mjancarik/to-aop.git"
     },
-    "keywords": ["aspect", "advice", "pointcut", "join-point",
-        "aspect-oriented", "aspect-oriented-programming", "aspects", "aop",
-        "javascript", "ES6", "Proxy"
+    "keywords": [
+        "aspect",
+        "advice",
+        "pointcut",
+        "join-point",
+        "aspect-oriented",
+        "aspect-oriented-programming",
+        "aspects",
+        "aop",
+        "javascript",
+        "ES6",
+        "Proxy"
     ],
     "author": "Miroslav Jancarik",
     "license": "ISC",
