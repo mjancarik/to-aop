@@ -6,7 +6,6 @@ describe('hook', () => {
       const hook = createHook('beforeMethod', 'setMethod', () => {});
 
       expect(hook).toMatchSnapshot();
-      expect(hook.beforeMethod.toString()).toMatchSnapshot();
     });
   });
 
