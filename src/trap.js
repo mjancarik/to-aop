@@ -1,22 +1,23 @@
 export function createProxy(instance, target, pattern = {}) {
   const proxy = new Proxy(instance, {
     get(object, property) {
-      return getAspect(target, object, property, pattern);
+      return getTrap(target, object, property, pattern);
     },
     set(object, property, payload) {
-      return setAspect(target, object, property, payload, pattern);
+      return setTrap(target, object, property, payload, pattern);
     }
   });
 
   return proxy;
 }
 
-export function setAspect(target, object, property, payload, pattern) {
+export function setTrap(target, object, property, payload, pattern, context) {
   invokePattern(pattern.beforSetter, {
     target,
     object,
     property,
-    payload
+    payload,
+    context
   });
 
   let result = pattern.aroundSetter
@@ -24,7 +25,8 @@ export function setAspect(target, object, property, payload, pattern) {
         target,
         object,
         property,
-        payload
+        payload,
+        context
       })
     : Reflect.set(object, property, payload);
 
@@ -32,13 +34,14 @@ export function setAspect(target, object, property, payload, pattern) {
     target,
     object,
     property,
-    payload
+    payload,
+    context
   });
 
   return result;
 }
 
-export function getAspect(target, object, property, pattern) {
+export function getTrap(target, object, property, pattern, context) {
   if (!Reflect.has(object, property)) {
     return;
   }
@@ -46,14 +49,16 @@ export function getAspect(target, object, property, pattern) {
   invokePattern(pattern.beforGetter, {
     target,
     object,
-    property
+    property,
+    context
   });
 
   let value = pattern.aroundGetter
     ? invokePattern(pattern.aroundGetter, {
         target,
         object,
-        property
+        property,
+        context
       })
     : Reflect.get(object, property);
 
@@ -61,6 +66,7 @@ export function getAspect(target, object, property, pattern) {
     target,
     object,
     property,
+    context,
     payload: value
   });
 
@@ -70,6 +76,7 @@ export function getAspect(target, object, property, pattern) {
         target,
         object,
         property,
+        context,
         args: rest
       });
 
@@ -78,20 +85,22 @@ export function getAspect(target, object, property, pattern) {
             target,
             object,
             property,
+            context,
             args: rest
           })
-        : Reflect.apply(object[property], object, rest);
+        : Reflect.apply(object[property], context || object, rest);
 
       invokePattern(pattern.afterMethod, {
         target,
         object,
         property,
+        context,
         args: rest,
         payload
       });
 
       return payload;
-    }.bind(object);
+    }.bind(context || object);
   }
 
   return value;

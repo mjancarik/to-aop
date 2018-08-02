@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`hook method createHook should return specific hook structure 1`] = `
+Object {
+  "beforeMethod": [Function],
+}
+`;
+
+exports[`hook method createHook should return specific hook structure 2`] = `
+"function hook(meta) {
+      return hookFor(meta, regular, callback);
+    }"
+`;

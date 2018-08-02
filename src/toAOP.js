@@ -1,49 +1,49 @@
 'use strict';
 
-import { createProxy, getAspect, setAspect } from './aspects';
+import { createProxy, getTrap, setTrap } from './trap';
 
-const WOVE_ORIGINAL_TARGET = Symbol('WoveOriginalTarget');
+const AOP_ORIGINAL_TARGET = Symbol('AopOriginalTarget');
 
-export function createPattern(pattern) {
+export function createAspect(pattern) {
   return function applyAOP(target) {
-    return aop(pattern, target);
+    return aop(target, pattern);
   };
 }
 
-export function aop(pattern, target) {
-  if (target[WOVE_ORIGINAL_TARGET]) {
+export function aop(target, pattern) {
+  if (target[AOP_ORIGINAL_TARGET]) {
     return;
   }
 
-  Reflect.defineProperty(target, WOVE_ORIGINAL_TARGET, {
+  Reflect.defineProperty(target, AOP_ORIGINAL_TARGET, {
     value: true,
     enumerable: false
   });
 
   if (typeof target === 'function') {
-    return applyPatternToClass(pattern, target);
+    return applyAopToClass(target, pattern);
   }
 
   if (typeof target === 'object') {
-    return applyPatternToInstance(pattern, target);
+    return applyAopToInstance(target, pattern);
   }
 
   throw new TypeError(
-    `aop factoru accept only object and function. You gave type of ${typeof target}.`
+    `aop accept only object and class. You gave type of ${typeof target}.`
   );
 }
 
-function applyPatternToInstance(pattern, instance) {
+function applyAopToInstance(instance, pattern) {
   return createProxy(instance, instance, pattern);
 }
 
-function applyPatternToClass(pattern, target) {
+function applyAopToClass(target, pattern) {
   const self = Reflect.getPrototypeOf(target.prototype || target);
   const proxy = createProxy(self, target, pattern);
 
   let original = {};
   Object.entries(Object.getOwnPropertyDescriptors(target.prototype)).forEach(
-    ([property]) => {
+    function([property]) {
       try {
         original[property] = target.prototype[property];
 
@@ -53,11 +53,18 @@ function applyPatternToClass(pattern, target) {
           Object.assign(
             {},
             {
-              get: () => {
-                return getAspect(target, original, property, pattern);
+              get: function() {
+                return getTrap(target, original, property, pattern, this);
               },
-              set: payload => {
-                return setAspect(target, original, property, payload, pattern);
+              set: function(payload) {
+                return setTrap(
+                  target,
+                  original,
+                  property,
+                  payload,
+                  pattern,
+                  this
+                );
               }
             }
           )

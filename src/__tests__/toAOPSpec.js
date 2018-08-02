@@ -1,7 +1,7 @@
-import { createPattern } from '../toAOP';
+import { createAspect } from '../toAop';
 
-describe('createPattern method', () => {
-  let withPattern = null;
+describe('createAspect method', () => {
+  let withAspect = null;
   let pattern = null;
 
   function createClasses() {
@@ -28,6 +28,8 @@ describe('createPattern method', () => {
     class C extends A {
       constructor(variable) {
         super(variable);
+
+        this.map = new Map();
       }
     }
 
@@ -42,7 +44,7 @@ describe('createPattern method', () => {
       afterGetter: () => {}
     };
 
-    withPattern = createPattern(pattern);
+    withAspect = createAspect(pattern);
   });
 
   afterEach(() => {});
@@ -53,7 +55,7 @@ describe('createPattern method', () => {
       spyOn(pattern, 'afterMethod');
 
       let { A } = createClasses();
-      let instance = withPattern(new A());
+      let instance = withAspect(new A());
       instance.method({}, 1);
 
       expect(pattern.beforeMethod.calls.count()).toEqual(1);
@@ -69,7 +71,7 @@ describe('createPattern method', () => {
       spyOn(pattern, 'beforeMethod');
       spyOn(pattern, 'afterMethod');
 
-      withPattern(A);
+      withAspect(A);
       new A('method').method({}, 1);
 
       expect(pattern.beforeMethod.calls.count()).toEqual(1);
@@ -83,7 +85,7 @@ describe('createPattern method', () => {
       spyOn(pattern, 'beforeMethod');
       spyOn(pattern, 'afterMethod');
 
-      withPattern(B);
+      withAspect(B);
       new B('method').method({}, 1);
 
       expect(pattern.beforeMethod.calls.count()).toEqual(1);
@@ -98,8 +100,8 @@ describe('createPattern method', () => {
       spyOn(pattern, 'afterMethod');
 
       const b = new B('method');
-      withPattern(B);
-      withPattern(C);
+      withAspect(B);
+      withAspect(C);
       b.method({}, 1);
 
       expect(pattern.beforeMethod.calls.count()).toEqual(1);
@@ -114,8 +116,8 @@ describe('createPattern method', () => {
       spyOn(pattern, 'afterMethod');
 
       const b = new B('method');
-      withPattern(B);
-      withPattern(C);
+      withAspect(B);
+      withAspect(C);
       b.method({}, 1);
 
       expect(pattern.beforeMethod.calls.count()).toEqual(1);

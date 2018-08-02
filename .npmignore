@@ -4,6 +4,7 @@
 .eslintrc.js
 .gitignore
 .npmignore
+.npmrc
 .prettierignore
 .travis.yml
 README.md

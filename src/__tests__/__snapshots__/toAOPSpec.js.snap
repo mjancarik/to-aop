@@ -1,12 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`createPattern method for class should call pattern.beforeMethod and pattern.afterMethod 1`] = `
+exports[`createAspect method for class should call pattern.beforeMethod and pattern.afterMethod 1`] = `
 Array [
   Object {
     "args": Array [
       Object {},
       1,
     ],
+    "context": bound  {},
     "object": A {
       "constructor": [Function],
       "method": [Function],
@@ -17,13 +18,14 @@ Array [
 ]
 `;
 
-exports[`createPattern method for class should call pattern.beforeMethod and pattern.afterMethod 2`] = `
+exports[`createAspect method for class should call pattern.beforeMethod and pattern.afterMethod 2`] = `
 Array [
   Object {
     "args": Array [
       Object {},
       1,
     ],
+    "context": bound  {},
     "object": A {
       "constructor": [Function],
       "method": [Function],
@@ -35,13 +37,14 @@ Array [
 ]
 `;
 
-exports[`createPattern method for class should call pattern.beforeMethod and pattern.afterMethod after class is instanced 1`] = `
+exports[`createAspect method for class should call pattern.beforeMethod and pattern.afterMethod after class is instanced 1`] = `
 Array [
   Object {
     "args": Array [
       Object {},
       1,
     ],
+    "context": undefined,
     "object": A {},
     "property": "method",
     "target": [Function],
@@ -49,13 +52,14 @@ Array [
 ]
 `;
 
-exports[`createPattern method for class should call pattern.beforeMethod and pattern.afterMethod after class is instanced 2`] = `
+exports[`createAspect method for class should call pattern.beforeMethod and pattern.afterMethod after class is instanced 2`] = `
 Array [
   Object {
     "args": Array [
       Object {},
       1,
     ],
+    "context": undefined,
     "object": A {},
     "payload": "method",
     "property": "method",
@@ -64,13 +68,14 @@ Array [
 ]
 `;
 
-exports[`createPattern method for class should call pattern.beforeMethod and pattern.afterMethod for extended class 1`] = `
+exports[`createAspect method for class should call pattern.beforeMethod and pattern.afterMethod for extended class 1`] = `
 Array [
   Object {
     "args": Array [
       Object {},
       1,
     ],
+    "context": undefined,
     "object": A {
       "variable": "method",
     },
@@ -80,13 +85,14 @@ Array [
 ]
 `;
 
-exports[`createPattern method for class should call pattern.beforeMethod and pattern.afterMethod for extended class 2`] = `
+exports[`createAspect method for class should call pattern.beforeMethod and pattern.afterMethod for extended class 2`] = `
 Array [
   Object {
     "args": Array [
       Object {},
       1,
     ],
+    "context": undefined,
     "object": A {
       "variable": "method",
     },
@@ -97,13 +103,14 @@ Array [
 ]
 `;
 
-exports[`createPattern method for class should call pattern.beforeMethod and pattern.afterMethod for extended classes with same ancestor 1`] = `
+exports[`createAspect method for class should call pattern.beforeMethod and pattern.afterMethod for extended classes with same ancestor 1`] = `
 Array [
   Object {
     "args": Array [
       Object {},
       1,
     ],
+    "context": undefined,
     "object": A {},
     "property": "method",
     "target": [Function],
@@ -111,13 +118,14 @@ Array [
 ]
 `;
 
-exports[`createPattern method for class should call pattern.beforeMethod and pattern.afterMethod for extended classes with same ancestor 2`] = `
+exports[`createAspect method for class should call pattern.beforeMethod and pattern.afterMethod for extended classes with same ancestor 2`] = `
 Array [
   Object {
     "args": Array [
       Object {},
       1,
     ],
+    "context": undefined,
     "object": A {},
     "payload": "method",
     "property": "method",
@@ -126,42 +134,44 @@ Array [
 ]
 `;
 
-exports[`createPattern method for instance should call pattern.beforeMethod and pattern.afterMethod 1`] = `
+exports[`createAspect method for instance should call pattern.beforeMethod and pattern.afterMethod 1`] = `
 Array [
   Object {
     "args": Array [
       Object {},
       1,
     ],
+    "context": undefined,
     "object": A {
       "variable": undefined,
-      Symbol(WoveOriginalTarget): true,
+      Symbol(AopOriginalTarget): true,
     },
     "property": "method",
     "target": A {
       "variable": undefined,
-      Symbol(WoveOriginalTarget): true,
+      Symbol(AopOriginalTarget): true,
     },
   },
 ]
 `;
 
-exports[`createPattern method for instance should call pattern.beforeMethod and pattern.afterMethod 2`] = `
+exports[`createAspect method for instance should call pattern.beforeMethod and pattern.afterMethod 2`] = `
 Array [
   Object {
     "args": Array [
       Object {},
       1,
     ],
+    "context": undefined,
     "object": A {
       "variable": undefined,
-      Symbol(WoveOriginalTarget): true,
+      Symbol(AopOriginalTarget): true,
     },
     "payload": undefined,
     "property": "method",
     "target": A {
       "variable": undefined,
-      Symbol(WoveOriginalTarget): true,
+      Symbol(AopOriginalTarget): true,
     },
   },
 ]

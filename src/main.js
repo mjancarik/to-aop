@@ -1,3 +1,4 @@
-import { createPattern, aop } from './toAOP';
+import { createAspect, aop } from './toAOP';
+import { createHook, hookFor } from './hook';
 
-export { createPattern, aop };
+export { createAspect, aop, createHook, hookFor };
