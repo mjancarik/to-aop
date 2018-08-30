@@ -1,3 +1,13 @@
+<a name="0.0.5"></a>
+## [0.0.5](https://github.com/mjancarik/to-aop/compare/0.0.4...0.0.5) (2018-08-30)
+
+
+### Features
+
+* **class:** allow hook traspiled ES6 class to es5 ([9d5774e](https://github.com/mjancarik/to-aop/commit/9d5774e))
+
+
+
 <a name="0.0.4"></a>
 ## [0.0.4](https://github.com/mjancarik/to-aop/compare/0.0.3...0.0.4) (2018-08-02)
 
