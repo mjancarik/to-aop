@@ -1,4 +1,7 @@
-export function createProxy(instance, target, pattern = {}) {
+import { AOP_PATTERN, AOP_HOOKS } from './symbol';
+
+export function createProxy(instance, target) {
+  const pattern = target[AOP_PATTERN];
   const proxy = new Proxy(instance, {
     get(object, property) {
       return getTrap(target, object, property, pattern);
@@ -41,12 +44,76 @@ export function setTrap(target, object, property, payload, pattern, context) {
   return result;
 }
 
+export function createCallTrap(target, object, property, pattern, context) {
+  function callTrap(...rest) {
+    const self = this;
+    let payload = undefined;
+
+    //console.log(callTrap[AOP_HOOKS]);
+
+    callTrap[AOP_HOOKS].forEach(
+      ({ target, object, property, pattern, context }) => {
+        invokePattern(pattern.beforeMethod, {
+          target,
+          object,
+          property,
+          context: context || self,
+          args: rest
+        });
+      }
+    );
+
+    {
+      const { target, object, property, pattern, context } = callTrap[
+        AOP_HOOKS
+      ][callTrap[AOP_HOOKS].length - 1];
+      const arrondPattern = Array.isArray(pattern.aroundMethod)
+        ? pattern.aroundMethod[pattern.aroundMethod.length - 1]
+        : pattern.aroundMethod;
+
+      payload = arrondPattern
+        ? invokePattern(arrondPattern, {
+            target,
+            object,
+            property,
+            context: context || self,
+            args: rest
+          })
+        : Reflect.apply(object[property], context || self, rest);
+    }
+
+    callTrap[AOP_HOOKS].forEach(
+      ({ target, object, property, pattern, context }) => {
+        invokePattern(pattern.afterMethod, {
+          target,
+          object,
+          property,
+          context: context || self,
+          args: rest,
+          payload
+        });
+      }
+    );
+
+    return payload;
+  }
+
+  //todo merge and use static property like AOP_PATTERN
+  if (callTrap[AOP_HOOKS]) {
+    callTrap[AOP_HOOKS].push({ target, object, property, pattern, context });
+  } else {
+    callTrap[AOP_HOOKS] = [{ target, object, property, pattern, context }];
+  }
+
+  return callTrap;
+}
+
 export function getTrap(target, object, property, pattern, context) {
   if (!Reflect.has(object, property)) {
     return;
   }
 
-  invokePattern(pattern.beforGetter, {
+  invokePattern(pattern.beforeGetter, {
     target,
     object,
     property,
@@ -71,42 +138,13 @@ export function getTrap(target, object, property, pattern, context) {
   });
 
   if (typeof value === 'function') {
-    value = function(...rest) {
-      invokePattern(pattern.beforeMethod, {
-        target,
-        object,
-        property,
-        context,
-        args: rest
-      });
-
-      const payload = pattern.aroundMethod
-        ? invokePattern(pattern.aroundMethod, {
-            target,
-            object,
-            property,
-            context,
-            args: rest
-          })
-        : Reflect.apply(object[property], context || object, rest);
-
-      invokePattern(pattern.afterMethod, {
-        target,
-        object,
-        property,
-        context,
-        args: rest,
-        payload
-      });
-
-      return payload;
-    }.bind(context || object);
+    value = createCallTrap(target, object, property, pattern, context);
   }
 
   return value;
 }
 
-function invokePattern(pattern, meta) {
+export function invokePattern(pattern, meta) {
   if (!pattern) {
     return;
   }

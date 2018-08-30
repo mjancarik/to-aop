@@ -7,9 +7,10 @@ Array [
       Object {},
       1,
     ],
-    "context": bound  {},
-    "object": A {
-      "constructor": [Function],
+    "context": A {
+      "variable": "method",
+    },
+    "object": Object {
       "method": [Function],
     },
     "property": "method",
@@ -25,9 +26,10 @@ Array [
       Object {},
       1,
     ],
-    "context": bound  {},
-    "object": A {
-      "constructor": [Function],
+    "context": A {
+      "variable": "method",
+    },
+    "object": Object {
       "method": [Function],
     },
     "payload": "method",
@@ -44,8 +46,12 @@ Array [
       Object {},
       1,
     ],
-    "context": undefined,
-    "object": A {},
+    "context": B {
+      "variable": "method",
+    },
+    "object": Object {
+      "method": [Function],
+    },
     "property": "method",
     "target": [Function],
   },
@@ -59,8 +65,12 @@ Array [
       Object {},
       1,
     ],
-    "context": undefined,
-    "object": A {},
+    "context": B {
+      "variable": "method",
+    },
+    "object": Object {
+      "method": [Function],
+    },
     "payload": "method",
     "property": "method",
     "target": [Function],
@@ -75,9 +85,11 @@ Array [
       Object {},
       1,
     ],
-    "context": undefined,
-    "object": A {
+    "context": B {
       "variable": "method",
+    },
+    "object": Object {
+      "method": [Function],
     },
     "property": "method",
     "target": [Function],
@@ -92,9 +104,11 @@ Array [
       Object {},
       1,
     ],
-    "context": undefined,
-    "object": A {
+    "context": B {
       "variable": "method",
+    },
+    "object": Object {
+      "method": [Function],
     },
     "payload": "method",
     "property": "method",
@@ -110,8 +124,12 @@ Array [
       Object {},
       1,
     ],
-    "context": undefined,
-    "object": A {},
+    "context": B {
+      "variable": "method",
+    },
+    "object": Object {
+      "method": [Function],
+    },
     "property": "method",
     "target": [Function],
   },
@@ -125,8 +143,12 @@ Array [
       Object {},
       1,
     ],
-    "context": undefined,
-    "object": A {},
+    "context": B {
+      "variable": "method",
+    },
+    "object": Object {
+      "method": [Function],
+    },
     "payload": "method",
     "property": "method",
     "target": [Function],
@@ -141,15 +163,33 @@ Array [
       Object {},
       1,
     ],
-    "context": undefined,
+    "context": callTrap {
+      "variable": undefined,
+      Symbol(AopPattern): Object {
+        "afterGetter": [Function],
+        "afterMethod": [Function],
+        "beforeGetter": [Function],
+        "beforeMethod": [Function],
+      },
+    },
     "object": A {
       "variable": undefined,
-      Symbol(AopOriginalTarget): true,
+      Symbol(AopPattern): Object {
+        "afterGetter": [Function],
+        "afterMethod": [Function],
+        "beforeGetter": [Function],
+        "beforeMethod": [Function],
+      },
     },
     "property": "method",
     "target": A {
       "variable": undefined,
-      Symbol(AopOriginalTarget): true,
+      Symbol(AopPattern): Object {
+        "afterGetter": [Function],
+        "afterMethod": [Function],
+        "beforeGetter": [Function],
+        "beforeMethod": [Function],
+      },
     },
   },
 ]
@@ -162,16 +202,34 @@ Array [
       Object {},
       1,
     ],
-    "context": undefined,
+    "context": callTrap {
+      "variable": undefined,
+      Symbol(AopPattern): Object {
+        "afterGetter": [Function],
+        "afterMethod": [Function],
+        "beforeGetter": [Function],
+        "beforeMethod": [Function],
+      },
+    },
     "object": A {
       "variable": undefined,
-      Symbol(AopOriginalTarget): true,
+      Symbol(AopPattern): Object {
+        "afterGetter": [Function],
+        "afterMethod": [Function],
+        "beforeGetter": [Function],
+        "beforeMethod": [Function],
+      },
     },
     "payload": undefined,
     "property": "method",
     "target": A {
       "variable": undefined,
-      Symbol(AopOriginalTarget): true,
+      Symbol(AopPattern): Object {
+        "afterGetter": [Function],
+        "afterMethod": [Function],
+        "beforeGetter": [Function],
+        "beforeMethod": [Function],
+      },
     },
   },
 ]

@@ -95,13 +95,12 @@ describe('createAspect method', () => {
     });
 
     it('should call pattern.beforeMethod and pattern.afterMethod after class is instanced', () => {
-      let { B, C } = createClasses();
+      let { B } = createClasses();
       spyOn(pattern, 'beforeMethod');
       spyOn(pattern, 'afterMethod');
 
       const b = new B('method');
       withAspect(B);
-      withAspect(C);
       b.method({}, 1);
 
       expect(pattern.beforeMethod.calls.count()).toEqual(1);
@@ -120,10 +119,27 @@ describe('createAspect method', () => {
       withAspect(C);
       b.method({}, 1);
 
-      expect(pattern.beforeMethod.calls.count()).toEqual(1);
+      expect(pattern.beforeMethod.calls.count()).toEqual(2);
       expect(pattern.beforeMethod.calls.argsFor(0)).toMatchSnapshot();
-      expect(pattern.afterMethod.calls.count()).toEqual(1);
+      expect(pattern.afterMethod.calls.count()).toEqual(2);
       expect(pattern.afterMethod.calls.argsFor(0)).toMatchSnapshot();
+    });
+  });
+
+  describe('es5', () => {
+    it('should be same istance', () => {
+      let { B, A } = createClasses();
+      spyOn(pattern, 'beforeMethod');
+      spyOn(pattern, 'afterMethod');
+
+      const b = new B('method');
+      withAspect(B);
+      b.method({}, 1);
+
+      expect(pattern.beforeMethod.calls.count()).toEqual(1);
+      expect(pattern.afterMethod.calls.count()).toEqual(1);
+      expect(b instanceof A).toBeTruthy();
+      expect(b instanceof B).toBeTruthy();
     });
   });
 });

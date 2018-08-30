@@ -1,8 +1,7 @@
 'use strict';
 
-import { createProxy, getTrap, setTrap } from './trap';
-
-const AOP_ORIGINAL_TARGET = Symbol('AopOriginalTarget');
+import { createProxy, createCallTrap } from './trap';
+import { AOP_PATTERN, AOP_HOOKS } from './symbol';
 
 export function createAspect(pattern) {
   return function applyAOP(target) {
@@ -11,21 +10,23 @@ export function createAspect(pattern) {
 }
 
 export function aop(target, pattern) {
-  if (target[AOP_ORIGINAL_TARGET]) {
+  if (target[AOP_PATTERN]) {
+    mergePattern(target, pattern);
+
     return;
   }
 
-  Reflect.defineProperty(target, AOP_ORIGINAL_TARGET, {
-    value: true,
+  Reflect.defineProperty(target, AOP_PATTERN, {
+    value: pattern,
     enumerable: false
   });
 
   if (typeof target === 'function') {
-    return applyAopToClass(target, pattern);
+    return applyAopToClass(target);
   }
 
   if (typeof target === 'object') {
-    return applyAopToInstance(target, pattern);
+    return applyAopToInstance(target);
   }
 
   throw new TypeError(
@@ -33,47 +34,74 @@ export function aop(target, pattern) {
   );
 }
 
-function applyAopToInstance(instance, pattern) {
-  return createProxy(instance, instance, pattern);
+function applyAopToInstance(instance) {
+  return createProxy(instance, instance);
 }
 
-function applyAopToClass(target, pattern) {
-  const self = Reflect.getPrototypeOf(target.prototype || target);
-  const proxy = createProxy(self, target, pattern);
-
+function applyAopToClass(target) {
   let original = {};
-  Object.entries(Object.getOwnPropertyDescriptors(target.prototype)).forEach(
-    function([property]) {
-      try {
-        original[property] = target.prototype[property];
+  let prototype = target.prototype;
+  let pattern = target[AOP_PATTERN];
 
-        Reflect.defineProperty(
-          target.prototype,
-          property,
-          Object.assign(
-            {},
-            {
-              get: function() {
-                return getTrap(target, original, property, pattern, this);
-              },
-              set: function(payload) {
-                return setTrap(
-                  target,
-                  original,
-                  property,
-                  payload,
-                  pattern,
-                  this
-                );
-              }
-            }
-          )
-        );
-      } catch (_) {
-        console.error(_);
-      } // eslint-disable-line no-empty
-    }
+  while (prototype) {
+    Object.entries(Object.getOwnPropertyDescriptors(prototype)).forEach(
+      function([property]) {
+        try {
+          if (property in original) {
+            return;
+          }
+          original[property] = prototype[property];
+
+          let aopHooks = original[property][AOP_HOOKS];
+          if (aopHooks) {
+            const { object } = aopHooks[aopHooks.length - 1];
+            aopHooks.push({
+              target,
+              object,
+              property,
+              pattern
+            });
+            return;
+          }
+
+          if (typeof original[property] === 'function') {
+            prototype[property] = createCallTrap(
+              target,
+              original,
+              property,
+              pattern
+            );
+          }
+        } catch (_) {
+          console.error(_);
+        } // eslint-disable-line no-empty
+      }
+    );
+
+    prototype = Reflect.getPrototypeOf(prototype);
+  }
+}
+
+function mergePattern(target, pattern) {
+  let currentTargetPattern = target[AOP_PATTERN];
+
+  target[AOP_PATTERN] = Object.entries(pattern).reduce(
+    (resultPattern, [hookName, hookValue]) => {
+      if (!resultPattern[hookName]) {
+        resultPattern = hookName;
+      }
+
+      if (resultPattern[hookName]) {
+        if (!Array.isArray(resultPattern[hookName])) {
+          resultPattern[hookName] = [resultPattern[hookName]];
+        }
+        if (!Array.isArray(hookValue)) {
+          hookValue = [hookValue];
+        }
+
+        resultPattern[hookName] = resultPattern[hookName].concat(hookValue);
+      }
+    },
+    Object.assign({}, currentTargetPattern)
   );
-
-  Reflect.setPrototypeOf(target.prototype || target, proxy);
 }
