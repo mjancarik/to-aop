@@ -1,7 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`hook method createHook should return specific hook structure 1`] = `
-Object {
-  "beforeMethod": [Function],
-}
-`;
