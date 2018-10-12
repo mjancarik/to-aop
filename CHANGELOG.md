@@ -1,3 +1,13 @@
+<a name="0.0.6"></a>
+## [0.0.6](https://github.com/mjancarik/to-aop/compare/0.0.5...0.0.6) (2018-10-12)
+
+
+### Features
+
+* **aop:** the method may be called more times for class ([5922d14](https://github.com/mjancarik/to-aop/commit/5922d14))
+
+
+
 <a name="0.0.5"></a>
 ## [0.0.5](https://github.com/mjancarik/to-aop/compare/0.0.4...0.0.5) (2018-08-30)
 
