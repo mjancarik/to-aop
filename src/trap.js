@@ -1,14 +1,27 @@
 import { AOP_PATTERN, AOP_HOOKS } from './symbol';
 
-export function createProxy(instance, target) {
-  const pattern = target[AOP_PATTERN];
-  const proxy = new Proxy(instance, {
+export function createProxy(target, pattern) {
+  pattern = pattern || target[AOP_PATTERN] || {};
+
+  const proxy = new Proxy(target, {
     get(object, property) {
-      return getTrap(target, object, property, pattern);
+      let value = getTrap(target, object, property, pattern);
+      if (value === undefined) {
+        return;
+      }
+
+      if (typeof value !== 'object' || typeof value !== 'function') {
+        return value;
+      }
+
+      return createProxy(value, pattern);
     },
     set(object, property, payload) {
       return setTrap(target, object, property, payload, pattern);
     }
+    // apply(method, object, args) {
+    //     return
+    // }
   });
 
   return proxy;
@@ -151,8 +164,9 @@ export function invokePattern(pattern, meta) {
 
   if (Array.isArray(pattern)) {
     return pattern.map(rule => {
-      const method = typeof pattern === 'function' ? pattern : pattern.method;
-      Reflect.apply(method, rule.context, [meta]);
+      //const method = ty
+      //peof pattern === 'function' ? pattern : pattern.method;
+      Reflect.apply(rule, rule.context, [meta]);
     });
   } else {
     const method = typeof pattern === 'function' ? pattern : pattern.method;

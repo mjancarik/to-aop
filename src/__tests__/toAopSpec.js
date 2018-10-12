@@ -2,6 +2,7 @@ import { createAspect } from '../toAop';
 
 describe('createAspect method', () => {
   let withAspect = null;
+  let withAspect2 = null;
   let pattern = null;
 
   function createClasses() {
@@ -22,6 +23,10 @@ describe('createAspect method', () => {
     class B extends A {
       constructor(variable) {
         super(variable);
+      }
+
+      method(...rest) {
+        return 'B ' + super.method(...rest);
       }
     }
 
@@ -45,6 +50,7 @@ describe('createAspect method', () => {
     };
 
     withAspect = createAspect(pattern);
+    withAspect2 = createAspect(pattern);
   });
 
   afterEach(() => {});
@@ -56,12 +62,13 @@ describe('createAspect method', () => {
 
       let { A } = createClasses();
       let instance = withAspect(new A());
-      instance.method({}, 1);
+      let result = instance.method({}, 1);
 
       expect(pattern.beforeMethod.calls.count()).toEqual(1);
       expect(pattern.beforeMethod.calls.argsFor(0)).toMatchSnapshot();
       expect(pattern.afterMethod.calls.count()).toEqual(1);
       expect(pattern.afterMethod.calls.argsFor(0)).toMatchSnapshot();
+      expect(result).toEqual(undefined);
     });
   });
 
@@ -110,18 +117,22 @@ describe('createAspect method', () => {
     });
 
     it('should call pattern.beforeMethod and pattern.afterMethod for extended classes with same ancestor', () => {
-      let { B, C } = createClasses();
+      let { B, C, A } = createClasses();
       spyOn(pattern, 'beforeMethod');
       spyOn(pattern, 'afterMethod');
 
       const b = new B('method');
-      withAspect(B);
+      withAspect(A);
+      withAspect2(A);
       withAspect(C);
-      b.method({}, 1);
+      withAspect2(C);
+      withAspect(B);
+      withAspect2(B);
+      expect(b.method({}, 1)).toEqual('B method');
 
-      expect(pattern.beforeMethod.calls.count()).toEqual(2);
+      expect(pattern.beforeMethod.calls.count()).toEqual(6);
       expect(pattern.beforeMethod.calls.argsFor(0)).toMatchSnapshot();
-      expect(pattern.afterMethod.calls.count()).toEqual(2);
+      expect(pattern.afterMethod.calls.count()).toEqual(6);
       expect(pattern.afterMethod.calls.argsFor(0)).toMatchSnapshot();
     });
   });

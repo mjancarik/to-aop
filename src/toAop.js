@@ -4,13 +4,13 @@ import { createProxy, createCallTrap } from './trap';
 import { AOP_PATTERN, AOP_HOOKS } from './symbol';
 
 export function createAspect(pattern) {
-  return function applyAOP(target) {
+  return function applyAop(target) {
     return aop(target, pattern);
   };
 }
 
 export function aop(target, pattern) {
-  if (target[AOP_PATTERN]) {
+  if (Object.hasOwnProperty(target, AOP_PATTERN)) {
     mergePattern(target, pattern);
 
     return;
@@ -18,7 +18,8 @@ export function aop(target, pattern) {
 
   Reflect.defineProperty(target, AOP_PATTERN, {
     value: pattern,
-    enumerable: false
+    enumerable: false,
+    writable: true
   });
 
   if (typeof target === 'function') {
@@ -35,7 +36,7 @@ export function aop(target, pattern) {
 }
 
 function applyAopToInstance(instance) {
-  return createProxy(instance, instance);
+  return createProxy(instance);
 }
 
 function applyAopToClass(target) {
@@ -51,6 +52,8 @@ function applyAopToClass(target) {
             return;
           }
           original[property] = prototype[property];
+
+          // TODO override getter and setter
 
           let aopHooks = original[property][AOP_HOOKS];
           if (aopHooks) {
@@ -101,7 +104,9 @@ function mergePattern(target, pattern) {
 
         resultPattern[hookName] = resultPattern[hookName].concat(hookValue);
       }
+
+      return resultPattern;
     },
-    Object.assign({}, currentTargetPattern)
+    currentTargetPattern
   );
 }

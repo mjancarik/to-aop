@@ -71,7 +71,7 @@ Array [
     "object": Object {
       "method": [Function],
     },
-    "payload": "method",
+    "payload": "B method",
     "property": "method",
     "target": [Function],
   },
@@ -110,7 +110,7 @@ Array [
     "object": Object {
       "method": [Function],
     },
-    "payload": "method",
+    "payload": "B method",
     "property": "method",
     "target": [Function],
   },
