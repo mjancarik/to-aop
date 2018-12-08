@@ -1,27 +1,35 @@
 import { AOP_PATTERN, AOP_HOOKS } from './symbol';
 
-export function createProxy(target, pattern) {
+export function createProxy(target, pattern, context) {
   pattern = pattern || target[AOP_PATTERN] || {};
 
   const proxy = new Proxy(target, {
     get(object, property) {
+      let original = object[property];
       let value = getTrap(target, object, property, pattern);
-      if (value === undefined) {
+
+      if (value === undefined || original === undefined) {
         return;
       }
 
-      if (typeof value !== 'object' || typeof value !== 'function') {
+      if (typeof original !== 'object' && typeof original !== 'function') {
         return value;
       }
 
-      return createProxy(value, pattern);
+      return createProxy(original, pattern, object);
     },
     set(object, property, payload) {
       return setTrap(target, object, property, payload, pattern);
+    },
+    apply(method, object, args) {
+      return createCallTrap(
+        target,
+        context || object,
+        method.name,
+        pattern,
+        context || object
+      )(...args);
     }
-    // apply(method, object, args) {
-    //     return
-    // }
   });
 
   return proxy;

@@ -43,17 +43,17 @@ describe('createAspect method', () => {
 
   beforeEach(() => {
     pattern = {
-      beforeMethod: () => {},
-      afterMethod: () => {},
-      beforeGetter: () => {},
-      afterGetter: () => {}
+      beforeMethod: () => { },
+      afterMethod: () => { },
+      beforeGetter: () => { },
+      afterGetter: () => { }
     };
 
     withAspect = createAspect(pattern);
     withAspect2 = createAspect(pattern);
   });
 
-  afterEach(() => {});
+  afterEach(() => { });
 
   describe('for instance', () => {
     it('should call pattern.beforeMethod and pattern.afterMethod', () => {
@@ -69,6 +69,19 @@ describe('createAspect method', () => {
       expect(pattern.afterMethod.calls.count()).toEqual(1);
       expect(pattern.afterMethod.calls.argsFor(0)).toMatchSnapshot();
       expect(result).toEqual(undefined);
+    });
+
+    it('should call pattern.beforeGetter and pattern.beforeMethod', () => {
+      spyOn(pattern, 'beforeGetter');
+      spyOn(pattern, 'beforeMethod');
+
+      let { C } = createClasses();
+      let instance = withAspect(new C());
+      let entries = instance.map.entries();
+
+      expect(pattern.beforeGetter.calls.count()).toEqual(2);
+      expect(pattern.beforeMethod.calls.count()).toEqual(1);
+      expect(entries.next().done).toEqual(true);
     });
   });
 

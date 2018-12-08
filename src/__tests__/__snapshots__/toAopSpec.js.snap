@@ -163,7 +163,7 @@ Array [
       Object {},
       1,
     ],
-    "context": callTrap {
+    "context": A {
       "variable": undefined,
       Symbol(AopPattern): Object {
         "afterGetter": [Function],
@@ -182,15 +182,7 @@ Array [
       },
     },
     "property": "method",
-    "target": A {
-      "variable": undefined,
-      Symbol(AopPattern): Object {
-        "afterGetter": [Function],
-        "afterMethod": [Function],
-        "beforeGetter": [Function],
-        "beforeMethod": [Function],
-      },
-    },
+    "target": [Function],
   },
 ]
 `;
@@ -202,7 +194,7 @@ Array [
       Object {},
       1,
     ],
-    "context": callTrap {
+    "context": A {
       "variable": undefined,
       Symbol(AopPattern): Object {
         "afterGetter": [Function],
@@ -222,15 +214,7 @@ Array [
     },
     "payload": undefined,
     "property": "method",
-    "target": A {
-      "variable": undefined,
-      Symbol(AopPattern): Object {
-        "afterGetter": [Function],
-        "afterMethod": [Function],
-        "beforeGetter": [Function],
-        "beforeMethod": [Function],
-      },
-    },
+    "target": [Function],
   },
 ]
 `;
