@@ -43,17 +43,17 @@ describe('createAspect method', () => {
 
   beforeEach(() => {
     pattern = {
-      beforeMethod: () => { },
-      afterMethod: () => { },
-      beforeGetter: () => { },
-      afterGetter: () => { }
+      beforeMethod: () => {},
+      afterMethod: () => {},
+      beforeGetter: () => {},
+      afterGetter: () => {}
     };
 
     withAspect = createAspect(pattern);
     withAspect2 = createAspect(pattern);
   });
 
-  afterEach(() => { });
+  afterEach(() => {});
 
   describe('for instance', () => {
     it('should call pattern.beforeMethod and pattern.afterMethod', () => {

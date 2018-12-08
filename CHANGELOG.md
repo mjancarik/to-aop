@@ -1,3 +1,13 @@
+<a name="0.0.7"></a>
+## [0.0.7](https://github.com/mjancarik/to-aop/compare/0.0.6...0.0.7) (2018-12-08)
+
+
+### Bug Fixes
+
+* **instance:** fixing aop for instance which use proxy ([c28aeb7](https://github.com/mjancarik/to-aop/commit/c28aeb7))
+
+
+
 <a name="0.0.6"></a>
 ## [0.0.6](https://github.com/mjancarik/to-aop/compare/0.0.5...0.0.6) (2018-10-12)
 
