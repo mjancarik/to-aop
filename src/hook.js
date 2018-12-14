@@ -40,3 +40,12 @@ export function hookFor(meta, filterRule, callback) {
     `Invalid rule type ${typeof filterRule}. Method accept string, regexp, function and array.`
   );
 }
+
+export const hookName = Object.freeze({
+  beforeMethod: 'beforeMethod',
+  afterMethod: 'afterMethod',
+  aroundMethod: 'aroundMethod',
+  beforeGetter: 'beforeGetter',
+  afterGetter: 'afterGetter',
+  aroundGetter: 'aroundGetter'
+});

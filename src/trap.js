@@ -172,8 +172,6 @@ export function invokePattern(pattern, meta) {
 
   if (Array.isArray(pattern)) {
     return pattern.map(rule => {
-      //const method = ty
-      //peof pattern === 'function' ? pattern : pattern.method;
       Reflect.apply(rule, rule.context, [meta]);
     });
   } else {
