@@ -1,3 +1,13 @@
+<a name="0.0.8"></a>
+## [0.0.8](https://github.com/mjancarik/to-aop/compare/0.0.7...0.0.8) (2018-12-14)
+
+
+### Features
+
+* **main:** to-aop exports hookName and all traps ([195fcf5](https://github.com/mjancarik/to-aop/commit/195fcf5))
+
+
+
 <a name="0.0.7"></a>
 ## [0.0.7](https://github.com/mjancarik/to-aop/compare/0.0.6...0.0.7) (2018-12-08)
 
