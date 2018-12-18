@@ -47,5 +47,8 @@ export const hookName = Object.freeze({
   aroundMethod: 'aroundMethod',
   beforeGetter: 'beforeGetter',
   afterGetter: 'afterGetter',
-  aroundGetter: 'aroundGetter'
+  aroundGetter: 'aroundGetter',
+  beforeSetter: 'beforeSetter',
+  afterSetter: 'afterSetter',
+  aroundSetter: 'aroundSetter'
 });
