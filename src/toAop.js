@@ -40,10 +40,38 @@ function applyAopToInstance(instance) {
 }
 
 function applyAopToClass(target) {
-  let original = {};
-  let prototype = target.prototype;
   let pattern = target[AOP_PATTERN];
 
+  applyAopToStaticMethods(target, pattern);
+  applyAopToMethods(target, pattern);
+}
+
+function applyAopToStaticMethods(target, pattern) {
+  let original = {};
+
+  while (target && target !== Function.prototype) {
+    Object.entries(Object.getOwnPropertyDescriptors(target)).forEach(
+      ([property]) => {
+        if (typeof target[property] === 'function') {
+          original[property] = target[property];
+
+          target[property] = createCallTrap(
+            target,
+            original,
+            property,
+            pattern
+          );
+        }
+      }
+    );
+
+    target = Reflect.getPrototypeOf(target);
+  }
+}
+
+function applyAopToMethods(target, pattern) {
+  let original = {};
+  let prototype = target.prototype;
   while (prototype) {
     Object.entries(Object.getOwnPropertyDescriptors(prototype)).forEach(
       function([property]) {

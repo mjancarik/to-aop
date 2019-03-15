@@ -11,6 +11,10 @@ describe('createAspect method', () => {
         return 'static method';
       }
 
+      static get staticGetter() {
+        return 'asd';
+      }
+
       constructor(variable) {
         this.variable = variable;
       }
@@ -31,6 +35,10 @@ describe('createAspect method', () => {
     }
 
     class C extends A {
+      static staticMethod2() {
+        return 'static method 2';
+      }
+
       constructor(variable) {
         super(variable);
 
@@ -86,6 +94,25 @@ describe('createAspect method', () => {
   });
 
   describe('for class', () => {
+    it('should call pattern.beforeMethod and pattern.afterMethod for static method', () => {
+      let { C } = createClasses();
+      spyOn(pattern, 'beforeMethod');
+      spyOn(pattern, 'afterMethod');
+
+      withAspect(C);
+      withAspect2(C);
+      const staticResult1 = C.staticMethod();
+      const staticResult2 = C.staticMethod2();
+
+      expect(pattern.beforeMethod.calls.count()).toEqual(4);
+      expect(pattern.beforeMethod.calls.argsFor(0)).toMatchSnapshot();
+      expect(pattern.afterMethod.calls.count()).toEqual(4);
+      expect(pattern.afterMethod.calls.argsFor(0)).toMatchSnapshot();
+
+      expect(staticResult1).toMatchInlineSnapshot(`"static method"`);
+      expect(staticResult2).toMatchInlineSnapshot(`"static method 2"`);
+    });
+
     it('should call pattern.beforeMethod and pattern.afterMethod', () => {
       let { A } = createClasses();
       spyOn(pattern, 'beforeMethod');
@@ -150,8 +177,8 @@ describe('createAspect method', () => {
     });
   });
 
-  describe('es5', () => {
-    it('should be same istance', () => {
+  describe('es5 problems', () => {
+    it('should be same instance', () => {
       let { B, A } = createClasses();
       spyOn(pattern, 'beforeMethod');
       spyOn(pattern, 'afterMethod');

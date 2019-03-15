@@ -156,6 +156,37 @@ Array [
 ]
 `;
 
+exports[`createAspect method for class should call pattern.beforeMethod and pattern.afterMethod for static method 1`] = `
+Array [
+  Object {
+    "args": Array [],
+    "context": [Function],
+    "object": Object {
+      "staticMethod": [Function],
+      "staticMethod2": [Function],
+    },
+    "property": "staticMethod",
+    "target": [Function],
+  },
+]
+`;
+
+exports[`createAspect method for class should call pattern.beforeMethod and pattern.afterMethod for static method 2`] = `
+Array [
+  Object {
+    "args": Array [],
+    "context": [Function],
+    "object": Object {
+      "staticMethod": [Function],
+      "staticMethod2": [Function],
+    },
+    "payload": "static method",
+    "property": "staticMethod",
+    "target": [Function],
+  },
+]
+`;
+
 exports[`createAspect method for instance should call pattern.beforeMethod and pattern.afterMethod 1`] = `
 Array [
   Object {
