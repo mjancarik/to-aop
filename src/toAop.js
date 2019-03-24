@@ -1,6 +1,6 @@
 'use strict';
 
-import { createProxy, createCallTrap } from './trap';
+import { createProxy, createCallTrap, getTrap, setTrap } from './trap';
 import { AOP_PATTERN, AOP_HOOKS } from './symbol';
 
 export function createAspect(pattern) {
@@ -48,10 +48,30 @@ function applyAopToClass(target) {
 
 function applyAopToStaticMethods(target, pattern) {
   let original = {};
+  let isAopApplied = false;
 
   while (target && target !== Function.prototype) {
     Object.entries(Object.getOwnPropertyDescriptors(target)).forEach(
-      ([property]) => {
+      ([property, descriptor]) => {
+        if (
+          typeof descriptor.get === 'function' ||
+          typeof descriptor.set === 'function'
+        ) {
+          original[property] = target[property];
+          Object.defineProperty(
+            target,
+            property,
+            Object.assign({}, descriptor, {
+              get: () =>
+                isAopApplied && getTrap(target, original, property, pattern),
+              set: payload => {
+                isAopApplied &&
+                  setTrap(target, original, property, payload, pattern);
+              }
+            })
+          );
+        }
+
         if (typeof target[property] === 'function') {
           original[property] = target[property];
 
@@ -64,9 +84,9 @@ function applyAopToStaticMethods(target, pattern) {
         }
       }
     );
-
     target = Reflect.getPrototypeOf(target);
   }
+  isAopApplied = true;
 }
 
 function applyAopToMethods(target, pattern) {

@@ -12,7 +12,7 @@ describe('createAspect method', () => {
       }
 
       static get staticGetter() {
-        return 'asd';
+        return 'static getter';
       }
 
       constructor(variable) {
@@ -111,6 +111,23 @@ describe('createAspect method', () => {
 
       expect(staticResult1).toMatchInlineSnapshot(`"static method"`);
       expect(staticResult2).toMatchInlineSnapshot(`"static method 2"`);
+    });
+
+    it('should call pattern.beforeGetter and pattern.afterGetter for static getter', () => {
+      let { C } = createClasses();
+      spyOn(pattern, 'beforeGetter');
+      spyOn(pattern, 'afterGetter');
+
+      withAspect(C);
+      withAspect2(C);
+      const staticResult1 = C.staticGetter;
+
+      expect(staticResult1).toMatchInlineSnapshot(`"static getter"`);
+
+      expect(pattern.beforeGetter.calls.count()).toEqual(2);
+      expect(pattern.beforeGetter.calls.argsFor(0)).toMatchSnapshot();
+      expect(pattern.afterGetter.calls.count()).toEqual(2);
+      expect(pattern.afterGetter.calls.argsFor(0)).toMatchSnapshot();
     });
 
     it('should call pattern.beforeMethod and pattern.afterMethod', () => {

@@ -1,5 +1,36 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`createAspect method for class should call pattern.beforeGetter and pattern.afterGetter for static getter 2`] = `
+Array [
+  Object {
+    "context": undefined,
+    "object": Object {
+      "staticGetter": "static getter",
+      "staticMethod": [Function],
+      "staticMethod2": [Function],
+    },
+    "property": "staticGetter",
+    "target": [Function],
+  },
+]
+`;
+
+exports[`createAspect method for class should call pattern.beforeGetter and pattern.afterGetter for static getter 3`] = `
+Array [
+  Object {
+    "context": undefined,
+    "object": Object {
+      "staticGetter": "static getter",
+      "staticMethod": [Function],
+      "staticMethod2": [Function],
+    },
+    "payload": "static getter",
+    "property": "staticGetter",
+    "target": [Function],
+  },
+]
+`;
+
 exports[`createAspect method for class should call pattern.beforeMethod and pattern.afterMethod 1`] = `
 Array [
   Object {
@@ -162,6 +193,7 @@ Array [
     "args": Array [],
     "context": [Function],
     "object": Object {
+      "staticGetter": "static getter",
       "staticMethod": [Function],
       "staticMethod2": [Function],
     },
@@ -177,6 +209,7 @@ Array [
     "args": Array [],
     "context": [Function],
     "object": Object {
+      "staticGetter": "static getter",
       "staticMethod": [Function],
       "staticMethod2": [Function],
     },
