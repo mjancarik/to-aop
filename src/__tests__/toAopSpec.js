@@ -6,6 +6,8 @@ describe('createAspect method', () => {
   let pattern = null;
 
   function createClasses() {
+    let staticSetter = null;
+
     class A {
       static staticMethod() {
         return 'static method';
@@ -13,6 +15,14 @@ describe('createAspect method', () => {
 
       static get staticGetter() {
         return 'static getter';
+      }
+
+      static set staticSetter(value) {
+        staticSetter = value;
+      }
+
+      static get staticSetter() {
+        return staticSetter;
       }
 
       constructor(variable) {
@@ -54,7 +64,9 @@ describe('createAspect method', () => {
       beforeMethod: () => {},
       afterMethod: () => {},
       beforeGetter: () => {},
-      afterGetter: () => {}
+      beforeSetter: () => {},
+      afterGetter: () => {},
+      afterSetter: () => {}
     };
 
     withAspect = createAspect(pattern);
@@ -128,6 +140,23 @@ describe('createAspect method', () => {
       expect(pattern.beforeGetter.calls.argsFor(0)).toMatchSnapshot();
       expect(pattern.afterGetter.calls.count()).toEqual(2);
       expect(pattern.afterGetter.calls.argsFor(0)).toMatchSnapshot();
+    });
+
+    it('should call pattern.beforeSetter and pattern.afterSetter for static setter', () => {
+      let { C } = createClasses();
+      spyOn(pattern, 'beforeSetter');
+      spyOn(pattern, 'afterSetter');
+
+      withAspect(C);
+      withAspect2(C);
+      C.staticSetter = 'static setter';
+
+      expect(C.staticSetter).toMatchInlineSnapshot(`"static setter"`);
+
+      expect(pattern.beforeSetter.calls.count()).toEqual(2);
+      expect(pattern.beforeSetter.calls.argsFor(0)).toMatchSnapshot();
+      expect(pattern.afterSetter.calls.count()).toEqual(2);
+      expect(pattern.afterSetter.calls.argsFor(0)).toMatchSnapshot();
     });
 
     it('should call pattern.beforeMethod and pattern.afterMethod', () => {

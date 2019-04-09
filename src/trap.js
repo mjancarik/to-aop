@@ -36,7 +36,7 @@ export function createProxy(target, pattern, context) {
 }
 
 export function setTrap(target, object, property, payload, pattern, context) {
-  invokePattern(pattern.beforSetter, {
+  invokePattern(pattern.beforeSetter, {
     target,
     object,
     property,

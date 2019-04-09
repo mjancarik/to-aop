@@ -8,6 +8,7 @@ Array [
       "staticGetter": "static getter",
       "staticMethod": [Function],
       "staticMethod2": [Function],
+      "staticSetter": null,
     },
     "property": "staticGetter",
     "target": [Function],
@@ -23,6 +24,7 @@ Array [
       "staticGetter": "static getter",
       "staticMethod": [Function],
       "staticMethod2": [Function],
+      "staticSetter": null,
     },
     "payload": "static getter",
     "property": "staticGetter",
@@ -196,6 +198,7 @@ Array [
       "staticGetter": "static getter",
       "staticMethod": [Function],
       "staticMethod2": [Function],
+      "staticSetter": null,
     },
     "property": "staticMethod",
     "target": [Function],
@@ -212,9 +215,44 @@ Array [
       "staticGetter": "static getter",
       "staticMethod": [Function],
       "staticMethod2": [Function],
+      "staticSetter": null,
     },
     "payload": "static method",
     "property": "staticMethod",
+    "target": [Function],
+  },
+]
+`;
+
+exports[`createAspect method for class should call pattern.beforeSetter and pattern.afterSetter for static setter 2`] = `
+Array [
+  Object {
+    "context": undefined,
+    "object": Object {
+      "staticGetter": "static getter",
+      "staticMethod": [Function],
+      "staticMethod2": [Function],
+      "staticSetter": "static setter",
+    },
+    "payload": "static setter",
+    "property": "staticSetter",
+    "target": [Function],
+  },
+]
+`;
+
+exports[`createAspect method for class should call pattern.beforeSetter and pattern.afterSetter for static setter 3`] = `
+Array [
+  Object {
+    "context": undefined,
+    "object": Object {
+      "staticGetter": "static getter",
+      "staticMethod": [Function],
+      "staticMethod2": [Function],
+      "staticSetter": "static setter",
+    },
+    "payload": "static setter",
+    "property": "staticSetter",
     "target": [Function],
   },
 ]
@@ -232,8 +270,10 @@ Array [
       Symbol(AopPattern): Object {
         "afterGetter": [Function],
         "afterMethod": [Function],
+        "afterSetter": [Function],
         "beforeGetter": [Function],
         "beforeMethod": [Function],
+        "beforeSetter": [Function],
       },
     },
     "object": A {
@@ -241,8 +281,10 @@ Array [
       Symbol(AopPattern): Object {
         "afterGetter": [Function],
         "afterMethod": [Function],
+        "afterSetter": [Function],
         "beforeGetter": [Function],
         "beforeMethod": [Function],
+        "beforeSetter": [Function],
       },
     },
     "property": "method",
@@ -263,8 +305,10 @@ Array [
       Symbol(AopPattern): Object {
         "afterGetter": [Function],
         "afterMethod": [Function],
+        "afterSetter": [Function],
         "beforeGetter": [Function],
         "beforeMethod": [Function],
+        "beforeSetter": [Function],
       },
     },
     "object": A {
@@ -272,8 +316,10 @@ Array [
       Symbol(AopPattern): Object {
         "afterGetter": [Function],
         "afterMethod": [Function],
+        "afterSetter": [Function],
         "beforeGetter": [Function],
         "beforeMethod": [Function],
+        "beforeSetter": [Function],
       },
     },
     "payload": undefined,

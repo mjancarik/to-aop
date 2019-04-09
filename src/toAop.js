@@ -1,7 +1,7 @@
 'use strict';
 
 import { createProxy, createCallTrap, getTrap, setTrap } from './trap';
-import { AOP_PATTERN, AOP_HOOKS } from './symbol';
+import { AOP_PATTERN, AOP_HOOKS, AOP_STATIC_ALLOW } from './symbol';
 
 export function createAspect(pattern) {
   return function applyAop(target) {
@@ -10,14 +10,14 @@ export function createAspect(pattern) {
 }
 
 export function aop(target, pattern) {
-  if (Object.hasOwnProperty(target, AOP_PATTERN)) {
+  if (target[AOP_PATTERN]) {
     mergePattern(target, pattern);
 
     return;
   }
 
   Reflect.defineProperty(target, AOP_PATTERN, {
-    value: pattern,
+    value: Object.assign({}, pattern),
     enumerable: false,
     writable: true
   });
@@ -48,7 +48,14 @@ function applyAopToClass(target) {
 
 function applyAopToStaticMethods(target, pattern) {
   let original = {};
-  let isAopApplied = false;
+  if (!Object.hasOwnProperty(target, AOP_STATIC_ALLOW)) {
+    Reflect.defineProperty(target, AOP_STATIC_ALLOW, {
+      value: false,
+      enumerable: false,
+      writable: true
+    });
+  }
+  let originalTarget = target;
 
   while (target && target !== Function.prototype) {
     Object.entries(Object.getOwnPropertyDescriptors(target)).forEach(
@@ -57,16 +64,22 @@ function applyAopToStaticMethods(target, pattern) {
           typeof descriptor.get === 'function' ||
           typeof descriptor.set === 'function'
         ) {
-          original[property] = target[property];
-          Object.defineProperty(
+          if (!Object.hasOwnProperty(original, property)) {
+            original[property] = target[property];
+          }
+          Reflect.defineProperty(
             target,
             property,
             Object.assign({}, descriptor, {
-              get: () =>
-                isAopApplied && getTrap(target, original, property, pattern),
+              get: () => {
+                if (originalTarget[AOP_STATIC_ALLOW]) {
+                  return getTrap(target, original, property, pattern);
+                }
+              },
               set: payload => {
-                isAopApplied &&
-                  setTrap(target, original, property, payload, pattern);
+                if (originalTarget[AOP_STATIC_ALLOW]) {
+                  return setTrap(target, original, property, payload, pattern);
+                }
               }
             })
           );
@@ -86,7 +99,7 @@ function applyAopToStaticMethods(target, pattern) {
     );
     target = Reflect.getPrototypeOf(target);
   }
-  isAopApplied = true;
+  originalTarget[AOP_STATIC_ALLOW] = true;
 }
 
 function applyAopToMethods(target, pattern) {
@@ -100,9 +113,6 @@ function applyAopToMethods(target, pattern) {
             return;
           }
           original[property] = prototype[property];
-
-          // TODO override getter and setter
-
           let aopHooks = original[property][AOP_HOOKS];
           if (aopHooks) {
             const { object } = aopHooks[aopHooks.length - 1];
