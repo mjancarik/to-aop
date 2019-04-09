@@ -1,3 +1,18 @@
+<a name="0.0.9"></a>
+## [0.0.9](https://github.com/mjancarik/to-aop/compare/0.0.8...0.0.9) (2019-04-09)
+
+
+### Bug Fixes
+
+* **hook:** added missing hooks name for setter ([2a652f6](https://github.com/mjancarik/to-aop/commit/2a652f6))
+
+
+### Features
+
+* **class:** added aop to class static method ([937873d](https://github.com/mjancarik/to-aop/commit/937873d))
+
+
+
 <a name="0.0.8"></a>
 ## [0.0.8](https://github.com/mjancarik/to-aop/compare/0.0.7...0.0.8) (2018-12-14)
 
