@@ -173,5 +173,5 @@ function mergePattern(target, pattern) {
 }
 
 function isConstructable(func) {
-  return !!(func && func.prototype && func.prototype.constructor.name);
+  return !!(func && func.prototype && func.prototype.constructor);
 }
