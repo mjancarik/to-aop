@@ -1,3 +1,13 @@
+<a name="0.0.11"></a>
+## [0.0.11](https://github.com/mjancarik/to-aop/compare/0.0.10...0.0.11) (2019-04-18)
+
+
+### Bug Fixes
+
+* **constructable:** fixed detection of constructable function ([d68389c](https://github.com/mjancarik/to-aop/commit/d68389c))
+
+
+
 <a name="0.0.10"></a>
 ## [0.0.10](https://github.com/mjancarik/to-aop/compare/0.0.9...0.0.10) (2019-04-18)
 
