@@ -159,6 +159,22 @@ describe('createAspect method', () => {
       expect(pattern.afterSetter.calls.argsFor(0)).toMatchSnapshot();
     });
 
+    it('should not call pattern.afterMethod for static getter which return constructable function', () => {
+      let { C, A } = createClasses();
+      spyOn(pattern, 'afterMethod');
+
+      C.A = A;
+
+      withAspect(C);
+
+      const a = Reflect.construct(C.A, []);
+
+      expect(a instanceof A).toBeTruthy();
+
+      expect(pattern.afterMethod.calls.count()).toEqual(0);
+      expect(pattern.afterMethod.calls.argsFor(0)).toMatchSnapshot();
+    });
+
     it('should call pattern.beforeMethod and pattern.afterMethod', () => {
       let { A } = createClasses();
       spyOn(pattern, 'beforeMethod');

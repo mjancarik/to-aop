@@ -42,11 +42,11 @@ function applyAopToInstance(instance) {
 function applyAopToClass(target) {
   let pattern = target[AOP_PATTERN];
 
-  applyAopToStaticMethods(target, pattern);
+  applyAopToStatic(target, pattern);
   applyAopToMethods(target, pattern);
 }
 
-function applyAopToStaticMethods(target, pattern) {
+function applyAopToStatic(target, pattern) {
   let original = {};
   if (!Object.hasOwnProperty(target, AOP_STATIC_ALLOW)) {
     Reflect.defineProperty(target, AOP_STATIC_ALLOW, {
@@ -85,7 +85,10 @@ function applyAopToStaticMethods(target, pattern) {
           );
         }
 
-        if (typeof target[property] === 'function') {
+        if (
+          typeof target[property] === 'function' &&
+          !isConstructable(target[property])
+        ) {
           original[property] = target[property];
 
           target[property] = createCallTrap(
@@ -167,4 +170,8 @@ function mergePattern(target, pattern) {
     },
     currentTargetPattern
   );
+}
+
+function isConstructable(func) {
+  return !!(func && func.prototype && func.prototype.constructor.name);
 }

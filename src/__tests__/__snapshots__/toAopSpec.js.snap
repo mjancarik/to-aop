@@ -258,6 +258,8 @@ Array [
 ]
 `;
 
+exports[`createAspect method for class should not call pattern.afterMethod for static getter which return constructable function 1`] = `Array []`;
+
 exports[`createAspect method for instance should call pattern.beforeMethod and pattern.afterMethod 1`] = `
 Array [
   Object {
