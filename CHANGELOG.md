@@ -1,3 +1,13 @@
+<a name="0.0.10"></a>
+## [0.0.10](https://github.com/mjancarik/to-aop/compare/0.0.9...0.0.10) (2019-04-18)
+
+
+### Bug Fixes
+
+* **aop:** cunstructable function is not hook for static getter ([c40c7b0](https://github.com/mjancarik/to-aop/commit/c40c7b0))
+
+
+
 <a name="0.0.9"></a>
 ## [0.0.9](https://github.com/mjancarik/to-aop/compare/0.0.8...0.0.9) (2019-04-09)
 
