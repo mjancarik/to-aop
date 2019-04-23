@@ -1,3 +1,8 @@
+<a name="0.1.0"></a>
+# [0.1.0](https://github.com/mjancarik/to-aop/compare/0.0.11...0.1.0) (2019-04-23)
+
+
+
 <a name="0.0.11"></a>
 ## [0.0.11](https://github.com/mjancarik/to-aop/compare/0.0.10...0.0.11) (2019-04-18)
 
