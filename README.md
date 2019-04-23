@@ -5,14 +5,101 @@
 [![NPM package version](https://img.shields.io/npm/v/to-aop/latest.svg)](https://www.npmjs.com/package/to-aop)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
+The to-aop module help you with applying [Aspect Oriented Programming](https://www.cs.ubc.ca/~gregor/papers/kiczales-ECOOP1997-AOP.pdf) to JavaScript. It use under the hood [ES Proxy](https://ponyfoo.com/articles/es6-proxies-in-depth) for object same as other similar modules. It allow you hook class without creating new instance as well. It use javascript prototype for that.
+
+More articles about AOP:
+1. https://blog.mgechev.com/2015/07/29/aspect-oriented-programming-javascript-aop-js/
+2. https://hackernoon.com/aspect-oriented-programming-in-javascript-es5-typescript-d751dda576d0
+3. https://kyu.io/sneak-peek-to-javascript-aop/
+
 ## Installation
 
-```
+```bash
 npm i to-aop --save
 ```
 
 ## Usage
 
+You have some common class. For example:
+
+```javascript
+// a.js
+export default class A {
+  constructor(variable) {
+    this.variable = variable;
+  }
+
+  method() {
+    return this.variable;
+  }
+
+  notHookedMethod() {
+    return 'not hook';
+  }    
+}
 ```
-//TODO
+
+#### Applying AOP to class
+
+```javascript
+import { aop, hookName, createHook } from 'to-aop';
+import A from './a';
+
+const classHook = createHook(
+  hookName.afterMethod,
+  /^(method)$/,
+  ({ target, object, property, context, args, payload }) => {
+    console.log(
+      `Instance of ${target.name} call "${property}"
+with arguments ${args && args.length ? args : '[]'}
+and return value is "${payload}".`
+    );
+  }
+);
+
+aop(A, classHook); // bind hook to class
+const a = new A('my hook');
+
+a.method(); // Instance of A call "method" with arguments [] and return value is "my hook".
+a.notHookedClassMethod(); // not hook
+
 ```
+
+#### Applying AOP to instance or object
+
+```javaScript
+import { aop, hookName, createHook } from 'to-aop';
+import A from './a';
+
+const instanceHook = createHook(
+  hookName.afterMethod,
+  /^(method)$/,
+  ({ target, object, property, context, args, payload }) => {
+    console.log(
+      `Instance of ${object.constructor.name} call "${property}"
+with arguments ${args && args.length ? args : '[]'}
+and return value is "${payload}".`
+    );
+  }
+);
+
+const a = new A('my hook');
+const hookedInstance = aop(a, instanceHook); // bind hook to instance
+
+hookedInstance.method(); // "Instance of A call "method" with arguments [] and return value is "my hook".
+hookedInstance.notHookedClassMethod(); // not hook
+```
+
+## Hooks API
+
+We implemented base set of hooks which you can use for AOP.
+
+1. beforeMethod
+2. afterMethod
+3. aroundMethod
+4. beforeGetter
+5. afterGetter
+6. aroundGetter
+7. beforeSetter
+8. afterSetter
+9. aroundSetter
