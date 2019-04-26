@@ -67,7 +67,7 @@ a.notHookedClassMethod(); // not hook
 
 #### Applying AOP to instance or object
 
-```javaScript
+```javascript
 import { aop, hookName, createHook } from 'to-aop';
 import A from './a';
 
