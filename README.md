@@ -7,6 +7,8 @@
 
 The to-aop module help you with applying [Aspect Oriented Programming](https://www.cs.ubc.ca/~gregor/papers/kiczales-ECOOP1997-AOP.pdf) to JavaScript. It use under the hood [ES Proxy](https://ponyfoo.com/articles/es6-proxies-in-depth) for object same as other similar modules. It allow you hook class without creating new instance as well. It use javascript prototype for that.
 
+For example I am using it for adding hooks to production code where all debug code is missing. I don't have got access to instance but I have only class constructor.
+
 More articles about AOP:
 1. https://blog.mgechev.com/2015/07/29/aspect-oriented-programming-javascript-aop-js/
 2. https://hackernoon.com/aspect-oriented-programming-in-javascript-es5-typescript-d751dda576d0
@@ -22,7 +24,7 @@ npm i to-aop --save
 
 You have some common class. For example:
 
-```javascript
+``` javascript
 // a.js
 export default class A {
   constructor(variable) {
@@ -41,14 +43,29 @@ export default class A {
 
 #### Applying AOP to class
 
-```javascript
+You can use it for creating hook to your favorite framework or your own application without modification source code.
+
+``` javascript
 import { aop, hookName, createHook } from 'to-aop';
 import A from './a';
 
-const classHook = createHook(
+const classHookBefore = createHook(
+  hookName.beforeMethod,
+  /^(method)$/,
+  ({ target, object, property, context, args }) => {
+    //call your own hook
+    console.log(
+      `Instance of ${target.name} call "${property}"
+with arguments ${args && args.length ? args : '[]'}.`
+    );
+  }
+);
+
+const classHookAfter = createHook(
   hookName.afterMethod,
   /^(method)$/,
   ({ target, object, property, context, args, payload }) => {
+    //call your own hook
     console.log(
       `Instance of ${target.name} call "${property}"
 with arguments ${args && args.length ? args : '[]'}
@@ -57,7 +74,10 @@ and return value is "${payload}".`
   }
 );
 
-aop(A, classHook); // bind hook to class
+aop(
+  A,
+  Object.assign({}, classHookBefore, classHookAfter)
+); // bind hook to class
 const a = new A('my hook');
 
 a.method(); // Instance of A call "method" with arguments [] and return value is "my hook".
