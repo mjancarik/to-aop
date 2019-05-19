@@ -11,9 +11,7 @@ const config = {
       exclude: 'node_modules/**',
       externalHelpers: true
     }),
-    nodeResolve({
-      jsnext: true
-    }),
+    nodeResolve(),
     commonjs()
   ]
 };
