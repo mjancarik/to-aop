@@ -269,25 +269,9 @@ Array [
     ],
     "context": A {
       "variable": undefined,
-      Symbol(AopPattern): Object {
-        "afterGetter": [Function],
-        "afterMethod": [Function],
-        "afterSetter": [Function],
-        "beforeGetter": [Function],
-        "beforeMethod": [Function],
-        "beforeSetter": [Function],
-      },
     },
     "object": A {
       "variable": undefined,
-      Symbol(AopPattern): Object {
-        "afterGetter": [Function],
-        "afterMethod": [Function],
-        "afterSetter": [Function],
-        "beforeGetter": [Function],
-        "beforeMethod": [Function],
-        "beforeSetter": [Function],
-      },
     },
     "property": "method",
     "target": [Function],
@@ -304,25 +288,9 @@ Array [
     ],
     "context": A {
       "variable": undefined,
-      Symbol(AopPattern): Object {
-        "afterGetter": [Function],
-        "afterMethod": [Function],
-        "afterSetter": [Function],
-        "beforeGetter": [Function],
-        "beforeMethod": [Function],
-        "beforeSetter": [Function],
-      },
     },
     "object": A {
       "variable": undefined,
-      Symbol(AopPattern): Object {
-        "afterGetter": [Function],
-        "afterMethod": [Function],
-        "afterSetter": [Function],
-        "beforeGetter": [Function],
-        "beforeMethod": [Function],
-        "beforeSetter": [Function],
-      },
     },
     "payload": undefined,
     "property": "method",
