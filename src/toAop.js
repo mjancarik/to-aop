@@ -48,7 +48,7 @@ function applyAopToClass(target) {
 
 function applyAopToStatic(target, pattern) {
   let original = {};
-  if (!Object.hasOwnProperty(target, AOP_STATIC_ALLOW)) {
+  if (!Object.prototype.hasOwnProperty.call(target, AOP_STATIC_ALLOW)) {
     Reflect.defineProperty(target, AOP_STATIC_ALLOW, {
       value: false,
       enumerable: false,
@@ -64,7 +64,7 @@ function applyAopToStatic(target, pattern) {
           typeof descriptor.get === 'function' ||
           typeof descriptor.set === 'function'
         ) {
-          if (!Object.hasOwnProperty(original, property)) {
+          if (!Object.prototype.hasOwnProperty.call(original, property)) {
             original[property] = target[property];
           }
           Reflect.defineProperty(
