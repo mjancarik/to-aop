@@ -1,3 +1,13 @@
+<a name="0.1.3"></a>
+## [0.1.3](https://github.com/mjancarik/to-aop/compare/0.1.2...0.1.3) (2019-07-12)
+
+
+### Bug Fixes
+
+* **aop:** builtin Object hasOwnProperty call ([fd2b69a](https://github.com/mjancarik/to-aop/commit/fd2b69a))
+
+
+
 <a name="0.1.2"></a>
 ## [0.1.2](https://github.com/mjancarik/to-aop/compare/0.1.1...0.1.2) (2019-05-19)
 
