@@ -6,7 +6,7 @@ export function createProxy(target, pattern, context) {
   const proxy = new Proxy(target, {
     get(object, property) {
       let original = object[property];
-      let value = getTrap(target, object, property, pattern);
+      let value = getTrap({ target, object, property, pattern });
 
       if (value === undefined || original === undefined) {
         return;
@@ -19,23 +19,31 @@ export function createProxy(target, pattern, context) {
       return createProxy(original, pattern, object);
     },
     set(object, property, payload) {
-      return setTrap(target, object, property, payload, pattern);
+      return setTrap({ target, object, property, payload, pattern });
     },
     apply(method, object, args) {
-      return createCallTrap(
+      return createCallTrap({
         target,
-        context || object,
-        method.name,
+        object: context || object,
+        property: method.name,
         pattern,
-        context || object
-      )(...args);
+        context: context || object,
+        method
+      })(...args);
     }
   });
 
   return proxy;
 }
 
-export function setTrap(target, object, property, payload, pattern, context) {
+export function setTrap({
+  target,
+  object,
+  property,
+  payload,
+  pattern,
+  context
+}) {
   invokePattern(pattern.beforeSetter, {
     target,
     object,
@@ -65,12 +73,17 @@ export function setTrap(target, object, property, payload, pattern, context) {
   return result;
 }
 
-export function createCallTrap(target, object, property, pattern, context) {
+export function createCallTrap({
+  target,
+  object,
+  property,
+  pattern,
+  context,
+  method
+}) {
   function callTrap(...rest) {
     const self = this;
     let payload = undefined;
-
-    //console.log(callTrap[AOP_HOOKS]);
 
     callTrap[AOP_HOOKS].forEach(
       ({ target, object, property, pattern, context }) => {
@@ -92,15 +105,21 @@ export function createCallTrap(target, object, property, pattern, context) {
         ? pattern.aroundMethod[pattern.aroundMethod.length - 1]
         : pattern.aroundMethod;
 
-      payload = arrondPattern
-        ? invokePattern(arrondPattern, {
-            target,
-            object,
-            property,
-            context: context || self,
-            args: rest
-          })
-        : Reflect.apply(object[property], context || self, rest);
+      if (arrondPattern) {
+        payload = invokePattern(arrondPattern, {
+          target,
+          object,
+          property,
+          context: context || self,
+          args: rest
+        });
+      } else {
+        if (typeof object[property] === 'function') {
+          payload = Reflect.apply(object[property], context || self, rest);
+        } else {
+          payload = method(...rest);
+        }
+      }
     }
 
     callTrap[AOP_HOOKS].forEach(
@@ -129,7 +148,7 @@ export function createCallTrap(target, object, property, pattern, context) {
   return callTrap;
 }
 
-export function getTrap(target, object, property, pattern, context) {
+export function getTrap({ target, object, property, pattern, context }) {
   if (!Reflect.has(object, property)) {
     return;
   }
@@ -159,7 +178,7 @@ export function getTrap(target, object, property, pattern, context) {
   });
 
   if (typeof value === 'function') {
-    value = createCallTrap(target, object, property, pattern, context);
+    value = createCallTrap({ target, object, property, pattern, context });
   }
 
   return value;

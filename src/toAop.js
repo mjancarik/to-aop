@@ -73,12 +73,23 @@ function applyAopToStatic(target, pattern) {
             Object.assign({}, descriptor, {
               get: () => {
                 if (originalTarget[AOP_STATIC_ALLOW]) {
-                  return getTrap(target, original, property, pattern);
+                  return getTrap({
+                    target,
+                    object: original,
+                    property,
+                    pattern
+                  });
                 }
               },
               set: payload => {
                 if (originalTarget[AOP_STATIC_ALLOW]) {
-                  return setTrap(target, original, property, payload, pattern);
+                  return setTrap({
+                    target,
+                    object: original,
+                    property,
+                    payload,
+                    pattern
+                  });
                 }
               }
             })
@@ -91,12 +102,12 @@ function applyAopToStatic(target, pattern) {
         ) {
           original[property] = target[property];
 
-          target[property] = createCallTrap(
+          target[property] = createCallTrap({
             target,
-            original,
+            object: original,
             property,
             pattern
-          );
+          });
         }
       }
     );
@@ -129,12 +140,12 @@ function applyAopToMethods(target, pattern) {
           }
 
           if (typeof original[property] === 'function') {
-            prototype[property] = createCallTrap(
+            prototype[property] = createCallTrap({
               target,
-              original,
+              object: original,
               property,
               pattern
-            );
+            });
           }
         } catch (_) {
           console.error(_);

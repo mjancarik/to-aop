@@ -255,4 +255,33 @@ describe('createAspect method', () => {
       expect(b instanceof B).toBeTruthy();
     });
   });
+
+  describe('for object', () => {
+    it('should call pattern.beforeMethod and pattern.afterMethod for dummy object', () => {
+      spyOn(pattern, 'beforeMethod');
+      spyOn(pattern, 'afterMethod');
+
+      let dummy = {
+        method() {}
+      };
+
+      let xdummy = withAspect(dummy);
+      xdummy.method('works');
+
+      expect(pattern.beforeMethod.calls.count()).toEqual(1);
+      expect(pattern.afterMethod.calls.count()).toEqual(1);
+    });
+
+    it('should  call pattern.beforeMethod and pattern.afterMethod for global console', () => {
+      spyOn(pattern, 'beforeMethod');
+      spyOn(pattern, 'afterMethod');
+      spyOn(console, 'log');
+
+      let xconsole = withAspect(console);
+      xconsole.log('works');
+
+      expect(pattern.beforeMethod.calls.count()).toEqual(1);
+      expect(pattern.afterMethod.calls.count()).toEqual(1);
+    });
+  });
 });
