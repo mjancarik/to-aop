@@ -7,7 +7,7 @@
 
 The to-aop module help you with applying [Aspect Oriented Programming](https://www.cs.ubc.ca/~gregor/papers/kiczales-ECOOP1997-AOP.pdf) to JavaScript. It use under the hood [ES Proxy](https://ponyfoo.com/articles/es6-proxies-in-depth) for object same as other similar modules. It allow you hook class without creating new instance as well. It use javascript prototype for that.
 
-For example I am using it for adding hooks to production code where all debug code is missing. I don't have got access to instance but I have only class constructor.
+For example I am using it for adding hooks to production code where all debug code is missing. I don't have got access to instance but I have only class constructor. But usage is unlimited.
 
 More articles about AOP:
 1. https://blog.mgechev.com/2015/07/29/aspect-oriented-programming-javascript-aop-js/
@@ -74,9 +74,11 @@ and return value is "${payload}".`
   }
 );
 
+const hooks = Object.assign({}, classHookBefore, classHookAfter);
+
 aop(
   A,
-  Object.assign({}, classHookBefore, classHookAfter)
+  hooks
 ); // bind hook to class
 const a = new A('my hook');
 
@@ -110,6 +112,19 @@ hookedInstance.method(); // "Instance of A call "method" with arguments [] and r
 hookedInstance.notHookedClassMethod(); // not hook
 ```
 
+## Documentation
+
+### createHook(hookName, regular, callbackHook)
+
+  - (string) hookName - set of hooks
+  - (string, regexp, Array, function) regular - condition for filtering
+  - (function) callbackHook - your defined action
+
+### aop(target, pattern)
+
+  - (class, object) - target for hooks
+  - (Object<string, Array<function>>) - pattern of hooks
+
 ## Hooks API
 
 We implemented base set of hooks which you can use for AOP.
@@ -123,3 +138,10 @@ We implemented base set of hooks which you can use for AOP.
 7. beforeSetter
 8. afterSetter
 9. aroundSetter
+
+```javascript
+import { hookName } from 'to-aop';
+
+// hookName.(beforeMethod|afterMethod|...)
+
+```
