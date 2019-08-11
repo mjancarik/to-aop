@@ -1,3 +1,13 @@
+<a name="0.2.0"></a>
+# [0.2.0](https://github.com/mjancarik/to-aop/compare/0.1.3...0.2.0) (2019-08-11)
+
+
+### Bug Fixes
+
+* **trap:** createCallTrap works for global object console ([78d7de8](https://github.com/mjancarik/to-aop/commit/78d7de8))
+
+
+
 <a name="0.1.3"></a>
 ## [0.1.3](https://github.com/mjancarik/to-aop/compare/0.1.2...0.1.3) (2019-07-12)
 
