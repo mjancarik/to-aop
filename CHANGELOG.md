@@ -1,3 +1,13 @@
+<a name="0.2.1"></a>
+## [0.2.1](https://github.com/mjancarik/to-aop/compare/0.2.0...0.2.1) (2019-08-29)
+
+
+### Bug Fixes
+
+* **trap:** must keep context of called method ([f88f26f](https://github.com/mjancarik/to-aop/commit/f88f26f))
+
+
+
 <a name="0.2.0"></a>
 # [0.2.0](https://github.com/mjancarik/to-aop/compare/0.1.3...0.2.0) (2019-08-11)
 
