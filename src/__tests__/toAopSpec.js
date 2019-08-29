@@ -272,7 +272,7 @@ describe('createAspect method', () => {
       expect(pattern.afterMethod.calls.count()).toEqual(1);
     });
 
-    it('should  call pattern.beforeMethod and pattern.afterMethod for global console', () => {
+    it('should call pattern.beforeMethod and pattern.afterMethod for global console', () => {
       spyOn(pattern, 'beforeMethod');
       spyOn(pattern, 'afterMethod');
       spyOn(console, 'log');
@@ -280,6 +280,26 @@ describe('createAspect method', () => {
       let xconsole = withAspect(console);
       xconsole.log('works');
 
+      expect(pattern.beforeMethod.calls.count()).toEqual(1);
+      expect(pattern.afterMethod.calls.count()).toEqual(1);
+    });
+
+    it('should call pattern.beforeMethod and pattern.afterMethod for object with context', () => {
+      spyOn(pattern, 'beforeMethod');
+      spyOn(pattern, 'afterMethod');
+
+      const object = {
+        value: 1,
+        method: function increase() {
+          this.value++;
+        }
+      };
+
+      const xobject = withAspect(object);
+
+      xobject.method();
+
+      expect(xobject.value).toEqual(2);
       expect(pattern.beforeMethod.calls.count()).toEqual(1);
       expect(pattern.afterMethod.calls.count()).toEqual(1);
     });

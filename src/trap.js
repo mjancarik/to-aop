@@ -117,7 +117,7 @@ export function createCallTrap({
         if (typeof object[property] === 'function') {
           payload = Reflect.apply(object[property], context || self, rest);
         } else {
-          payload = method(...rest);
+          payload = Reflect.apply(method, context || self, rest);
         }
       }
     }
