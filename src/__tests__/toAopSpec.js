@@ -4,6 +4,7 @@ describe('createAspect method', () => {
   let withAspect = null;
   let withAspect2 = null;
   let pattern = null;
+  let pattern2 = null;
 
   function createClasses() {
     let staticSetter = null;
@@ -54,6 +55,10 @@ describe('createAspect method', () => {
 
         this.map = new Map();
       }
+
+      method2() {
+        return this.map;
+      }
     }
 
     return { A, B, C };
@@ -68,9 +73,10 @@ describe('createAspect method', () => {
       afterGetter: () => {},
       afterSetter: () => {}
     };
+    pattern2 = Object.assign({}, pattern);
 
     withAspect = createAspect(pattern);
-    withAspect2 = createAspect(pattern);
+    withAspect2 = createAspect(pattern2);
   });
 
   afterEach(() => {});
@@ -106,136 +112,190 @@ describe('createAspect method', () => {
   });
 
   describe('for class', () => {
-    it('should call pattern.beforeMethod and pattern.afterMethod for static method', () => {
-      let { C } = createClasses();
-      spyOn(pattern, 'beforeMethod');
-      spyOn(pattern, 'afterMethod');
+    describe('static method', () => {
+      it('should call pattern.beforeMethod and pattern.afterMethod', () => {
+        let { C } = createClasses();
+        spyOn(pattern, 'beforeMethod');
+        spyOn(pattern, 'afterMethod');
 
-      withAspect(C);
-      withAspect2(C);
-      const staticResult1 = C.staticMethod();
-      const staticResult2 = C.staticMethod2();
+        withAspect(C);
+        withAspect2(C);
+        const staticResult1 = C.staticMethod();
+        const staticResult2 = C.staticMethod2();
 
-      expect(pattern.beforeMethod.calls.count()).toEqual(4);
-      expect(pattern.beforeMethod.calls.argsFor(0)).toMatchSnapshot();
-      expect(pattern.afterMethod.calls.count()).toEqual(4);
-      expect(pattern.afterMethod.calls.argsFor(0)).toMatchSnapshot();
+        expect(pattern.beforeMethod.calls.count()).toEqual(2);
+        expect(pattern.beforeMethod.calls.argsFor(0)).toMatchSnapshot();
+        expect(pattern.afterMethod.calls.count()).toEqual(2);
+        expect(pattern.afterMethod.calls.argsFor(0)).toMatchSnapshot();
 
-      expect(staticResult1).toMatchInlineSnapshot(`"static method"`);
-      expect(staticResult2).toMatchInlineSnapshot(`"static method 2"`);
+        expect(staticResult1).toMatchInlineSnapshot(`"static method"`);
+        expect(staticResult2).toMatchInlineSnapshot(`"static method 2"`);
+      });
+
+      it('should call pattern.beforeMethod and pattern.afterMethod for extended class with multiple aspect', () => {
+        let { C, A } = createClasses();
+        spyOn(pattern, 'beforeMethod');
+        spyOn(pattern, 'afterMethod');
+
+        withAspect(A);
+        withAspect(C);
+        const staticResult2 = C.staticMethod2();
+
+        expect(pattern.beforeMethod.calls.count()).toEqual(1);
+        expect(pattern.beforeMethod.calls.argsFor(0)).toMatchSnapshot();
+        expect(pattern.afterMethod.calls.count()).toEqual(1);
+        expect(pattern.afterMethod.calls.argsFor(0)).toMatchSnapshot();
+
+        expect(staticResult2).toMatchInlineSnapshot(`"static method 2"`);
+      });
+
+      it('should call pattern.beforeMethod and pattern.afterMethod', () => {
+        let { C, A } = createClasses();
+        spyOn(pattern, 'beforeMethod');
+        spyOn(pattern, 'afterMethod');
+
+        withAspect(A);
+        withAspect(C);
+        const staticResult = C.staticMethod();
+
+        expect(pattern.beforeMethod.calls.count()).toEqual(2);
+        expect(pattern.beforeMethod.calls.argsFor(0)).toMatchSnapshot();
+        expect(pattern.afterMethod.calls.count()).toEqual(2);
+        expect(pattern.afterMethod.calls.argsFor(0)).toMatchSnapshot();
+
+        expect(staticResult).toMatchInlineSnapshot(`"static method"`);
+      });
+
+      it('should call pattern.beforeGetter and pattern.afterGetter', () => {
+        let { C } = createClasses();
+        spyOn(pattern, 'beforeGetter');
+        spyOn(pattern, 'afterGetter');
+
+        withAspect(C);
+
+        const staticResult1 = C.staticGetter;
+
+        expect(staticResult1).toMatchInlineSnapshot(`"static getter"`);
+
+        expect(pattern.beforeGetter.calls.count()).toEqual(1);
+        expect(pattern.beforeGetter.calls.argsFor(0)).toMatchSnapshot();
+        expect(pattern.afterGetter.calls.count()).toEqual(1);
+        expect(pattern.afterGetter.calls.argsFor(0)).toMatchSnapshot();
+      });
+
+      it('should call pattern.beforeSetter and pattern.afterSetter', () => {
+        let { C } = createClasses();
+        spyOn(pattern, 'beforeSetter');
+        spyOn(pattern, 'afterSetter');
+
+        withAspect(C);
+
+        C.staticSetter = 'static setter';
+
+        expect(C.staticSetter).toMatchInlineSnapshot(`"static setter"`);
+
+        expect(pattern.beforeSetter.calls.count()).toEqual(1);
+        expect(pattern.beforeSetter.calls.argsFor(0)).toMatchSnapshot();
+        expect(pattern.afterSetter.calls.count()).toEqual(1);
+        expect(pattern.afterSetter.calls.argsFor(0)).toMatchSnapshot();
+      });
+
+      it('should not call pattern.afterMethod for static getter which return constructable function', () => {
+        let { C, A } = createClasses();
+        spyOn(pattern, 'afterMethod');
+
+        C.A = A;
+
+        withAspect(C);
+
+        const a = Reflect.construct(C.A, []);
+
+        expect(a instanceof A).toBeTruthy();
+
+        expect(pattern.afterMethod.calls.count()).toEqual(0);
+        expect(pattern.afterMethod.calls.argsFor(0)).toMatchSnapshot();
+      });
     });
 
-    it('should call pattern.beforeGetter and pattern.afterGetter for static getter', () => {
-      let { C } = createClasses();
-      spyOn(pattern, 'beforeGetter');
-      spyOn(pattern, 'afterGetter');
+    describe('class method', () => {
+      it('should call pattern.beforeMethod and pattern.afterMethod', () => {
+        let { A } = createClasses();
+        spyOn(pattern, 'beforeMethod');
+        spyOn(pattern, 'afterMethod');
 
-      withAspect(C);
-      withAspect2(C);
-      const staticResult1 = C.staticGetter;
+        withAspect(A);
+        new A('method').method({}, 1);
 
-      expect(staticResult1).toMatchInlineSnapshot(`"static getter"`);
+        expect(pattern.beforeMethod.calls.count()).toEqual(1);
+        expect(pattern.beforeMethod.calls.argsFor(0)).toMatchSnapshot();
+        expect(pattern.afterMethod.calls.count()).toEqual(1);
+        expect(pattern.afterMethod.calls.argsFor(0)).toMatchSnapshot();
+      });
 
-      expect(pattern.beforeGetter.calls.count()).toEqual(2);
-      expect(pattern.beforeGetter.calls.argsFor(0)).toMatchSnapshot();
-      expect(pattern.afterGetter.calls.count()).toEqual(2);
-      expect(pattern.afterGetter.calls.argsFor(0)).toMatchSnapshot();
-    });
+      it('should call pattern.beforeMethod and pattern.afterMethod for extended class with multiple aspect', () => {
+        let { A, C } = createClasses();
+        spyOn(pattern, 'beforeMethod');
+        spyOn(pattern, 'afterMethod');
 
-    it('should call pattern.beforeSetter and pattern.afterSetter for static setter', () => {
-      let { C } = createClasses();
-      spyOn(pattern, 'beforeSetter');
-      spyOn(pattern, 'afterSetter');
+        withAspect(A);
+        withAspect(C);
 
-      withAspect(C);
-      withAspect2(C);
-      C.staticSetter = 'static setter';
+        new C('method').method2({}, 1);
 
-      expect(C.staticSetter).toMatchInlineSnapshot(`"static setter"`);
+        expect(pattern.beforeMethod.calls.count()).toEqual(1);
+        expect(pattern.beforeMethod.calls.argsFor(0)).toMatchSnapshot();
+        expect(pattern.afterMethod.calls.count()).toEqual(1);
+        expect(pattern.afterMethod.calls.argsFor(0)).toMatchSnapshot();
+      });
 
-      expect(pattern.beforeSetter.calls.count()).toEqual(2);
-      expect(pattern.beforeSetter.calls.argsFor(0)).toMatchSnapshot();
-      expect(pattern.afterSetter.calls.count()).toEqual(2);
-      expect(pattern.afterSetter.calls.argsFor(0)).toMatchSnapshot();
-    });
+      it('should call pattern.beforeMethod and pattern.afterMethod for extended class', () => {
+        let { B } = createClasses();
+        spyOn(pattern, 'beforeMethod');
+        spyOn(pattern, 'afterMethod');
 
-    it('should not call pattern.afterMethod for static getter which return constructable function', () => {
-      let { C, A } = createClasses();
-      spyOn(pattern, 'afterMethod');
+        withAspect(B);
+        new B('method').method({}, 1);
 
-      C.A = A;
+        expect(pattern.beforeMethod.calls.count()).toEqual(1);
+        expect(pattern.beforeMethod.calls.argsFor(0)).toMatchSnapshot();
+        expect(pattern.afterMethod.calls.count()).toEqual(1);
+        expect(pattern.afterMethod.calls.argsFor(0)).toMatchSnapshot();
+      });
 
-      withAspect(C);
+      it('should call pattern.beforeMethod and pattern.afterMethod after class is instanced', () => {
+        let { B } = createClasses();
+        spyOn(pattern, 'beforeMethod');
+        spyOn(pattern, 'afterMethod');
 
-      const a = Reflect.construct(C.A, []);
+        const b = new B('method');
+        withAspect(B);
+        b.method({}, 1);
 
-      expect(a instanceof A).toBeTruthy();
+        expect(pattern.beforeMethod.calls.count()).toEqual(1);
+        expect(pattern.beforeMethod.calls.argsFor(0)).toMatchSnapshot();
+        expect(pattern.afterMethod.calls.count()).toEqual(1);
+        expect(pattern.afterMethod.calls.argsFor(0)).toMatchSnapshot();
+      });
 
-      expect(pattern.afterMethod.calls.count()).toEqual(0);
-      expect(pattern.afterMethod.calls.argsFor(0)).toMatchSnapshot();
-    });
+      it('should call pattern.beforeMethod and pattern.afterMethod for extended classes with same ancestor', () => {
+        let { B, C, A } = createClasses();
+        spyOn(pattern, 'beforeMethod');
+        spyOn(pattern, 'afterMethod');
 
-    it('should call pattern.beforeMethod and pattern.afterMethod', () => {
-      let { A } = createClasses();
-      spyOn(pattern, 'beforeMethod');
-      spyOn(pattern, 'afterMethod');
+        const b = new B('method');
+        withAspect(A);
+        withAspect2(A);
+        withAspect(C);
+        withAspect2(C);
+        withAspect(B);
+        withAspect2(B);
+        expect(b.method({}, 1)).toEqual('B method');
 
-      withAspect(A);
-      new A('method').method({}, 1);
-
-      expect(pattern.beforeMethod.calls.count()).toEqual(1);
-      expect(pattern.beforeMethod.calls.argsFor(0)).toMatchSnapshot();
-      expect(pattern.afterMethod.calls.count()).toEqual(1);
-      expect(pattern.afterMethod.calls.argsFor(0)).toMatchSnapshot();
-    });
-
-    it('should call pattern.beforeMethod and pattern.afterMethod for extended class', () => {
-      let { B } = createClasses();
-      spyOn(pattern, 'beforeMethod');
-      spyOn(pattern, 'afterMethod');
-
-      withAspect(B);
-      new B('method').method({}, 1);
-
-      expect(pattern.beforeMethod.calls.count()).toEqual(1);
-      expect(pattern.beforeMethod.calls.argsFor(0)).toMatchSnapshot();
-      expect(pattern.afterMethod.calls.count()).toEqual(1);
-      expect(pattern.afterMethod.calls.argsFor(0)).toMatchSnapshot();
-    });
-
-    it('should call pattern.beforeMethod and pattern.afterMethod after class is instanced', () => {
-      let { B } = createClasses();
-      spyOn(pattern, 'beforeMethod');
-      spyOn(pattern, 'afterMethod');
-
-      const b = new B('method');
-      withAspect(B);
-      b.method({}, 1);
-
-      expect(pattern.beforeMethod.calls.count()).toEqual(1);
-      expect(pattern.beforeMethod.calls.argsFor(0)).toMatchSnapshot();
-      expect(pattern.afterMethod.calls.count()).toEqual(1);
-      expect(pattern.afterMethod.calls.argsFor(0)).toMatchSnapshot();
-    });
-
-    it('should call pattern.beforeMethod and pattern.afterMethod for extended classes with same ancestor', () => {
-      let { B, C, A } = createClasses();
-      spyOn(pattern, 'beforeMethod');
-      spyOn(pattern, 'afterMethod');
-
-      const b = new B('method');
-      withAspect(A);
-      withAspect2(A);
-      withAspect(C);
-      withAspect2(C);
-      withAspect(B);
-      withAspect2(B);
-      expect(b.method({}, 1)).toEqual('B method');
-
-      expect(pattern.beforeMethod.calls.count()).toEqual(6);
-      expect(pattern.beforeMethod.calls.argsFor(0)).toMatchSnapshot();
-      expect(pattern.afterMethod.calls.count()).toEqual(6);
-      expect(pattern.afterMethod.calls.argsFor(0)).toMatchSnapshot();
+        expect(pattern.beforeMethod.calls.count()).toEqual(3);
+        expect(pattern.beforeMethod.calls.argsFor(0)).toMatchSnapshot();
+        expect(pattern.afterMethod.calls.count()).toEqual(3);
+        expect(pattern.afterMethod.calls.argsFor(0)).toMatchSnapshot();
+      });
     });
   });
 

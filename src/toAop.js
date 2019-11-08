@@ -1,7 +1,9 @@
 'use strict';
 
-import { createProxy, createCallTrap, getTrap, setTrap } from './trap';
-import { AOP_PATTERN, AOP_HOOKS, AOP_STATIC_ALLOW } from './symbol';
+import { AOP_PATTERN } from './symbol';
+import aopForMethods from './aopForMethods';
+import aopForStatic from './aopForStatic';
+import createProxy from './trap/createProxy';
 
 export function createAspect(pattern) {
   return function applyAop(target) {
@@ -11,6 +13,12 @@ export function createAspect(pattern) {
 
 export function aop(target, pattern) {
   if (target[AOP_PATTERN]) {
+    if (typeof target === 'function') {
+      aopForStatic(target, pattern);
+      aopForMethods(target, pattern);
+      return;
+    }
+
     mergePattern(target, pattern);
 
     return;
@@ -42,119 +50,8 @@ function applyAopToInstance(instance) {
 function applyAopToClass(target) {
   let pattern = target[AOP_PATTERN];
 
-  applyAopToStatic(target, pattern);
-  applyAopToMethods(target, pattern);
-}
-
-function applyAopToStatic(target, pattern) {
-  let original = {};
-  if (!Object.prototype.hasOwnProperty.call(target, AOP_STATIC_ALLOW)) {
-    Reflect.defineProperty(target, AOP_STATIC_ALLOW, {
-      value: false,
-      enumerable: false,
-      writable: true
-    });
-  }
-  let originalTarget = target;
-
-  while (target && target !== Function.prototype) {
-    Object.entries(Object.getOwnPropertyDescriptors(target)).forEach(
-      ([property, descriptor]) => {
-        if (
-          typeof descriptor.get === 'function' ||
-          typeof descriptor.set === 'function'
-        ) {
-          if (!Object.prototype.hasOwnProperty.call(original, property)) {
-            original[property] = target[property];
-          }
-          Reflect.defineProperty(
-            target,
-            property,
-            Object.assign({}, descriptor, {
-              get: () => {
-                if (originalTarget[AOP_STATIC_ALLOW]) {
-                  return getTrap({
-                    target,
-                    object: original,
-                    property,
-                    pattern
-                  });
-                }
-              },
-              set: payload => {
-                if (originalTarget[AOP_STATIC_ALLOW]) {
-                  return setTrap({
-                    target,
-                    object: original,
-                    property,
-                    payload,
-                    pattern
-                  });
-                }
-              }
-            })
-          );
-        }
-
-        if (
-          typeof target[property] === 'function' &&
-          !isConstructable(target[property])
-        ) {
-          original[property] = target[property];
-
-          target[property] = createCallTrap({
-            target,
-            object: original,
-            property,
-            pattern
-          });
-        }
-      }
-    );
-    target = Reflect.getPrototypeOf(target);
-  }
-  originalTarget[AOP_STATIC_ALLOW] = true;
-}
-
-function applyAopToMethods(target, pattern) {
-  let original = {};
-  let prototype = target.prototype;
-  while (prototype) {
-    Object.entries(Object.getOwnPropertyDescriptors(prototype)).forEach(
-      function([property]) {
-        try {
-          if (property in original) {
-            return;
-          }
-          original[property] = prototype[property];
-          let aopHooks = original[property][AOP_HOOKS];
-          if (aopHooks) {
-            const { object } = aopHooks[aopHooks.length - 1];
-            aopHooks.push({
-              target,
-              object,
-              property,
-              pattern
-            });
-            return;
-          }
-
-          if (typeof original[property] === 'function') {
-            prototype[property] = createCallTrap({
-              target,
-              object: original,
-              property,
-              pattern
-            });
-          }
-        } catch (_) {
-          console.error(_);
-        } // eslint-disable-line no-empty
-      }
-    );
-
-    prototype = Reflect.getPrototypeOf(prototype);
-  }
+  aopForStatic(target, pattern);
+  aopForMethods(target, pattern);
 }
 
 function mergePattern(target, pattern) {
@@ -181,8 +78,4 @@ function mergePattern(target, pattern) {
     },
     currentTargetPattern
   );
-}
-
-function isConstructable(func) {
-  return !!(func && func.prototype && func.prototype.constructor);
 }

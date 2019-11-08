@@ -1,6 +1,203 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`createAspect method for class should call pattern.beforeGetter and pattern.afterGetter for static getter 2`] = `
+exports[`createAspect method for class class method should call pattern.beforeMethod and pattern.afterMethod 1`] = `
+Array [
+  Object {
+    "args": Array [
+      Object {},
+      1,
+    ],
+    "context": A {
+      "variable": "method",
+    },
+    "object": Object {
+      "method": [Function],
+    },
+    "property": "method",
+    "target": [Function],
+  },
+]
+`;
+
+exports[`createAspect method for class class method should call pattern.beforeMethod and pattern.afterMethod 2`] = `
+Array [
+  Object {
+    "args": Array [
+      Object {},
+      1,
+    ],
+    "context": A {
+      "variable": "method",
+    },
+    "object": Object {
+      "method": [Function],
+    },
+    "payload": "method",
+    "property": "method",
+    "target": [Function],
+  },
+]
+`;
+
+exports[`createAspect method for class class method should call pattern.beforeMethod and pattern.afterMethod after class is instanced 1`] = `
+Array [
+  Object {
+    "args": Array [
+      Object {},
+      1,
+    ],
+    "context": B {
+      "variable": "method",
+    },
+    "object": Object {
+      "method": [Function],
+    },
+    "property": "method",
+    "target": [Function],
+  },
+]
+`;
+
+exports[`createAspect method for class class method should call pattern.beforeMethod and pattern.afterMethod after class is instanced 2`] = `
+Array [
+  Object {
+    "args": Array [
+      Object {},
+      1,
+    ],
+    "context": B {
+      "variable": "method",
+    },
+    "object": Object {
+      "method": [Function],
+    },
+    "payload": "B method",
+    "property": "method",
+    "target": [Function],
+  },
+]
+`;
+
+exports[`createAspect method for class class method should call pattern.beforeMethod and pattern.afterMethod for extended class 1`] = `
+Array [
+  Object {
+    "args": Array [
+      Object {},
+      1,
+    ],
+    "context": B {
+      "variable": "method",
+    },
+    "object": Object {
+      "method": [Function],
+    },
+    "property": "method",
+    "target": [Function],
+  },
+]
+`;
+
+exports[`createAspect method for class class method should call pattern.beforeMethod and pattern.afterMethod for extended class 2`] = `
+Array [
+  Object {
+    "args": Array [
+      Object {},
+      1,
+    ],
+    "context": B {
+      "variable": "method",
+    },
+    "object": Object {
+      "method": [Function],
+    },
+    "payload": "B method",
+    "property": "method",
+    "target": [Function],
+  },
+]
+`;
+
+exports[`createAspect method for class class method should call pattern.beforeMethod and pattern.afterMethod for extended class with multiple aspect 1`] = `
+Array [
+  Object {
+    "args": Array [
+      Object {},
+      1,
+    ],
+    "context": C {
+      "map": Map {},
+      "variable": "method",
+    },
+    "object": Object {
+      "method2": [Function],
+    },
+    "property": "method2",
+    "target": [Function],
+  },
+]
+`;
+
+exports[`createAspect method for class class method should call pattern.beforeMethod and pattern.afterMethod for extended class with multiple aspect 2`] = `
+Array [
+  Object {
+    "args": Array [
+      Object {},
+      1,
+    ],
+    "context": C {
+      "map": Map {},
+      "variable": "method",
+    },
+    "object": Object {
+      "method2": [Function],
+    },
+    "payload": Map {},
+    "property": "method2",
+    "target": [Function],
+  },
+]
+`;
+
+exports[`createAspect method for class class method should call pattern.beforeMethod and pattern.afterMethod for extended classes with same ancestor 1`] = `
+Array [
+  Object {
+    "args": Array [
+      Object {},
+      1,
+    ],
+    "context": B {
+      "variable": "method",
+    },
+    "object": Object {
+      "method": [Function],
+    },
+    "property": "method",
+    "target": [Function],
+  },
+]
+`;
+
+exports[`createAspect method for class class method should call pattern.beforeMethod and pattern.afterMethod for extended classes with same ancestor 2`] = `
+Array [
+  Object {
+    "args": Array [
+      Object {},
+      1,
+    ],
+    "context": B {
+      "variable": "method",
+    },
+    "object": Object {
+      "method": [Function],
+    },
+    "payload": "method",
+    "property": "method",
+    "target": [Function],
+  },
+]
+`;
+
+exports[`createAspect method for class static method should call pattern.beforeGetter and pattern.afterGetter 2`] = `
 Array [
   Object {
     "context": undefined,
@@ -16,7 +213,7 @@ Array [
 ]
 `;
 
-exports[`createAspect method for class should call pattern.beforeGetter and pattern.afterGetter for static getter 3`] = `
+exports[`createAspect method for class static method should call pattern.beforeGetter and pattern.afterGetter 3`] = `
 Array [
   Object {
     "context": undefined,
@@ -33,163 +230,7 @@ Array [
 ]
 `;
 
-exports[`createAspect method for class should call pattern.beforeMethod and pattern.afterMethod 1`] = `
-Array [
-  Object {
-    "args": Array [
-      Object {},
-      1,
-    ],
-    "context": A {
-      "variable": "method",
-    },
-    "object": Object {
-      "method": [Function],
-    },
-    "property": "method",
-    "target": [Function],
-  },
-]
-`;
-
-exports[`createAspect method for class should call pattern.beforeMethod and pattern.afterMethod 2`] = `
-Array [
-  Object {
-    "args": Array [
-      Object {},
-      1,
-    ],
-    "context": A {
-      "variable": "method",
-    },
-    "object": Object {
-      "method": [Function],
-    },
-    "payload": "method",
-    "property": "method",
-    "target": [Function],
-  },
-]
-`;
-
-exports[`createAspect method for class should call pattern.beforeMethod and pattern.afterMethod after class is instanced 1`] = `
-Array [
-  Object {
-    "args": Array [
-      Object {},
-      1,
-    ],
-    "context": B {
-      "variable": "method",
-    },
-    "object": Object {
-      "method": [Function],
-    },
-    "property": "method",
-    "target": [Function],
-  },
-]
-`;
-
-exports[`createAspect method for class should call pattern.beforeMethod and pattern.afterMethod after class is instanced 2`] = `
-Array [
-  Object {
-    "args": Array [
-      Object {},
-      1,
-    ],
-    "context": B {
-      "variable": "method",
-    },
-    "object": Object {
-      "method": [Function],
-    },
-    "payload": "B method",
-    "property": "method",
-    "target": [Function],
-  },
-]
-`;
-
-exports[`createAspect method for class should call pattern.beforeMethod and pattern.afterMethod for extended class 1`] = `
-Array [
-  Object {
-    "args": Array [
-      Object {},
-      1,
-    ],
-    "context": B {
-      "variable": "method",
-    },
-    "object": Object {
-      "method": [Function],
-    },
-    "property": "method",
-    "target": [Function],
-  },
-]
-`;
-
-exports[`createAspect method for class should call pattern.beforeMethod and pattern.afterMethod for extended class 2`] = `
-Array [
-  Object {
-    "args": Array [
-      Object {},
-      1,
-    ],
-    "context": B {
-      "variable": "method",
-    },
-    "object": Object {
-      "method": [Function],
-    },
-    "payload": "B method",
-    "property": "method",
-    "target": [Function],
-  },
-]
-`;
-
-exports[`createAspect method for class should call pattern.beforeMethod and pattern.afterMethod for extended classes with same ancestor 1`] = `
-Array [
-  Object {
-    "args": Array [
-      Object {},
-      1,
-    ],
-    "context": B {
-      "variable": "method",
-    },
-    "object": Object {
-      "method": [Function],
-    },
-    "property": "method",
-    "target": [Function],
-  },
-]
-`;
-
-exports[`createAspect method for class should call pattern.beforeMethod and pattern.afterMethod for extended classes with same ancestor 2`] = `
-Array [
-  Object {
-    "args": Array [
-      Object {},
-      1,
-    ],
-    "context": B {
-      "variable": "method",
-    },
-    "object": Object {
-      "method": [Function],
-    },
-    "payload": "method",
-    "property": "method",
-    "target": [Function],
-  },
-]
-`;
-
-exports[`createAspect method for class should call pattern.beforeMethod and pattern.afterMethod for static method 1`] = `
+exports[`createAspect method for class static method should call pattern.beforeMethod and pattern.afterMethod 1`] = `
 Array [
   Object {
     "args": Array [],
@@ -206,7 +247,7 @@ Array [
 ]
 `;
 
-exports[`createAspect method for class should call pattern.beforeMethod and pattern.afterMethod for static method 2`] = `
+exports[`createAspect method for class static method should call pattern.beforeMethod and pattern.afterMethod 2`] = `
 Array [
   Object {
     "args": Array [],
@@ -224,7 +265,75 @@ Array [
 ]
 `;
 
-exports[`createAspect method for class should call pattern.beforeSetter and pattern.afterSetter for static setter 2`] = `
+exports[`createAspect method for class static method should call pattern.beforeMethod and pattern.afterMethod 5`] = `
+Array [
+  Object {
+    "args": Array [],
+    "context": [Function],
+    "object": Object {
+      "staticGetter": "static getter",
+      "staticMethod": [Function],
+      "staticSetter": null,
+    },
+    "property": "staticMethod",
+    "target": [Function],
+  },
+]
+`;
+
+exports[`createAspect method for class static method should call pattern.beforeMethod and pattern.afterMethod 6`] = `
+Array [
+  Object {
+    "args": Array [],
+    "context": [Function],
+    "object": Object {
+      "staticGetter": "static getter",
+      "staticMethod": [Function],
+      "staticSetter": null,
+    },
+    "payload": "static method",
+    "property": "staticMethod",
+    "target": [Function],
+  },
+]
+`;
+
+exports[`createAspect method for class static method should call pattern.beforeMethod and pattern.afterMethod for extended class with multiple aspect 1`] = `
+Array [
+  Object {
+    "args": Array [],
+    "context": [Function],
+    "object": Object {
+      "staticGetter": "static getter",
+      "staticMethod": [Function],
+      "staticMethod2": [Function],
+      "staticSetter": null,
+    },
+    "property": "staticMethod2",
+    "target": [Function],
+  },
+]
+`;
+
+exports[`createAspect method for class static method should call pattern.beforeMethod and pattern.afterMethod for extended class with multiple aspect 2`] = `
+Array [
+  Object {
+    "args": Array [],
+    "context": [Function],
+    "object": Object {
+      "staticGetter": "static getter",
+      "staticMethod": [Function],
+      "staticMethod2": [Function],
+      "staticSetter": null,
+    },
+    "payload": "static method 2",
+    "property": "staticMethod2",
+    "target": [Function],
+  },
+]
+`;
+
+exports[`createAspect method for class static method should call pattern.beforeSetter and pattern.afterSetter 2`] = `
 Array [
   Object {
     "context": undefined,
@@ -241,7 +350,7 @@ Array [
 ]
 `;
 
-exports[`createAspect method for class should call pattern.beforeSetter and pattern.afterSetter for static setter 3`] = `
+exports[`createAspect method for class static method should call pattern.beforeSetter and pattern.afterSetter 3`] = `
 Array [
   Object {
     "context": undefined,
@@ -258,7 +367,7 @@ Array [
 ]
 `;
 
-exports[`createAspect method for class should not call pattern.afterMethod for static getter which return constructable function 1`] = `Array []`;
+exports[`createAspect method for class static method should not call pattern.afterMethod for static getter which return constructable function 1`] = `Array []`;
 
 exports[`createAspect method for instance should call pattern.beforeMethod and pattern.afterMethod 1`] = `
 Array [
