@@ -1,3 +1,13 @@
+<a name="0.3.0"></a>
+# [0.3.0](https://github.com/mjancarik/to-aop/compare/0.2.1...0.3.0) (2019-12-09)
+
+
+### Features
+
+* **static:** added support for static getter, setter and method ([d94583a](https://github.com/mjancarik/to-aop/commit/d94583a))
+
+
+
 <a name="0.2.1"></a>
 ## [0.2.1](https://github.com/mjancarik/to-aop/compare/0.2.0...0.2.1) (2019-08-29)
 
