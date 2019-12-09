@@ -1,144 +1,135 @@
 import aopForStatic from '../aopForStatic';
-
-function createClasses() {
-  let staticSetter = null;
-
-  class A {
-    static staticMethod() {
-      return 'static method';
-    }
-
-    static get staticGetter() {
-      return 'static getter';
-    }
-
-    static set staticSetter(value) {
-      staticSetter = value;
-    }
-
-    static get staticSetter() {
-      return staticSetter;
-    }
-
-    constructor(variable) {
-      this.variable = variable;
-    }
-
-    method() {
-      return this.variable;
-    }
-  }
-
-  class B extends A {
-    constructor(variable) {
-      super(variable);
-    }
-
-    method(...rest) {
-      return 'B ' + super.method(...rest);
-    }
-  }
-
-  class C extends A {
-    static staticMethod2() {
-      return 'static method 2';
-    }
-
-    constructor(variable) {
-      super(variable);
-
-      this.map = new Map();
-    }
-
-    method2() {
-      return this.map;
-    }
-  }
-
-  return { A, B, C };
-}
+import { hookName } from '../hook';
+import createClasses from './createClasses';
+import createPattern from './createPattern';
 
 describe('aopForStatic method', () => {
   let pattern = null;
   let pattern2 = null;
 
+  let beforeMethod = null;
+  let afterMethod = null;
+  let beforeGetter = null;
+  let afterGetter = null;
+  let beforeSetter = null;
+  let afterSetter = null;
+
   beforeEach(() => {
-    pattern = {
-      beforeMethod: () => {},
-      afterMethod: () => {},
-      beforeGetter: () => {},
-      beforeSetter: () => {},
-      afterGetter: () => {},
-      afterSetter: () => {}
-    };
-    pattern2 = Object.assign({}, pattern);
-  });
+    beforeMethod = jest.fn();
+    afterMethod = jest.fn();
+    beforeGetter = jest.fn();
+    afterGetter = jest.fn();
+    beforeSetter = jest.fn();
+    afterSetter = jest.fn();
 
-  describe('parent classs with static method', () => {
-    let result = null;
-
-    beforeEach(() => {
-      spyOn(pattern, 'beforeMethod');
-      spyOn(pattern2, 'beforeMethod');
-      spyOn(pattern, 'afterMethod');
-      spyOn(pattern2, 'afterMethod');
-
-      const { A } = createClasses();
-
-      aopForStatic(A, pattern);
-      aopForStatic(A, pattern2);
-
-      result = A.staticMethod();
+    pattern = createPattern(undefined, {
+      [hookName.beforeMethod]: beforeMethod,
+      [hookName.afterMethod]: afterMethod,
+      [hookName.beforeGetter]: beforeGetter,
+      [hookName.afterGetter]: afterGetter,
+      [hookName.beforeSetter]: beforeSetter,
+      [hookName.afterSetter]: afterSetter
     });
-
-    it('should call pattern.beforeMethod and pattern.afterMethod', () => {
-      expect(pattern.beforeMethod.calls.count()).toEqual(1);
-      expect(pattern.beforeMethod.calls.argsFor(0)).toMatchSnapshot();
-      expect(pattern.afterMethod.calls.count()).toEqual(1);
-      expect(pattern.afterMethod.calls.argsFor(0)).toMatchSnapshot();
-      expect(result).toEqual('static method');
-    });
-
-    it('should call pattern2.beforeMethod and pattern2.afterMethod', () => {
-      expect(pattern2.beforeMethod.calls.count()).toEqual(1);
-      expect(pattern2.beforeMethod.calls.argsFor(0)).toMatchSnapshot();
-      expect(pattern2.afterMethod.calls.count()).toEqual(1);
-      expect(pattern2.afterMethod.calls.argsFor(0)).toMatchSnapshot();
-      expect(result).toEqual('static method');
+    pattern2 = createPattern(undefined, {
+      [hookName.beforeMethod]: beforeMethod,
+      [hookName.afterMethod]: afterMethod,
+      [hookName.beforeGetter]: beforeGetter,
+      [hookName.afterGetter]: afterGetter,
+      [hookName.beforeSetter]: beforeSetter,
+      [hookName.afterSetter]: afterSetter
     });
   });
 
-  describe('parent classs with static getter', () => {
-    let result = null;
+  it('should call pattern.beforeMethod and pattern.afterMethod with multiple aspect', () => {
+    let { C } = createClasses();
 
-    beforeEach(() => {
-      const { A } = createClasses();
+    aopForStatic(C, pattern);
+    aopForStatic(C, pattern2);
+    const staticResult1 = C.staticMethod();
+    const staticResult2 = C.staticMethod2();
 
-      aopForStatic(A, pattern);
-      aopForStatic(A, pattern2);
+    expect(beforeMethod.mock.calls.length).toEqual(4);
+    expect(beforeMethod.mock.calls[0]).toMatchSnapshot();
+    expect(afterMethod.mock.calls.length).toEqual(4);
+    expect(afterMethod.mock.calls[0]).toMatchSnapshot();
 
-      spyOn(pattern, 'beforeGetter');
-      spyOn(pattern2, 'beforeGetter');
-      spyOn(pattern, 'afterGetter');
-      spyOn(pattern2, 'afterGetter');
+    expect(staticResult1).toMatchInlineSnapshot(`"static method"`);
+    expect(staticResult2).toMatchInlineSnapshot(`"static method 2"`);
+  });
 
-      result = A.staticGetter;
-    });
+  it('should call pattern.beforeMethod and pattern.afterMethod for extended class with multiple aspect', () => {
+    let { C, A } = createClasses();
 
-    it('should call pattern.beforeGetter and pattern.afterGetter', () => {
-      expect(pattern.beforeGetter.calls.count()).toEqual(1);
-      expect(pattern.beforeGetter.calls.argsFor(0)).toMatchSnapshot();
-      expect(pattern.afterGetter.calls.count()).toEqual(1);
-      expect(pattern.afterGetter.calls.argsFor(0)).toMatchSnapshot();
-      expect(result).toEqual('static getter');
-    });
+    aopForStatic(A, pattern);
+    aopForStatic(C, pattern);
+    const staticResult2 = C.staticMethod2();
 
-    it('should call pattern2.beforeGetter and pattern2.afterGetter', () => {
-      expect(pattern2.beforeGetter.calls.count()).toEqual(1);
-      expect(pattern2.beforeGetter.calls.argsFor(0)).toMatchSnapshot();
-      expect(pattern2.afterGetter.calls.count()).toEqual(1);
-      expect(pattern2.afterGetter.calls.argsFor(0)).toMatchSnapshot();
-      expect(result).toEqual('static getter');
-    });
+    expect(beforeMethod.mock.calls.length).toEqual(1);
+    expect(beforeMethod.mock.calls[0]).toMatchSnapshot();
+    expect(afterMethod.mock.calls.length).toEqual(1);
+    expect(afterMethod.mock.calls[0]).toMatchSnapshot();
+
+    expect(staticResult2).toMatchInlineSnapshot(`"static method 2"`);
+  });
+
+  it('should call pattern.beforeMethod and pattern.afterMethod', () => {
+    let { C, A } = createClasses();
+
+    aopForStatic(A, pattern);
+    aopForStatic(C, pattern);
+
+    const staticResult = C.staticMethod();
+
+    expect(beforeMethod.mock.calls.length).toEqual(2);
+    expect(beforeMethod.mock.calls[0]).toMatchSnapshot();
+    expect(afterMethod.mock.calls.length).toEqual(2);
+    expect(afterMethod.mock.calls[0]).toMatchSnapshot();
+
+    expect(staticResult).toMatchInlineSnapshot(`"static method"`);
+  });
+
+  it('should call pattern.beforeGetter and pattern.afterGetter', () => {
+    let { C } = createClasses();
+
+    aopForStatic(C, pattern);
+
+    const staticResult1 = C.staticGetter;
+
+    expect(staticResult1).toMatchInlineSnapshot(`"static getter"`);
+
+    expect(beforeGetter.mock.calls.length).toEqual(1);
+    expect(beforeGetter.mock.calls[0]).toMatchSnapshot();
+    expect(afterGetter.mock.calls.length).toEqual(1);
+    expect(afterGetter.mock.calls[0]).toMatchSnapshot();
+  });
+
+  it('should call pattern.beforeSetter and pattern.afterSetter', () => {
+    let { C } = createClasses();
+
+    aopForStatic(C, pattern);
+
+    C.staticSetter = 'static setter';
+
+    expect(C.staticSetter).toMatchInlineSnapshot(`"static setter"`);
+
+    expect(beforeSetter.mock.calls.length).toEqual(1);
+    expect(beforeSetter.mock.calls[0]).toMatchSnapshot();
+    expect(afterSetter.mock.calls.length).toEqual(1);
+    expect(afterSetter.mock.calls[0]).toMatchSnapshot();
+  });
+
+  it('should not call pattern.afterMethod for static getter which return constructable function', () => {
+    let { C, A } = createClasses();
+
+    C.A = A;
+
+    aopForStatic(C, pattern);
+
+    const a = Reflect.construct(C.A, []);
+
+    expect(a instanceof A).toBeTruthy();
+
+    expect(afterMethod.mock.calls.length).toEqual(0);
+    expect(afterMethod.mock.calls[0]).toMatchSnapshot();
   });
 });

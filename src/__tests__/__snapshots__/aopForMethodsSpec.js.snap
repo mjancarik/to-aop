@@ -1,0 +1,283 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`for class class method should call pattern.beforeMethod and pattern.afterMethod 1`] = `
+Array [
+  Object {
+    "args": Array [
+      Object {},
+      1,
+    ],
+    "context": A {
+      "variable": "method",
+    },
+    "object": Object {
+      "_privateMethod": [Function],
+      "method": [Function],
+      "superMethod": [Function],
+    },
+    "property": "method",
+    "target": [Function],
+  },
+]
+`;
+
+exports[`for class class method should call pattern.beforeMethod and pattern.afterMethod 2`] = `
+Array [
+  Object {
+    "args": Array [
+      Object {},
+      1,
+    ],
+    "context": A {
+      "variable": "method",
+    },
+    "object": Object {
+      "_privateMethod": [Function],
+      "method": [Function],
+      "superMethod": [Function],
+    },
+    "payload": "method",
+    "property": "method",
+    "target": [Function],
+  },
+]
+`;
+
+exports[`for class class method should call pattern.beforeMethod and pattern.afterMethod after class is instanced 1`] = `
+Array [
+  Object {
+    "args": Array [
+      Object {},
+      1,
+    ],
+    "context": B {
+      "variable": "method",
+    },
+    "object": Object {
+      "_privateMethod": [Function],
+      "method": [Function],
+      "superMethod": [Function],
+    },
+    "property": "method",
+    "target": [Function],
+  },
+]
+`;
+
+exports[`for class class method should call pattern.beforeMethod and pattern.afterMethod after class is instanced 2`] = `
+Array [
+  Object {
+    "args": Array [
+      Object {},
+      1,
+    ],
+    "context": B {
+      "variable": "method",
+    },
+    "object": Object {
+      "_privateMethod": [Function],
+      "method": [Function],
+      "superMethod": [Function],
+    },
+    "payload": "B method",
+    "property": "method",
+    "target": [Function],
+  },
+]
+`;
+
+exports[`for class class method should call pattern.beforeMethod and pattern.afterMethod for extended class 1`] = `
+Array [
+  Object {
+    "args": Array [
+      Object {},
+      1,
+    ],
+    "context": B {
+      "variable": "method",
+    },
+    "object": Object {
+      "_privateMethod": [Function],
+      "method": [Function],
+      "superMethod": [Function],
+    },
+    "property": "method",
+    "target": [Function],
+  },
+]
+`;
+
+exports[`for class class method should call pattern.beforeMethod and pattern.afterMethod for extended class 2`] = `
+Array [
+  Object {
+    "args": Array [
+      Object {},
+      1,
+    ],
+    "context": B {
+      "variable": "method",
+    },
+    "object": Object {
+      "_privateMethod": [Function],
+      "method": [Function],
+      "superMethod": [Function],
+    },
+    "payload": "B method",
+    "property": "method",
+    "target": [Function],
+  },
+]
+`;
+
+exports[`for class class method should call pattern.beforeMethod and pattern.afterMethod for extended class with multiple aspect 1`] = `
+Array [
+  Object {
+    "args": Array [
+      Object {},
+      1,
+    ],
+    "context": C {
+      "map": Map {},
+      "variable": "method",
+    },
+    "object": Object {
+      "_privateMethod": [Function],
+      "method": [Function],
+      "method2": [Function],
+      "superMethod": [Function],
+    },
+    "property": "method2",
+    "target": [Function],
+  },
+]
+`;
+
+exports[`for class class method should call pattern.beforeMethod and pattern.afterMethod for extended class with multiple aspect 2`] = `
+Array [
+  Object {
+    "args": Array [
+      Object {},
+      1,
+    ],
+    "context": C {
+      "map": Map {},
+      "variable": "method",
+    },
+    "object": Object {
+      "_privateMethod": [Function],
+      "method": [Function],
+      "method2": [Function],
+      "superMethod": [Function],
+    },
+    "payload": Map {},
+    "property": "method2",
+    "target": [Function],
+  },
+]
+`;
+
+exports[`for class class method should call pattern.beforeMethod and pattern.afterMethod for extended classes with same ancestor 1`] = `
+Array [
+  Object {
+    "args": Array [
+      Object {},
+      1,
+    ],
+    "context": B {
+      "variable": "method",
+    },
+    "object": Object {
+      "_privateMethod": [Function],
+      "method": [Function],
+      "superMethod": [Function],
+    },
+    "property": "method",
+    "target": [Function],
+  },
+]
+`;
+
+exports[`for class class method should call pattern.beforeMethod and pattern.afterMethod for extended classes with same ancestor 2`] = `
+Array [
+  Object {
+    "args": Array [
+      Object {},
+      1,
+    ],
+    "context": B {
+      "variable": "method",
+    },
+    "object": Object {
+      "_privateMethod": [Function],
+      "method": [Function],
+      "superMethod": [Function],
+    },
+    "payload": "method",
+    "property": "method",
+    "target": [Function],
+  },
+]
+`;
+
+exports[`for class class method should call pattern.beforeMethod and pattern.afterMethod for super.superMethod 1`] = `
+Array [
+  Object {
+    "args": Array [],
+    "context": C {
+      "map": Map {},
+      "variable": "super method",
+    },
+    "object": Object {
+      "__defineGetter__": [Function],
+      "__defineSetter__": [Function],
+      "__lookupGetter__": [Function],
+      "__lookupSetter__": [Function],
+      "_privateMethod": [Function],
+      "constructor": [Function],
+      "hasOwnProperty": [Function],
+      "isPrototypeOf": [Function],
+      "method": [Function],
+      "method2": [Function],
+      "propertyIsEnumerable": [Function],
+      "superMethod": [Function],
+      "toLocaleString": [Function],
+      "toString": [Function],
+      "valueOf": [Function],
+    },
+    "property": "superMethod",
+    "target": [Function],
+  },
+]
+`;
+
+exports[`for class class method should call pattern.beforeMethod and pattern.afterMethod for super.superMethod 2`] = `
+Array [
+  Object {
+    "args": Array [],
+    "context": C {
+      "map": Map {},
+      "variable": "super method",
+    },
+    "object": Object {
+      "__defineGetter__": [Function],
+      "__defineSetter__": [Function],
+      "__lookupGetter__": [Function],
+      "__lookupSetter__": [Function],
+      "_privateMethod": [Function],
+      "constructor": [Function],
+      "hasOwnProperty": [Function],
+      "isPrototypeOf": [Function],
+      "method": [Function],
+      "method2": [Function],
+      "propertyIsEnumerable": [Function],
+      "superMethod": [Function],
+      "toLocaleString": [Function],
+      "toString": [Function],
+      "valueOf": [Function],
+    },
+    "payload": "super method",
+    "property": "superMethod",
+    "target": [Function],
+  },
+]
+`;

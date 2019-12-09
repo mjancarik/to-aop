@@ -1,11 +1,32 @@
-import { createHook, hookFor } from '../hook';
+import { createHook, hookFor, hookName } from '../hook';
+import { AOP_FILTER_FUNCTION } from '../symbol';
 
 describe('hook', () => {
   describe('method createHook', () => {
     it('should return specific hook structure', () => {
-      const hook = createHook('beforeMethod', 'setMethod', () => {});
+      const hook = createHook(hookName.beforeMethod, 'setMethod', () => {});
 
       expect(hook).toMatchSnapshot();
+    });
+
+    it('should return true if method match with defined regular', () => {
+      const hook = createHook(hookName.beforeMethod, 'setMethod', () => {});
+
+      expect(
+        hook[hookName.beforeMethod][AOP_FILTER_FUNCTION]({
+          property: 'setMethod'
+        })
+      ).toEqual(true);
+    });
+
+    it('should return false if method not match with defined regular', () => {
+      const hook = createHook(hookName.beforeMethod, 'setMethod', () => {});
+
+      expect(
+        hook[hookName.beforeMethod][AOP_FILTER_FUNCTION]({
+          property: 'getMethod'
+        })
+      ).toEqual(false);
     });
   });
 

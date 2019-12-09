@@ -9,15 +9,17 @@ export default function createSetTrap({
   context
 }) {
   function setTrap(payload) {
-    setTrap[AOP_HOOKS].forEach(({ target, object, property, context }) => {
-      invokePattern(pattern.beforeSetter, {
-        target,
-        object,
-        property,
-        payload,
-        context
-      });
-    });
+    setTrap[AOP_HOOKS].forEach(
+      ({ target, object, property, context, pattern }) => {
+        invokePattern(pattern.beforeSetter, {
+          target,
+          object,
+          property,
+          payload,
+          context
+        });
+      }
+    );
 
     const { target, object, property, pattern, context } = setTrap[AOP_HOOKS][
       setTrap[AOP_HOOKS].length - 1
@@ -36,15 +38,17 @@ export default function createSetTrap({
         })
       : Reflect.set(object, property, payload);
 
-    setTrap[AOP_HOOKS].forEach(({ target, object, property, context }) => {
-      invokePattern(pattern.afterSetter, {
-        target,
-        object,
-        property,
-        payload,
-        context
-      });
-    });
+    setTrap[AOP_HOOKS].forEach(
+      ({ target, object, property, context, pattern }) => {
+        invokePattern(pattern.afterSetter, {
+          target,
+          object,
+          property,
+          payload,
+          context
+        });
+      }
+    );
 
     return result;
   }

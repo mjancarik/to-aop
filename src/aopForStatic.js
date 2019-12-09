@@ -1,11 +1,7 @@
-import createCallTrap from './trap/createCallTrap';
 import createGetTrap from './trap/createGetTrap';
-import { setTrap } from './trap';
-import { AOP_HOOKS, AOP_STATIC_ALLOW } from './symbol';
-
-function isConstructable(func) {
-  return !!(func && func.prototype && func.prototype.constructor);
-}
+import createSetTrap from './trap/createSetTrap';
+import overOwnProperty from './overOwnProperty';
+import { AOP_STATIC_ALLOW, AOP_HOOKS } from './symbol';
 
 export default function aopForStatic(target, pattern) {
   let original = {};
@@ -15,10 +11,13 @@ export default function aopForStatic(target, pattern) {
       enumerable: false,
       writable: true
     });
+  } else {
+    target[AOP_STATIC_ALLOW] = false;
   }
   let originalTarget = target;
 
   while (target && target !== Function.prototype) {
+    // TODO improve
     Object.entries(Object.getOwnPropertyDescriptors(target)).forEach(
       ([property, descriptor]) => {
         if (
@@ -58,46 +57,47 @@ export default function aopForStatic(target, pattern) {
               },
               set: payload => {
                 if (originalTarget[AOP_STATIC_ALLOW]) {
-                  return setTrap({
+                  return createSetTrap({
                     target,
                     object: original,
                     property,
-                    payload,
                     pattern
-                  });
+                  })(payload);
                 }
               }
             })
           );
         }
 
-        if (
-          typeof target[property] === 'function' &&
-          (!isConstructable(target[property]) || target[property][AOP_HOOKS])
-        ) {
-          original[property] = target[property];
-
-          let aopHooks = original[property][AOP_HOOKS];
-          if (aopHooks) {
-            const { object } = aopHooks[aopHooks.length - 1];
-            aopHooks.push({
-              target,
-              object: object,
-              property,
-              pattern
-            });
-            return;
-          }
-
-          target[property] = createCallTrap({
-            target,
-            object: original,
-            property,
-            pattern
-          });
-        }
+        // if (
+        //   typeof target[property] === 'function' &&
+        //   (!isConstructable(target[property]) || target[property][AOP_HOOKS])
+        // ) {
+        //   original[property] = target[property];
+        //
+        //   let aopHooks = original[property][AOP_HOOKS];
+        //   if (aopHooks) {
+        //     const { object } = aopHooks[aopHooks.length - 1];
+        //     aopHooks.push({
+        //       target,
+        //       object,
+        //       property,
+        //       pattern
+        //     });
+        //     return;
+        //   }
+        //
+        //   target[property] = createCallTrap({
+        //     target,
+        //     object: original,
+        //     property,
+        //     pattern
+        //   });
+        // }
       }
     );
+
+    overOwnProperty({ target, pattern, original, object: target });
     target = Reflect.getPrototypeOf(target);
   }
   originalTarget[AOP_STATIC_ALLOW] = true;

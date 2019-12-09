@@ -1,12 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`aopForStatic method parent classs with static getter should call pattern.beforeGetter and pattern.afterGetter 1`] = `
+exports[`aopForStatic method should call pattern.beforeGetter and pattern.afterGetter 2`] = `
 Array [
   Object {
     "context": undefined,
     "object": Object {
       "staticGetter": "static getter",
       "staticMethod": [Function],
+      "staticMethod2": [Function],
       "staticSetter": null,
     },
     "property": "staticGetter",
@@ -15,44 +16,14 @@ Array [
 ]
 `;
 
-exports[`aopForStatic method parent classs with static getter should call pattern.beforeGetter and pattern.afterGetter 2`] = `
+exports[`aopForStatic method should call pattern.beforeGetter and pattern.afterGetter 3`] = `
 Array [
   Object {
     "context": undefined,
     "object": Object {
       "staticGetter": "static getter",
       "staticMethod": [Function],
-      "staticSetter": null,
-    },
-    "payload": "static getter",
-    "property": "staticGetter",
-    "target": [Function],
-  },
-]
-`;
-
-exports[`aopForStatic method parent classs with static getter should call pattern2.beforeGetter and pattern2.afterGetter 1`] = `
-Array [
-  Object {
-    "context": undefined,
-    "object": Object {
-      "staticGetter": "static getter",
-      "staticMethod": [Function],
-      "staticSetter": null,
-    },
-    "property": "staticGetter",
-    "target": [Function],
-  },
-]
-`;
-
-exports[`aopForStatic method parent classs with static getter should call pattern2.beforeGetter and pattern2.afterGetter 2`] = `
-Array [
-  Object {
-    "context": undefined,
-    "object": Object {
-      "staticGetter": "static getter",
-      "staticMethod": [Function],
+      "staticMethod2": [Function],
       "staticSetter": null,
     },
     "payload": "static getter",
@@ -62,7 +33,7 @@ Array [
 ]
 `;
 
-exports[`aopForStatic method parent classs with static method should call pattern.beforeMethod and pattern.afterMethod 1`] = `
+exports[`aopForStatic method should call pattern.beforeMethod and pattern.afterMethod 1`] = `
 Array [
   Object {
     "args": Array [],
@@ -78,7 +49,7 @@ Array [
 ]
 `;
 
-exports[`aopForStatic method parent classs with static method should call pattern.beforeMethod and pattern.afterMethod 2`] = `
+exports[`aopForStatic method should call pattern.beforeMethod and pattern.afterMethod 2`] = `
 Array [
   Object {
     "args": Array [],
@@ -95,7 +66,7 @@ Array [
 ]
 `;
 
-exports[`aopForStatic method parent classs with static method should call pattern2.beforeMethod and pattern2.afterMethod 1`] = `
+exports[`aopForStatic method should call pattern.beforeMethod and pattern.afterMethod for extended class with multiple aspect 1`] = `
 Array [
   Object {
     "args": Array [],
@@ -103,6 +74,42 @@ Array [
     "object": Object {
       "staticGetter": "static getter",
       "staticMethod": [Function],
+      "staticMethod2": [Function],
+      "staticSetter": null,
+    },
+    "property": "staticMethod2",
+    "target": [Function],
+  },
+]
+`;
+
+exports[`aopForStatic method should call pattern.beforeMethod and pattern.afterMethod for extended class with multiple aspect 2`] = `
+Array [
+  Object {
+    "args": Array [],
+    "context": [Function],
+    "object": Object {
+      "staticGetter": "static getter",
+      "staticMethod": [Function],
+      "staticMethod2": [Function],
+      "staticSetter": null,
+    },
+    "payload": "static method 2",
+    "property": "staticMethod2",
+    "target": [Function],
+  },
+]
+`;
+
+exports[`aopForStatic method should call pattern.beforeMethod and pattern.afterMethod with multiple aspect 1`] = `
+Array [
+  Object {
+    "args": Array [],
+    "context": [Function],
+    "object": Object {
+      "staticGetter": "static getter",
+      "staticMethod": [Function],
+      "staticMethod2": [Function],
       "staticSetter": null,
     },
     "property": "staticMethod",
@@ -111,7 +118,7 @@ Array [
 ]
 `;
 
-exports[`aopForStatic method parent classs with static method should call pattern2.beforeMethod and pattern2.afterMethod 2`] = `
+exports[`aopForStatic method should call pattern.beforeMethod and pattern.afterMethod with multiple aspect 2`] = `
 Array [
   Object {
     "args": Array [],
@@ -119,6 +126,7 @@ Array [
     "object": Object {
       "staticGetter": "static getter",
       "staticMethod": [Function],
+      "staticMethod2": [Function],
       "staticSetter": null,
     },
     "payload": "static method",
@@ -127,3 +135,39 @@ Array [
   },
 ]
 `;
+
+exports[`aopForStatic method should call pattern.beforeSetter and pattern.afterSetter 2`] = `
+Array [
+  Object {
+    "context": undefined,
+    "object": Object {
+      "staticGetter": "static getter",
+      "staticMethod": [Function],
+      "staticMethod2": [Function],
+      "staticSetter": "static setter",
+    },
+    "payload": "static setter",
+    "property": "staticSetter",
+    "target": [Function],
+  },
+]
+`;
+
+exports[`aopForStatic method should call pattern.beforeSetter and pattern.afterSetter 3`] = `
+Array [
+  Object {
+    "context": undefined,
+    "object": Object {
+      "staticGetter": "static getter",
+      "staticMethod": [Function],
+      "staticMethod2": [Function],
+      "staticSetter": "static setter",
+    },
+    "payload": "static setter",
+    "property": "staticSetter",
+    "target": [Function],
+  },
+]
+`;
+
+exports[`aopForStatic method should not call pattern.afterMethod for static getter which return constructable function 1`] = `undefined`;
