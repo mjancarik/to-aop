@@ -57,7 +57,7 @@ describe('aopForStatic method', () => {
     expect(staticResult2).toMatchInlineSnapshot(`"static method 2"`);
   });
 
-  it('should call pattern.beforeMethod and pattern.afterMethod for extended class with multiple aspect', () => {
+  it('should call pattern.beforeMethod and pattern.afterMethod for own static method with multiple aspect', () => {
     let { C, A } = createClasses();
 
     aopForStatic(A, pattern);
@@ -72,7 +72,7 @@ describe('aopForStatic method', () => {
     expect(staticResult2).toMatchInlineSnapshot(`"static method 2"`);
   });
 
-  it('should call pattern.beforeMethod and pattern.afterMethod', () => {
+  it('should call pattern.beforeMethod and pattern.afterMethod for inhereted static method with multiple aspect', () => {
     let { C, A } = createClasses();
 
     aopForStatic(A, pattern);
@@ -88,7 +88,7 @@ describe('aopForStatic method', () => {
     expect(staticResult).toMatchInlineSnapshot(`"static method"`);
   });
 
-  it('should call pattern.beforeGetter and pattern.afterGetter', () => {
+  it('should call pattern.beforeGetter and pattern.afterGetter for inhereted static getter', () => {
     let { C } = createClasses();
 
     aopForStatic(C, pattern);
@@ -103,7 +103,23 @@ describe('aopForStatic method', () => {
     expect(afterGetter.mock.calls[0]).toMatchSnapshot();
   });
 
-  it('should call pattern.beforeSetter and pattern.afterSetter', () => {
+  it('should call pattern.beforeGetter and pattern.afterGetter for inhereted static getter with multiple aspect', () => {
+    let { A, C } = createClasses();
+
+    aopForStatic(A, pattern);
+    aopForStatic(C, pattern);
+
+    const staticResult1 = C.staticGetter;
+
+    expect(staticResult1).toMatchInlineSnapshot(`"static getter"`);
+
+    expect(beforeGetter.mock.calls.length).toEqual(3);
+    expect(beforeGetter.mock.calls[0]).toMatchSnapshot();
+    expect(afterGetter.mock.calls.length).toEqual(3);
+    expect(afterGetter.mock.calls[0]).toMatchSnapshot();
+  });
+
+  it('should call pattern.beforeSetter and pattern.afterSetter for inhereted static setter', () => {
     let { C } = createClasses();
 
     aopForStatic(C, pattern);

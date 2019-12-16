@@ -5,16 +5,17 @@ import { AOP_STATIC_ALLOW, AOP_HOOKS } from './symbol';
 
 export default function aopForStatic(target, pattern) {
   let original = {};
-  if (!Object.prototype.hasOwnProperty.call(target, AOP_STATIC_ALLOW)) {
-    Reflect.defineProperty(target, AOP_STATIC_ALLOW, {
+  let originalTarget = target;
+
+  if (!Object.prototype.hasOwnProperty.call(originalTarget, AOP_STATIC_ALLOW)) {
+    Reflect.defineProperty(originalTarget, AOP_STATIC_ALLOW, {
       value: false,
       enumerable: false,
       writable: true
     });
   } else {
-    target[AOP_STATIC_ALLOW] = false;
+    originalTarget[AOP_STATIC_ALLOW] = false;
   }
-  let originalTarget = target;
 
   while (target && target !== Function.prototype) {
     // TODO improve
@@ -32,7 +33,7 @@ export default function aopForStatic(target, pattern) {
             property,
             Object.assign({}, descriptor, {
               get: (...rest) => {
-                if (originalTarget[AOP_STATIC_ALLOW]) {
+                if (originalTarget[AOP_STATIC_ALLOW] === true) {
                   let aopHooks = descriptor.get[AOP_HOOKS];
                   if (aopHooks) {
                     const { object } = aopHooks[aopHooks.length - 1];
@@ -44,7 +45,9 @@ export default function aopForStatic(target, pattern) {
                       pattern
                     });
 
-                    return descriptor.get(...rest);
+                    return typeof descriptor.get === 'function'
+                      ? descriptor.get(...rest)
+                      : undefined;
                   }
 
                   return createGetTrap({
@@ -53,10 +56,14 @@ export default function aopForStatic(target, pattern) {
                     property,
                     pattern
                   })(...rest);
+                } else {
+                  return typeof descriptor.get === 'function'
+                    ? descriptor.get(...rest)
+                    : undefined;
                 }
               },
               set: payload => {
-                if (originalTarget[AOP_STATIC_ALLOW]) {
+                if (originalTarget[AOP_STATIC_ALLOW] === true) {
                   return createSetTrap({
                     target,
                     object: original,
@@ -100,5 +107,6 @@ export default function aopForStatic(target, pattern) {
     overOwnProperty({ target, pattern, original, object: target });
     target = Reflect.getPrototypeOf(target);
   }
+
   originalTarget[AOP_STATIC_ALLOW] = true;
 }
