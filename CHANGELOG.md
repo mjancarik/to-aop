@@ -1,3 +1,13 @@
+<a name="0.3.1"></a>
+## [0.3.1](https://github.com/mjancarik/to-aop/compare/0.3.0...0.3.1) (2019-12-16)
+
+
+### Bug Fixes
+
+* returning value from static getter ([2189021](https://github.com/mjancarik/to-aop/commit/2189021))
+
+
+
 <a name="0.3.0"></a>
 # [0.3.0](https://github.com/mjancarik/to-aop/compare/0.2.1...0.3.0) (2019-12-09)
 
