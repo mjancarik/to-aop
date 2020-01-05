@@ -26,7 +26,7 @@ export default function aopForStatic(target, pattern) {
           typeof descriptor.set === 'function'
         ) {
           if (!Object.prototype.hasOwnProperty.call(original, property)) {
-            original[property] = target[property];
+            Reflect.defineProperty(original, property, descriptor);
           }
           Reflect.defineProperty(
             target,

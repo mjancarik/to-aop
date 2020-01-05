@@ -65,5 +65,23 @@ export default function createClasses() {
     }
   }
 
-  return { A, B, C };
+  class D {
+    static staticMethod() {
+      throw new Error('Static method');
+    }
+
+    static get staticGetter() {
+      throw new Error('Static getter');
+    }
+
+    static set staticSetter(value) {
+      throw new Error('Static setter');
+    }
+
+    static get staticSetter() {
+      throw new Error('Static setter');
+    }
+  }
+
+  return { A, B, C, D };
 }

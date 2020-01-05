@@ -103,6 +103,14 @@ describe('aopForStatic method', () => {
     expect(afterGetter.mock.calls[0]).toMatchSnapshot();
   });
 
+  it('should not throw error after call aopForStatic', () => {
+    let { D } = createClasses();
+
+    expect(() => {
+      aopForStatic(D, pattern);
+    }).not.toThrow();
+  });
+
   it('should call pattern.beforeGetter and pattern.afterGetter for inhereted static getter with multiple aspect', () => {
     let { A, C } = createClasses();
 
@@ -113,9 +121,9 @@ describe('aopForStatic method', () => {
 
     expect(staticResult1).toMatchInlineSnapshot(`"static getter"`);
 
-    expect(beforeGetter.mock.calls.length).toEqual(3);
+    expect(beforeGetter.mock.calls.length).toEqual(2);
     expect(beforeGetter.mock.calls[0]).toMatchSnapshot();
-    expect(afterGetter.mock.calls.length).toEqual(3);
+    expect(afterGetter.mock.calls.length).toEqual(2);
     expect(afterGetter.mock.calls[0]).toMatchSnapshot();
   });
 
