@@ -83,5 +83,34 @@ export default function createClasses() {
     }
   }
 
-  return { A, B, C, D };
+  class E {
+    static get $dependencies() {
+      return ['E'];
+    }
+
+    constructor(value) {
+      this._value = value;
+    }
+  }
+  class F extends E {
+    static get $dependencies() {
+      return ['F'];
+    }
+
+    constructor(value) {
+      super();
+
+      this._value = value;
+    }
+
+    get value() {
+      return this._value;
+    }
+
+    getValue() {
+      return this._value;
+    }
+  }
+
+  return { A, B, C, D, E, F };
 }

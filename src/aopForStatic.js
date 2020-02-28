@@ -25,9 +25,11 @@ export default function aopForStatic(target, pattern) {
           typeof descriptor.get === 'function' ||
           typeof descriptor.set === 'function'
         ) {
-          if (!Object.prototype.hasOwnProperty.call(original, property)) {
-            Reflect.defineProperty(original, property, descriptor);
+          if (Object.prototype.hasOwnProperty.call(original, property)) {
+            return;
           }
+
+          Reflect.defineProperty(original, property, descriptor);
           Reflect.defineProperty(
             target,
             property,
@@ -75,32 +77,6 @@ export default function aopForStatic(target, pattern) {
             })
           );
         }
-
-        // if (
-        //   typeof target[property] === 'function' &&
-        //   (!isConstructable(target[property]) || target[property][AOP_HOOKS])
-        // ) {
-        //   original[property] = target[property];
-        //
-        //   let aopHooks = original[property][AOP_HOOKS];
-        //   if (aopHooks) {
-        //     const { object } = aopHooks[aopHooks.length - 1];
-        //     aopHooks.push({
-        //       target,
-        //       object,
-        //       property,
-        //       pattern
-        //     });
-        //     return;
-        //   }
-        //
-        //   target[property] = createCallTrap({
-        //     target,
-        //     object: original,
-        //     property,
-        //     pattern
-        //   });
-        // }
       }
     );
 

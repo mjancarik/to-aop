@@ -1,5 +1,87 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`createAspect method for class call pattern.beforeMethod and pattern.afterMethod with multiple aspect 1`] = `
+Array [
+  Object {
+    "args": Array [],
+    "context": F {
+      "_value": Object {
+        "x": [Function],
+      },
+    },
+    "object": Object {
+      "getValue": [Function],
+    },
+    "property": "getValue",
+    "target": [Function],
+  },
+]
+`;
+
+exports[`createAspect method for class call pattern.beforeMethod and pattern.afterMethod with multiple aspect 2`] = `
+Array [
+  Object {
+    "args": Array [],
+    "context": F {
+      "_value": Object {
+        "x": [Function],
+      },
+    },
+    "object": Object {
+      "getValue": [Function],
+    },
+    "payload": Object {
+      "x": [Function],
+    },
+    "property": "getValue",
+    "target": [Function],
+  },
+]
+`;
+
+exports[`createAspect method for class should call pattern.beforeMethod and pattern.afterMethod 1`] = `
+Array [
+  Object {
+    "args": Array [
+      Object {},
+      1,
+    ],
+    "context": A {
+      "variable": undefined,
+    },
+    "object": Object {
+      "_privateMethod": [Function],
+      "method": [Function],
+      "superMethod": [Function],
+    },
+    "property": "method",
+    "target": [Function],
+  },
+]
+`;
+
+exports[`createAspect method for class should call pattern.beforeMethod and pattern.afterMethod 2`] = `
+Array [
+  Object {
+    "args": Array [
+      Object {},
+      1,
+    ],
+    "context": A {
+      "variable": undefined,
+    },
+    "object": Object {
+      "_privateMethod": [Function],
+      "method": [Function],
+      "superMethod": [Function],
+    },
+    "payload": undefined,
+    "property": "method",
+    "target": [Function],
+  },
+]
+`;
+
 exports[`createAspect method for instance should call pattern.beforeMethod and pattern.afterMethod 1`] = `
 Array [
   Object {

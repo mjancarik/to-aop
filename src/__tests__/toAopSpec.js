@@ -13,6 +13,80 @@ describe('createAspect method', () => {
     withAspect = createAspect(pattern);
   });
 
+  describe('for class', () => {
+    let beforeMethod = null;
+    let afterMethod = null;
+
+    beforeEach(() => {
+      beforeMethod = jest.fn();
+      afterMethod = jest.fn();
+
+      pattern = createPattern(undefined, {
+        [hookName.beforeMethod]: beforeMethod,
+        [hookName.afterMethod]: afterMethod
+      });
+
+      withAspect = createAspect(pattern);
+    });
+
+    it('should call pattern.beforeMethod and pattern.afterMethod', () => {
+      let { A } = createClasses();
+      withAspect(A);
+
+      let instance = new A();
+      let result = instance.method({}, 1);
+
+      expect(beforeMethod.mock.calls.length).toEqual(1);
+      expect(beforeMethod.mock.calls[0]).toMatchSnapshot();
+      expect(afterMethod.mock.calls.length).toEqual(1);
+      expect(afterMethod.mock.calls[0]).toMatchSnapshot();
+
+      expect(result).toEqual(undefined);
+    });
+
+    it('call pattern.beforeMethod and pattern.afterMethod with multiple aspect', () => {
+      let { E, F } = createClasses();
+
+      withAspect(E);
+      withAspect(E);
+      withAspect(E);
+      withAspect(F);
+
+      const value = {
+        x: () => {}
+      };
+      const instance = new F(value);
+      const result = instance.getValue();
+
+      expect(() => result.x()).not.toThrow();
+      expect(result).toEqual(value);
+      expect(beforeMethod.mock.calls.length).toEqual(1);
+      expect(beforeMethod.mock.calls[0]).toMatchSnapshot();
+      expect(afterMethod.mock.calls.length).toEqual(1);
+      expect(afterMethod.mock.calls[0]).toMatchSnapshot();
+    });
+
+    it('should not modified returnig value for static getter in parent class', () => {
+      let { E, F } = createClasses();
+
+      withAspect(E);
+      withAspect(F);
+
+      expect(E.$dependencies).toEqual(['E']);
+      expect(F.$dependencies).toEqual(['F']);
+    });
+
+    it('should not modified returnig value for static getter in child class', () => {
+      let { E, F } = createClasses();
+
+      withAspect(F);
+      withAspect(E);
+
+      expect(E.$dependencies).toEqual(['E']);
+      expect(F.$dependencies).toEqual(['F']);
+    });
+  });
+
   describe('for instance', () => {
     let beforeMethod = null;
     let beforeGetter = null;
@@ -53,6 +127,16 @@ describe('createAspect method', () => {
       expect(beforeGetter.mock.calls.length).toEqual(2);
       expect(beforeMethod.mock.calls.length).toEqual(1);
       expect(entries.next().done).toEqual(true);
+    });
+
+    it('should return value from instance getter', () => {
+      let { F } = createClasses();
+
+      const value = 1;
+      let instance = withAspect(new F(value));
+
+      expect(instance.value).toEqual(value);
+      expect(beforeGetter.mock.calls.length).toEqual(1);
     });
   });
 
