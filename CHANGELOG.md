@@ -1,3 +1,13 @@
+<a name="0.3.3"></a>
+## [0.3.3](https://github.com/mjancarik/to-aop/compare/0.3.2...0.3.3) (2020-02-28)
+
+
+### Bug Fixes
+
+* **class:** returnig value from static getter is not modified ([100295d](https://github.com/mjancarik/to-aop/commit/100295d))
+
+
+
 <a name="0.3.2"></a>
 ## [0.3.2](https://github.com/mjancarik/to-aop/compare/0.3.1...0.3.2) (2020-01-05)
 
