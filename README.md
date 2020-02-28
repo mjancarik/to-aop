@@ -10,9 +10,13 @@ The to-aop module help you with applying [Aspect Oriented Programming](https://w
 For example I am using it for adding hooks to production code where all debug code is missing. I don't have got access to instance but I have only class constructor. But usage is unlimited.
 
 More articles about AOP:
-1. https://blog.mgechev.com/2015/07/29/aspect-oriented-programming-javascript-aop-js/
+1. https://github.com/mjancarik/shallow-with-context/blob/master/src/shallowWithContext.js
 2. https://hackernoon.com/aspect-oriented-programming-in-javascript-es5-typescript-d751dda576d0
 3. https://kyu.io/sneak-peek-to-javascript-aop/
+
+Examples:
+1. https://blog.mgechev.com/2015/07/29/aspect-oriented-programming-javascript-aop-js/
+2. https://github.com/seznam/ima/blob/master/packages/devtools/src/services/defaultSettings.json
 
 ## Installation
 
