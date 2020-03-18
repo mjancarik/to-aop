@@ -15,7 +15,7 @@ More articles about AOP:
 3. https://kyu.io/sneak-peek-to-javascript-aop/
 
 Examples:
-1. https://blog.mgechev.com/2015/07/29/aspect-oriented-programming-javascript-aop-js/
+1. https://github.com/mjancarik/shallow-with-context/blob/master/src/shallowWithContext.js
 2. https://github.com/seznam/ima/blob/master/packages/devtools/src/services/defaultSettings.json
 
 ## Installation
