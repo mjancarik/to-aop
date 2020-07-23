@@ -28,7 +28,7 @@ describe('aopForStatic method', () => {
       [hookName.beforeGetter]: beforeGetter,
       [hookName.afterGetter]: afterGetter,
       [hookName.beforeSetter]: beforeSetter,
-      [hookName.afterSetter]: afterSetter
+      [hookName.afterSetter]: afterSetter,
     });
     pattern2 = createPattern(undefined, {
       [hookName.beforeMethod]: beforeMethod,
@@ -36,7 +36,7 @@ describe('aopForStatic method', () => {
       [hookName.beforeGetter]: beforeGetter,
       [hookName.afterGetter]: afterGetter,
       [hookName.beforeSetter]: beforeSetter,
-      [hookName.afterSetter]: afterSetter
+      [hookName.afterSetter]: afterSetter,
     });
   });
 

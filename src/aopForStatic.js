@@ -11,7 +11,7 @@ export default function aopForStatic(target, pattern) {
     Reflect.defineProperty(originalTarget, AOP_STATIC_ALLOW, {
       value: false,
       enumerable: false,
-      writable: true
+      writable: true,
     });
   } else {
     originalTarget[AOP_STATIC_ALLOW] = false;
@@ -44,7 +44,7 @@ export default function aopForStatic(target, pattern) {
                       target,
                       object,
                       property,
-                      pattern
+                      pattern,
                     });
 
                     return typeof descriptor.get === 'function'
@@ -56,7 +56,7 @@ export default function aopForStatic(target, pattern) {
                     target,
                     object: original,
                     property,
-                    pattern
+                    pattern,
                   })(...rest);
                 } else {
                   return typeof descriptor.get === 'function'
@@ -64,16 +64,16 @@ export default function aopForStatic(target, pattern) {
                     : undefined;
                 }
               },
-              set: payload => {
+              set: (payload) => {
                 if (originalTarget[AOP_STATIC_ALLOW] === true) {
                   return createSetTrap({
                     target,
                     object: original,
                     property,
-                    pattern
+                    pattern,
                   })(payload);
                 }
-              }
+              },
             })
           );
         }

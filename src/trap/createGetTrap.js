@@ -8,7 +8,7 @@ export default function createGetTrap({
   property,
   pattern,
   context,
-  method
+  method,
 }) {
   function getTrap() {
     const hasProperty = getTrap[AOP_HOOKS].reduce(
@@ -28,7 +28,7 @@ export default function createGetTrap({
           target,
           object,
           property,
-          context
+          context,
         });
       }
     );
@@ -45,7 +45,7 @@ export default function createGetTrap({
           target,
           object,
           property,
-          context
+          context,
         })
       : Reflect.get(object, property);
 
@@ -56,7 +56,7 @@ export default function createGetTrap({
           object,
           property,
           context,
-          payload: value
+          payload: value,
         });
       }
     );
@@ -68,7 +68,7 @@ export default function createGetTrap({
         property,
         pattern,
         context,
-        method
+        method,
       });
     }
 

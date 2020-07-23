@@ -6,7 +6,7 @@ function hasToRegisterHook(pattern, props) {
   return [
     hookName.beforeMethod,
     hookName.afterMethod,
-    hookName.aroundMethod
+    hookName.aroundMethod,
   ].reduce((result, hook) => {
     return (
       result ||
@@ -22,8 +22,8 @@ function isConstructable(func) {
 }
 
 export default function overOwnProperty({ target, pattern, original, object }) {
-  Object.entries(Object.getOwnPropertyDescriptors(object)).forEach(function([
-    property
+  Object.entries(Object.getOwnPropertyDescriptors(object)).forEach(function ([
+    property,
   ]) {
     try {
       if (!hasToRegisterHook(pattern, { property, target, object })) {
@@ -46,7 +46,7 @@ export default function overOwnProperty({ target, pattern, original, object }) {
           target,
           object: lastObject,
           property,
-          pattern
+          pattern,
         });
 
         if (!(property in original)) {
@@ -65,7 +65,7 @@ export default function overOwnProperty({ target, pattern, original, object }) {
           target,
           object: original,
           property,
-          pattern
+          pattern,
         });
       }
     } catch (_) {

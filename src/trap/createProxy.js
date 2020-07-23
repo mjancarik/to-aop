@@ -31,9 +31,9 @@ export default function createProxy(target, pattern, context) {
         property: method.name,
         pattern,
         context: context || object,
-        method
+        method,
       })(...args);
-    }
+    },
   });
 
   return proxy;

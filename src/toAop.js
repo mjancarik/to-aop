@@ -27,7 +27,7 @@ export function aop(target, pattern) {
   Reflect.defineProperty(target, AOP_PATTERN, {
     value: Object.assign({}, pattern),
     enumerable: false,
-    writable: true
+    writable: true,
   });
 
   if (typeof target === 'function') {

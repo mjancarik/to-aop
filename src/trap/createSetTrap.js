@@ -6,7 +6,7 @@ export default function createSetTrap({
   object,
   property,
   pattern,
-  context
+  context,
 }) {
   function setTrap(payload) {
     setTrap[AOP_HOOKS].forEach(
@@ -16,7 +16,7 @@ export default function createSetTrap({
           object,
           property,
           payload,
-          context
+          context,
         });
       }
     );
@@ -34,7 +34,7 @@ export default function createSetTrap({
           object,
           property,
           payload,
-          context
+          context,
         })
       : Reflect.set(object, property, payload);
 
@@ -45,7 +45,7 @@ export default function createSetTrap({
           object,
           property,
           payload,
-          context
+          context,
         });
       }
     );

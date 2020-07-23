@@ -4,7 +4,7 @@ export default function invokePattern(pattern, meta) {
   }
 
   if (Array.isArray(pattern)) {
-    return pattern.map(rule => {
+    return pattern.map((rule) => {
       Reflect.apply(rule, rule.context, [meta]);
     });
   } else {

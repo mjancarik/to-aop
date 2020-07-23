@@ -9,11 +9,11 @@ const config = {
   plugins: [
     babel({
       exclude: 'node_modules/**',
-      externalHelpers: true
+      externalHelpers: true,
     }),
     nodeResolve(),
-    commonjs()
-  ]
+    commonjs(),
+  ],
 };
 
 if (env === 'es' || env === 'cjs') {
@@ -29,8 +29,8 @@ if (env === 'umd') {
         pure_getters: true,
         unsafe: true,
         unsafe_comps: true,
-        warnings: false
-      }
+        warnings: false,
+      },
     })
   );
 }

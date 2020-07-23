@@ -17,11 +17,11 @@ describe('for class', () => {
 
       pattern = createPattern(undefined, {
         [hookName.beforeMethod]: beforeMethod,
-        [hookName.afterMethod]: afterMethod
+        [hookName.afterMethod]: afterMethod,
       });
       pattern2 = createPattern(undefined, {
         [hookName.beforeMethod]: beforeMethod,
-        [hookName.afterMethod]: afterMethod
+        [hookName.afterMethod]: afterMethod,
       });
     });
 
@@ -100,11 +100,11 @@ describe('for class', () => {
       pattern = createPattern(
         {
           [hookName.beforeMethod]: 'superMethod',
-          [hookName.afterMethod]: 'superMethod'
+          [hookName.afterMethod]: 'superMethod',
         },
         {
           [hookName.beforeMethod]: beforeMethod,
-          [hookName.afterMethod]: afterMethod
+          [hookName.afterMethod]: afterMethod,
         }
       );
 
@@ -130,7 +130,7 @@ describe('for class', () => {
 
       pattern = createPattern(undefined, {
         [hookName.beforeMethod]: beforeMethod,
-        [hookName.afterMethod]: afterMethod
+        [hookName.afterMethod]: afterMethod,
       });
     });
 

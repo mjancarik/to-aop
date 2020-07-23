@@ -14,7 +14,7 @@ describe('hook', () => {
 
       expect(
         hook[hookName.beforeMethod][AOP_FILTER_FUNCTION]({
-          property: 'setMethod'
+          property: 'setMethod',
         })
       ).toEqual(true);
     });
@@ -24,7 +24,7 @@ describe('hook', () => {
 
       expect(
         hook[hookName.beforeMethod][AOP_FILTER_FUNCTION]({
-          property: 'getMethod'
+          property: 'getMethod',
         })
       ).toEqual(false);
     });
@@ -37,10 +37,10 @@ describe('hook', () => {
 
     beforeEach(() => {
       metaTruthy = {
-        property: 'setState'
+        property: 'setState',
       };
       metaFalsy = {
-        property: 'getState'
+        property: 'getState',
       };
       fn = jest.fn();
     });

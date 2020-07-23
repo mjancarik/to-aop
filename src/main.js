@@ -14,5 +14,5 @@ export {
   createCallTrap,
   createSetTrap,
   createGetTrap,
-  createProxy
+  createProxy,
 };

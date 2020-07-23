@@ -7,7 +7,7 @@ export default function createCallTrap({
   property,
   pattern,
   context,
-  method
+  method,
 }) {
   function callTrap(...rest) {
     const self = this;
@@ -20,7 +20,7 @@ export default function createCallTrap({
           object,
           property,
           context: context || self,
-          args: rest
+          args: rest,
         });
       }
     );
@@ -39,7 +39,7 @@ export default function createCallTrap({
           object,
           property,
           context: context || self,
-          args: rest
+          args: rest,
         });
       } else {
         if (typeof object[property] === 'function') {
@@ -58,7 +58,7 @@ export default function createCallTrap({
           property,
           context: context || self,
           args: rest,
-          payload
+          payload,
         });
       }
     );

@@ -5,7 +5,7 @@ export function createHook(name, regular, callback) {
     return hookFor(meta, regular, callback);
   }
 
-  hook[AOP_FILTER_FUNCTION] = function({ property, target, prototype }) {
+  hook[AOP_FILTER_FUNCTION] = function ({ property, target, prototype }) {
     return (
       (typeof regular === 'string' && property.includes(regular)) ||
       (regular instanceof RegExp && regular.test(property)) ||
@@ -15,7 +15,7 @@ export function createHook(name, regular, callback) {
   };
 
   return {
-    [name]: hook
+    [name]: hook,
   };
 }
 
@@ -63,5 +63,5 @@ export const hookName = Object.freeze({
   aroundGetter: 'aroundGetter',
   beforeSetter: 'beforeSetter',
   afterSetter: 'afterSetter',
-  aroundSetter: 'aroundSetter'
+  aroundSetter: 'aroundSetter',
 });

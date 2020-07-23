@@ -23,7 +23,7 @@ describe('createAspect method', () => {
 
       pattern = createPattern(undefined, {
         [hookName.beforeMethod]: beforeMethod,
-        [hookName.afterMethod]: afterMethod
+        [hookName.afterMethod]: afterMethod,
       });
 
       withAspect = createAspect(pattern);
@@ -53,7 +53,7 @@ describe('createAspect method', () => {
       withAspect(F);
 
       const value = {
-        x: () => {}
+        x: () => {},
       };
       const instance = new F(value);
       const result = instance.getValue();
@@ -100,7 +100,7 @@ describe('createAspect method', () => {
       pattern = createPattern(undefined, {
         [hookName.beforeMethod]: beforeMethod,
         [hookName.beforeGetter]: beforeGetter,
-        [hookName.afterMethod]: afterMethod
+        [hookName.afterMethod]: afterMethod,
       });
 
       withAspect = createAspect(pattern);
@@ -150,7 +150,7 @@ describe('createAspect method', () => {
 
       pattern = createPattern(undefined, {
         [hookName.beforeMethod]: beforeMethod,
-        [hookName.afterMethod]: afterMethod
+        [hookName.afterMethod]: afterMethod,
       });
 
       withAspect = createAspect(pattern);
@@ -158,7 +158,7 @@ describe('createAspect method', () => {
 
     it('should call pattern.beforeMethod and pattern.afterMethod for dummy object', () => {
       let dummy = {
-        method() {}
+        method() {},
       };
 
       let xdummy = withAspect(dummy);
@@ -183,7 +183,7 @@ describe('createAspect method', () => {
         value: 1,
         method: function increase() {
           this.value++;
-        }
+        },
       };
 
       const xobject = withAspect(object);
