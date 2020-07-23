@@ -1,3 +1,12 @@
+## [0.3.5](https://github.com/mjancarik/to-aop/compare/0.3.4...0.3.5) (2020-07-23)
+
+
+### Features
+
+* **aroundmethod:** added original method to meta for arround hook ([f83eae1](https://github.com/mjancarik/to-aop/commit/f83eae1a6c7796eca35143430d7802dd1811a695))
+
+
+
 <a name="0.3.4"></a>
 ## [0.3.4](https://github.com/mjancarik/to-aop/compare/0.3.3...0.3.4) (2020-03-18)
 
