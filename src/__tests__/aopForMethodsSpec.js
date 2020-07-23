@@ -1,19 +1,22 @@
 import aopForMethods from '../aopForMethods';
-import { hookName } from '../hook';
+import { hookName, createHook } from '../hook';
 import createClasses from './createClasses';
 import createPattern from './createPattern';
 
 describe('for class', () => {
   let pattern = null;
   let pattern2 = null;
+  let arroundPattern = null;
 
   describe('class method', () => {
     let beforeMethod = null;
     let afterMethod = null;
+    let aroundMethod = null;
 
     beforeEach(() => {
       beforeMethod = jest.fn();
       afterMethod = jest.fn();
+      aroundMethod = jest.fn();
 
       pattern = createPattern(undefined, {
         [hookName.beforeMethod]: beforeMethod,
@@ -23,6 +26,18 @@ describe('for class', () => {
         [hookName.beforeMethod]: beforeMethod,
         [hookName.afterMethod]: afterMethod,
       });
+      arroundPattern = createHook(hookName.aroundMethod, /.*/, aroundMethod);
+    });
+
+    it('should call pattern.aroundMethod', () => {
+      let { A } = createClasses();
+
+      aopForMethods(A, arroundPattern);
+      new A('method').method({}, 1);
+
+      expect(aroundMethod.mock.calls.length).toEqual(1);
+      expect(aroundMethod.mock.calls[0][0].original).not.toEqual(aroundMethod);
+      expect(aroundMethod.mock.calls[0]).toMatchSnapshot();
     });
 
     it('should call pattern.beforeMethod and pattern.afterMethod', () => {
@@ -49,6 +64,18 @@ describe('for class', () => {
       expect(beforeMethod.mock.calls[0]).toMatchSnapshot();
       expect(afterMethod.mock.calls.length).toEqual(1);
       expect(afterMethod.mock.calls[0]).toMatchSnapshot();
+    });
+
+    it('should call pattern.arroundMethod for extended class with multiple aspect', () => {
+      let { A, C } = createClasses();
+
+      aopForMethods(A, arroundPattern);
+      aopForMethods(C, arroundPattern);
+      new C('method').method2({}, 1);
+
+      expect(aroundMethod.mock.calls.length).toEqual(1);
+      expect(aroundMethod.mock.calls[0][0].original).not.toEqual(aroundMethod);
+      expect(aroundMethod.mock.calls[0]).toMatchSnapshot();
     });
 
     it('should call pattern.beforeMethod and pattern.afterMethod for extended class', () => {
@@ -117,6 +144,19 @@ describe('for class', () => {
       expect(beforeMethod.mock.calls[0]).toMatchSnapshot();
       expect(afterMethod.mock.calls.length).toEqual(1);
       expect(afterMethod.mock.calls[0]).toMatchSnapshot();
+    });
+
+    it('should call pattern.aroundMethod for super.superMethod', () => {
+      let { C } = createClasses();
+
+      aopForMethods(C, arroundPattern);
+      const c = new C('super method');
+
+      expect(c.superMethod()).toEqual(undefined);
+
+      expect(aroundMethod.mock.calls.length).toEqual(1);
+      expect(aroundMethod.mock.calls[0][0].original).not.toEqual(aroundMethod);
+      expect(aroundMethod.mock.calls[0]).toMatchSnapshot();
     });
   });
 

@@ -1,5 +1,72 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`for class class method should call pattern.aroundMethod 1`] = `
+Array [
+  Object {
+    "args": Array [
+      Object {},
+      1,
+    ],
+    "context": A {
+      "variable": "method",
+    },
+    "object": Object {
+      "_privateMethod": [Function],
+      "method": [Function],
+      "superMethod": [Function],
+    },
+    "original": [Function],
+    "property": "method",
+    "target": [Function],
+  },
+]
+`;
+
+exports[`for class class method should call pattern.aroundMethod for super.superMethod 1`] = `
+Array [
+  Object {
+    "args": Array [],
+    "context": C {
+      "map": Map {},
+      "variable": "super method",
+    },
+    "object": Object {
+      "_privateMethod": [Function],
+      "method": [Function],
+      "method2": [Function],
+      "superMethod": [Function],
+    },
+    "original": [Function],
+    "property": "superMethod",
+    "target": [Function],
+  },
+]
+`;
+
+exports[`for class class method should call pattern.arroundMethod for extended class with multiple aspect 1`] = `
+Array [
+  Object {
+    "args": Array [
+      Object {},
+      1,
+    ],
+    "context": C {
+      "map": Map {},
+      "variable": "method",
+    },
+    "object": Object {
+      "_privateMethod": [Function],
+      "method": [Function],
+      "method2": [Function],
+      "superMethod": [Function],
+    },
+    "original": [Function],
+    "property": "method2",
+    "target": [Function],
+  },
+]
+`;
+
 exports[`for class class method should call pattern.beforeMethod and pattern.afterMethod 1`] = `
 Array [
   Object {

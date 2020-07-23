@@ -40,6 +40,8 @@ export default function createCallTrap({
           property,
           context: context || self,
           args: rest,
+          original:
+            typeof object[property] === 'function' ? object[property] : method,
         });
       } else {
         if (typeof object[property] === 'function') {
