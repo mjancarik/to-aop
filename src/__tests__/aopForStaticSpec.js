@@ -103,6 +103,37 @@ describe('aopForStatic method', () => {
     expect(afterGetter.mock.calls[0]).toMatchSnapshot();
   });
 
+  it('should not call pattern.beforeGetter and pattern.afterGetter for not hooked property', () => {
+    let hookFilterMethod = ({ property }) => property === 'staticGetter2';
+
+    let pattern = createPattern(
+      {
+        [hookName.beforeGetter]: hookFilterMethod,
+        [hookName.afterGetter]: hookFilterMethod,
+        [hookName.beforeSetter]: hookFilterMethod,
+        [hookName.afterSetter]: hookFilterMethod,
+      },
+      {
+        [hookName.beforeGetter]: beforeGetter,
+        [hookName.afterGetter]: afterGetter,
+        [hookName.beforeSetter]: beforeSetter,
+        [hookName.afterSetter]: afterSetter,
+      }
+    );
+    let { C } = createClasses();
+
+    aopForStatic(C, pattern);
+
+    const staticResult1 = C.staticGetter;
+
+    expect(staticResult1).toMatchInlineSnapshot(`"static getter"`);
+
+    expect(beforeGetter.mock.calls.length).toEqual(0);
+    expect(beforeGetter.mock.calls[0]).toMatchSnapshot();
+    expect(afterGetter.mock.calls.length).toEqual(0);
+    expect(afterGetter.mock.calls[0]).toMatchSnapshot();
+  });
+
   it('should not throw error after call aopForStatic', () => {
     let { D } = createClasses();
 

@@ -54,6 +54,19 @@ export function hookFor(meta, regular, callback) {
   );
 }
 
+export function hasToRegisterHook(hooks) {
+  return (pattern, props) => {
+    return hooks.reduce((result, hook) => {
+      return (
+        result ||
+        (pattern[hook] &&
+          typeof pattern[hook][AOP_FILTER_FUNCTION] === 'function' &&
+          pattern[hook][AOP_FILTER_FUNCTION](props))
+      );
+    }, false);
+  };
+}
+
 export const hookName = Object.freeze({
   beforeMethod: 'beforeMethod',
   afterMethod: 'afterMethod',

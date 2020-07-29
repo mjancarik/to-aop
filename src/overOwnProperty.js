@@ -1,21 +1,12 @@
 import createCallTrap from './trap/createCallTrap';
-import { AOP_HOOKS, AOP_FILTER_FUNCTION } from './symbol';
-import { hookName } from './hook';
+import { AOP_HOOKS } from './symbol';
+import { hookName, hasToRegisterHook } from './hook';
 
-function hasToRegisterHook(pattern, props) {
-  return [
-    hookName.beforeMethod,
-    hookName.afterMethod,
-    hookName.aroundMethod,
-  ].reduce((result, hook) => {
-    return (
-      result ||
-      (pattern[hook] &&
-        typeof pattern[hook][AOP_FILTER_FUNCTION] === 'function' &&
-        pattern[hook][AOP_FILTER_FUNCTION](props))
-    );
-  }, false);
-}
+const hasToRegisterMethodHook = hasToRegisterHook([
+  hookName.beforeMethod,
+  hookName.afterMethod,
+  hookName.aroundMethod,
+]);
 
 function isConstructable(func) {
   return !!(func && func.prototype && func.prototype.constructor);
@@ -26,7 +17,7 @@ export default function overOwnProperty({ target, pattern, original, object }) {
     property,
   ]) {
     try {
-      if (!hasToRegisterHook(pattern, { property, target, object })) {
+      if (!hasToRegisterMethodHook(pattern, { property, target, object })) {
         original[property] = object[property];
         return;
       }

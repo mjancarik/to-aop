@@ -179,3 +179,7 @@ Array [
 `;
 
 exports[`aopForStatic method should not call pattern.afterMethod for static getter which return constructable function 1`] = `undefined`;
+
+exports[`aopForStatic method should not call pattern.beforeGetter and pattern.afterGetter for not hooked property 2`] = `undefined`;
+
+exports[`aopForStatic method should not call pattern.beforeGetter and pattern.afterGetter for not hooked property 3`] = `undefined`;

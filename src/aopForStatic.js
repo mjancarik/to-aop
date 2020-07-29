@@ -2,6 +2,16 @@ import createGetTrap from './trap/createGetTrap';
 import createSetTrap from './trap/createSetTrap';
 import overOwnProperty from './overOwnProperty';
 import { AOP_STATIC_ALLOW, AOP_HOOKS } from './symbol';
+import { hookName, hasToRegisterHook } from './hook';
+
+const hasToRegisterGetterSetterHook = hasToRegisterHook([
+  hookName.beforeGetter,
+  hookName.afterGetter,
+  hookName.aroundGetter,
+  hookName.beforeSetter,
+  hookName.afterSetter,
+  hookName.aroundSetter,
+]);
 
 export default function aopForStatic(target, pattern) {
   let original = {};
@@ -30,6 +40,16 @@ export default function aopForStatic(target, pattern) {
           }
 
           Reflect.defineProperty(original, property, descriptor);
+          if (
+            !hasToRegisterGetterSetterHook(pattern, {
+              target,
+              property,
+              object: original,
+            })
+          ) {
+            return;
+          }
+
           Reflect.defineProperty(
             target,
             property,

@@ -1,5 +1,6 @@
-import { createHook, hookFor, hookName } from '../hook';
+import { createHook, hookFor, hookName, hasToRegisterHook } from '../hook';
 import { AOP_FILTER_FUNCTION } from '../symbol';
+import createPattern from './createPattern';
 
 describe('hook', () => {
   describe('method createHook', () => {
@@ -77,6 +78,37 @@ describe('hook', () => {
       hookFor(metaFalsy, () => false, fn);
 
       expect(fn).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('method hasToRegisterHook', () => {
+    let pattern;
+    let hasToRegisterGetterHook;
+
+    beforeEach(() => {
+      pattern = createPattern(
+        {
+          [hookName.beforeGetter]: ({ property }) =>
+            property === 'staticGetter',
+        },
+        {
+          [hookName.beforeGetter]: () => {},
+        }
+      );
+
+      hasToRegisterGetterHook = hasToRegisterHook([hookName.beforeGetter]);
+    });
+
+    it('should return true if hook has to be registered', () => {
+      expect(
+        hasToRegisterGetterHook(pattern, { property: 'staticGetter' })
+      ).toEqual(true);
+    });
+
+    it('should return false if hook has not to be registered', () => {
+      expect(
+        hasToRegisterGetterHook(pattern, { property: 'staticGetter2' })
+      ).toEqual(false);
     });
   });
 });
