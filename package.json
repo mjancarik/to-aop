@@ -1,6 +1,6 @@
 {
   "name": "to-aop",
-  "version": "0.3.5",
+  "version": "0.3.6",
   "description": "Library for AOP(aspect-oriented programming) with JavaScript using ES6 Proxy",
   "main": "lib/toAop.js",
   "module": "es/toAop.js",

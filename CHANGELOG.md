@@ -1,3 +1,12 @@
+## [0.3.6](https://github.com/mjancarik/to-aop/compare/0.3.5...0.3.6) (2020-07-29)
+
+
+### Features
+
+* **static:** static methods, getters and setters are hooked only for defined names ([a6881fb](https://github.com/mjancarik/to-aop/commit/a6881fbba925cfdd58911aa42f6a4077c09c68b1))
+
+
+
 ## [0.3.5](https://github.com/mjancarik/to-aop/compare/0.3.4...0.3.5) (2020-07-23)
 
 
