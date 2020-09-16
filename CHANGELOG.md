@@ -1,3 +1,12 @@
+# [0.4.0](https://github.com/mjancarik/to-aop/compare/0.3.6...0.4.0) (2020-09-16)
+
+
+### Features
+
+* **aroundmethod:** call all defined aroundMethod hooks ([5d5f4c8](https://github.com/mjancarik/to-aop/commit/5d5f4c8c16d90c43372f9c3fa2f94ca158a9c778))
+
+
+
 ## [0.3.6](https://github.com/mjancarik/to-aop/compare/0.3.5...0.3.6) (2020-07-29)
 
 
