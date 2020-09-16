@@ -16,6 +16,7 @@ Array [
       "superMethod": [Function],
     },
     "original": [Function],
+    "payload": undefined,
     "property": "method",
     "target": [Function],
   },
@@ -37,7 +38,31 @@ Array [
       "superMethod": [Function],
     },
     "original": [Function],
+    "payload": undefined,
     "property": "superMethod",
+    "target": [Function],
+  },
+]
+`;
+
+exports[`for class class method should call pattern.aroundMethod three times and modify payload 1`] = `
+Array [
+  Object {
+    "args": Array [
+      Object {},
+      1,
+    ],
+    "context": A {
+      "variable": "method",
+    },
+    "object": Object {
+      "_privateMethod": [Function],
+      "method": [Function],
+      "superMethod": [Function],
+    },
+    "original": [Function],
+    "payload": undefined,
+    "property": "method",
     "target": [Function],
   },
 ]
@@ -61,6 +86,7 @@ Array [
       "superMethod": [Function],
     },
     "original": [Function],
+    "payload": undefined,
     "property": "method2",
     "target": [Function],
   },

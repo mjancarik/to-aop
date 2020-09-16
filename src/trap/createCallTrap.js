@@ -26,24 +26,32 @@ export default function createCallTrap({
     );
 
     {
-      const { target, object, property, pattern, context } = callTrap[
-        AOP_HOOKS
-      ][callTrap[AOP_HOOKS].length - 1];
-      const arrondPattern = Array.isArray(pattern.aroundMethod)
-        ? pattern.aroundMethod[pattern.aroundMethod.length - 1]
-        : pattern.aroundMethod;
-
-      if (arrondPattern) {
-        payload = invokePattern(arrondPattern, {
-          target,
-          object,
-          property,
-          context: context || self,
-          args: rest,
-          original:
-            typeof object[property] === 'function' ? object[property] : method,
-        });
+      const aroundPatterns = callTrap[AOP_HOOKS].filter(
+        ({ pattern }) => pattern.aroundMethod
+      );
+      if (aroundPatterns.length > 0) {
+        payload = aroundPatterns.reduce(
+          (payload, { target, object, property, pattern, context }) => {
+            return invokePattern(pattern.aroundMethod, {
+              target,
+              object,
+              property,
+              context: context || self,
+              args: rest,
+              payload,
+              original:
+                typeof object[property] === 'function'
+                  ? object[property]
+                  : method,
+            });
+          },
+          undefined
+        );
       } else {
+        const { object, property, context } = callTrap[AOP_HOOKS][
+          callTrap[AOP_HOOKS].length - 1
+        ];
+
         if (typeof object[property] === 'function') {
           payload = Reflect.apply(object[property], context || self, rest);
         } else {

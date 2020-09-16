@@ -6,7 +6,7 @@ import createPattern from './createPattern';
 describe('for class', () => {
   let pattern = null;
   let pattern2 = null;
-  let arroundPattern = null;
+  let aroundPattern = null;
 
   describe('class method', () => {
     let beforeMethod = null;
@@ -26,16 +26,35 @@ describe('for class', () => {
         [hookName.beforeMethod]: beforeMethod,
         [hookName.afterMethod]: afterMethod,
       });
-      arroundPattern = createHook(hookName.aroundMethod, /.*/, aroundMethod);
+      aroundPattern = createHook(hookName.aroundMethod, /.*/, aroundMethod);
     });
 
     it('should call pattern.aroundMethod', () => {
       let { A } = createClasses();
 
-      aopForMethods(A, arroundPattern);
+      aopForMethods(A, aroundPattern);
       new A('method').method({}, 1);
 
       expect(aroundMethod.mock.calls.length).toEqual(1);
+      expect(aroundMethod.mock.calls[0][0].original).not.toEqual(aroundMethod);
+      expect(aroundMethod.mock.calls[0]).toMatchSnapshot();
+    });
+
+    it('should call pattern.aroundMethod three times and modify payload', () => {
+      aroundMethod = jest.fn(({ args, payload }) =>
+        payload ? payload + 1 : args[1]
+      );
+      aroundPattern = createHook(hookName.aroundMethod, /.*/, aroundMethod);
+
+      let { A } = createClasses();
+
+      aopForMethods(A, aroundPattern);
+      aopForMethods(A, aroundPattern);
+      aopForMethods(A, aroundPattern);
+      const result = new A('method').method({}, 1);
+
+      expect(result).toEqual(3);
+      expect(aroundMethod.mock.calls.length).toEqual(3);
       expect(aroundMethod.mock.calls[0][0].original).not.toEqual(aroundMethod);
       expect(aroundMethod.mock.calls[0]).toMatchSnapshot();
     });
@@ -69,8 +88,8 @@ describe('for class', () => {
     it('should call pattern.arroundMethod for extended class with multiple aspect', () => {
       let { A, C } = createClasses();
 
-      aopForMethods(A, arroundPattern);
-      aopForMethods(C, arroundPattern);
+      aopForMethods(A, aroundPattern);
+      aopForMethods(C, aroundPattern);
       new C('method').method2({}, 1);
 
       expect(aroundMethod.mock.calls.length).toEqual(1);
@@ -149,7 +168,7 @@ describe('for class', () => {
     it('should call pattern.aroundMethod for super.superMethod', () => {
       let { C } = createClasses();
 
-      aopForMethods(C, arroundPattern);
+      aopForMethods(C, aroundPattern);
       const c = new C('super method');
 
       expect(c.superMethod()).toEqual(undefined);
