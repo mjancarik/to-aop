@@ -2,12 +2,8 @@
   "name": "to-aop",
   "version": "0.4.0",
   "description": "Library for AOP(aspect-oriented programming) or creating hooks using ES6 Proxy|Class Prototype",
-  "main": "dist/toAop.cjs",
-  "module": "dist/toAop.mjs",
-  "exports": {
-    "import": "./dist/toAop.mjs",
-    "require": "./dist/toAop.cjs"
-  },
+  "main": "dist/toAop",
+  "module": "dist/toAop",
   "scripts": {
     "preversion": "npm test && npm run lint && npm run build",
     "version": "npm run changelog && git add CHANGELOG.md",
