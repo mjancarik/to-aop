@@ -1,3 +1,12 @@
+## [0.4.1](https://github.com/mjancarik/to-aop/compare/v0.4.0...v0.4.1) (2020-09-19)
+
+
+### Bug Fixes
+
+* added js file extension to dist ([799f63c](https://github.com/mjancarik/to-aop/commit/799f63cd7eec1e8a6d2ac91c87679644a8674e28))
+
+
+
 # [0.4.0](https://github.com/mjancarik/to-aop/compare/0.3.6...0.4.0) (2020-09-16)
 
 
