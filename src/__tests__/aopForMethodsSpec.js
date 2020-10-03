@@ -41,9 +41,7 @@ describe('aopForMethods', () => {
     });
 
     it('should call pattern.aroundMethod three times and modify payload', () => {
-      aroundMethod = jest.fn(({ args, payload }) =>
-        payload ? payload + 1 : args[1]
-      );
+      aroundMethod = jest.fn(({ args }) => (args[1] ? args[1] + 1 : args[1]));
       aroundPattern = createHook(hookName.aroundMethod, /.*/, aroundMethod);
 
       let { A } = createClasses();
@@ -53,8 +51,8 @@ describe('aopForMethods', () => {
       aopForMethods(A, aroundPattern);
       const result = new A('method').method({}, 1);
 
-      expect(result).toEqual(3);
-      expect(aroundMethod.mock.calls.length).toEqual(3);
+      expect(result).toEqual(2);
+      expect(aroundMethod.mock.calls.length).toEqual(1);
       expect(aroundMethod.mock.calls[0][0].original).not.toEqual(aroundMethod);
       expect(aroundMethod.mock.calls[0]).toMatchSnapshot();
     });
