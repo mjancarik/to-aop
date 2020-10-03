@@ -57,6 +57,18 @@ describe('aopForStatic method', () => {
     expect(staticResult2).toMatchInlineSnapshot(`"static method 2"`);
   });
 
+  it('should create meta information from pattern.beforeMethod and pass to pattern.afterMethod', () => {
+    const value = 'value';
+    beforeMethod = ({ meta }) => (meta.information = 'value');
+    afterMethod = ({ meta }) => expect(meta.information).toEqual(value);
+
+    let { C } = createClasses();
+
+    aopForStatic(C, pattern);
+
+    C.staticMethod();
+  });
+
   it('should call pattern.beforeMethod and pattern.afterMethod for own static method with multiple aspect', () => {
     let { C, A } = createClasses();
 
@@ -101,6 +113,22 @@ describe('aopForStatic method', () => {
     expect(beforeGetter.mock.calls[0]).toMatchSnapshot();
     expect(afterGetter.mock.calls.length).toEqual(1);
     expect(afterGetter.mock.calls[0]).toMatchSnapshot();
+  });
+
+  it('should create meta information from pattern.beforeGetter and pass to pattern.afterGetter', () => {
+    const value = 'value';
+    beforeGetter = ({ meta }) => (meta.information = 'value');
+    afterGetter = ({ meta }) => expect(meta.information).toEqual(value);
+    pattern = createPattern(undefined, {
+      [hookName.beforeGetter]: beforeGetter,
+      [hookName.afterGetter]: afterGetter,
+    });
+
+    let { C } = createClasses();
+
+    aopForStatic(C, pattern);
+
+    C.staticGetter;
   });
 
   it('should not call pattern.beforeGetter and pattern.afterGetter for not hooked property', () => {
@@ -171,6 +199,22 @@ describe('aopForStatic method', () => {
     expect(beforeSetter.mock.calls[0]).toMatchSnapshot();
     expect(afterSetter.mock.calls.length).toEqual(1);
     expect(afterSetter.mock.calls[0]).toMatchSnapshot();
+  });
+
+  it('should create meta information from pattern.beforeSetter and pass to pattern.afterSetter', () => {
+    const value = 'value';
+    beforeSetter = ({ meta }) => (meta.information = 'value');
+    afterSetter = ({ meta }) => (expect(meta.information).toEqual(value));
+    pattern = createPattern(undefined, {
+      [hookName.beforeSetter]: beforeSetter,
+      [hookName.afterSetter]: afterSetter,
+    });
+
+    let { C } = createClasses();
+
+    aopForStatic(C, pattern);
+
+    C.staticSetter = 'static setter';
   });
 
   it('should not call pattern.afterMethod for static getter which return constructable function', () => {

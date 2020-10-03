@@ -3,7 +3,7 @@ import { hookName, createHook } from '../hook';
 import createClasses from './createClasses';
 import createPattern from './createPattern';
 
-describe('for class', () => {
+describe('aopForMethods', () => {
   let pattern = null;
   let pattern2 = null;
   let aroundPattern = null;
@@ -71,6 +71,21 @@ describe('for class', () => {
       expect(afterMethod.mock.calls[0]).toMatchSnapshot();
     });
 
+    it('should create meta information from pattern.beforeMethod and pass to pattern.afterMethod', () => {
+      const value = 'value';
+      beforeMethod = ({ meta }) => (meta.information = 'value');
+      afterMethod = ({ meta }) => expect(meta.information).toEqual(value);
+      pattern = createPattern(undefined, {
+        [hookName.beforeMethod]: beforeMethod,
+        [hookName.afterMethod]: afterMethod,
+      });
+
+      let { A } = createClasses();
+
+      aopForMethods(A, pattern);
+      new A('method').method({}, 1);
+    });
+
     it('should call pattern.beforeMethod and pattern.afterMethod for extended class with multiple aspect', () => {
       let { A, C } = createClasses();
 
@@ -120,6 +135,22 @@ describe('for class', () => {
       expect(beforeMethod.mock.calls[0]).toMatchSnapshot();
       expect(afterMethod.mock.calls.length).toEqual(1);
       expect(afterMethod.mock.calls[0]).toMatchSnapshot();
+    });
+
+    it('should create meta information from pattern.beforeMethod and pass to pattern.afterMethod after class is instanced', () => {
+      const value = 'value';
+      beforeMethod = ({ meta }) => (meta.information = 'value');
+      afterMethod = ({ meta }) => expect(meta.information).toEqual(value);
+      pattern = createPattern(undefined, {
+        [hookName.beforeMethod]: beforeMethod,
+        [hookName.afterMethod]: afterMethod,
+      });
+
+      let { B } = createClasses();
+      const b = new B('method');
+
+      aopForMethods(B, pattern);
+      b.method({}, 1);
     });
 
     it('should call pattern.beforeMethod and pattern.afterMethod for extended classes with same ancestor', () => {

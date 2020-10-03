@@ -22,6 +22,9 @@ export default function createGetTrap({
       return;
     }
 
+    let payload = undefined;
+    let meta = {};
+
     getTrap[AOP_HOOKS].forEach(
       ({ target, object, property, pattern, context }) => {
         invokePattern(pattern.beforeGetter, {
@@ -29,6 +32,7 @@ export default function createGetTrap({
           object,
           property,
           context,
+          meta,
         });
       }
     );
@@ -40,12 +44,13 @@ export default function createGetTrap({
       ? pattern.aroundGetter[pattern.aroundGetter.length - 1]
       : pattern.aroundGetter;
 
-    let value = aroundGetter
+    payload = aroundGetter
       ? invokePattern(aroundGetter, {
           target,
           object,
           property,
           context,
+          meta,
         })
       : Reflect.get(object, property);
 
@@ -56,13 +61,14 @@ export default function createGetTrap({
           object,
           property,
           context,
-          payload: value,
+          payload,
+          meta,
         });
       }
     );
 
-    if (typeof value === 'function') {
-      value = createCallTrap({
+    if (typeof payload === 'function') {
+      payload = createCallTrap({
         target,
         object,
         property,
@@ -72,7 +78,7 @@ export default function createGetTrap({
       });
     }
 
-    return value;
+    return payload;
   }
 
   getTrap[AOP_HOOKS] = [{ target, object, property, pattern, context }];

@@ -9,6 +9,7 @@ Array [
         "x": [Function],
       },
     },
+    "meta": Object {},
     "object": Object {
       "getValue": [Function],
     },
@@ -27,6 +28,7 @@ Array [
         "x": [Function],
       },
     },
+    "meta": Object {},
     "object": Object {
       "getValue": [Function],
     },
@@ -49,6 +51,7 @@ Array [
     "context": A {
       "variable": undefined,
     },
+    "meta": Object {},
     "object": Object {
       "_privateMethod": [Function],
       "method": [Function],
@@ -70,6 +73,7 @@ Array [
     "context": A {
       "variable": undefined,
     },
+    "meta": Object {},
     "object": Object {
       "_privateMethod": [Function],
       "method": [Function],
@@ -92,6 +96,7 @@ Array [
     "context": A {
       "variable": undefined,
     },
+    "meta": Object {},
     "object": A {
       "variable": undefined,
     },
@@ -111,6 +116,7 @@ Array [
     "context": A {
       "variable": undefined,
     },
+    "meta": Object {},
     "object": A {
       "variable": undefined,
     },

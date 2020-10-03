@@ -12,6 +12,7 @@ export default function createCallTrap({
   function callTrap(...rest) {
     const self = this;
     let payload = undefined;
+    let meta = {};
 
     callTrap[AOP_HOOKS].forEach(
       ({ target, object, property, pattern, context }) => {
@@ -21,6 +22,7 @@ export default function createCallTrap({
           property,
           context: context || self,
           args: rest,
+          meta,
         });
       }
     );
@@ -43,6 +45,7 @@ export default function createCallTrap({
                 typeof object[property] === 'function'
                   ? object[property]
                   : method,
+              meta,
             });
           },
           undefined
@@ -69,6 +72,7 @@ export default function createCallTrap({
           context: context || self,
           args: rest,
           payload,
+          meta,
         });
       }
     );

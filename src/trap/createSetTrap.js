@@ -9,6 +9,8 @@ export default function createSetTrap({
   context,
 }) {
   function setTrap(payload) {
+    let meta = {};
+
     setTrap[AOP_HOOKS].forEach(
       ({ target, object, property, context, pattern }) => {
         invokePattern(pattern.beforeSetter, {
@@ -17,6 +19,7 @@ export default function createSetTrap({
           property,
           payload,
           context,
+          meta,
         });
       }
     );
@@ -35,6 +38,7 @@ export default function createSetTrap({
           property,
           payload,
           context,
+          meta,
         })
       : Reflect.set(object, property, payload);
 
@@ -46,6 +50,7 @@ export default function createSetTrap({
           property,
           payload,
           context,
+          meta,
         });
       }
     );

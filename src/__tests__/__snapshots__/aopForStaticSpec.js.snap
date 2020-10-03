@@ -4,6 +4,7 @@ exports[`aopForStatic method should call pattern.beforeGetter and pattern.afterG
 Array [
   Object {
     "context": undefined,
+    "meta": Object {},
     "object": Object {
       "staticMethod": [Function],
       "staticMethod2": [Function],
@@ -18,6 +19,7 @@ exports[`aopForStatic method should call pattern.beforeGetter and pattern.afterG
 Array [
   Object {
     "context": undefined,
+    "meta": Object {},
     "object": Object {
       "staticMethod": [Function],
       "staticMethod2": [Function],
@@ -33,6 +35,7 @@ exports[`aopForStatic method should call pattern.beforeGetter and pattern.afterG
 Array [
   Object {
     "context": undefined,
+    "meta": Object {},
     "object": Object {
       "staticMethod": [Function],
       "staticMethod2": [Function],
@@ -47,6 +50,7 @@ exports[`aopForStatic method should call pattern.beforeGetter and pattern.afterG
 Array [
   Object {
     "context": undefined,
+    "meta": Object {},
     "object": Object {
       "staticMethod": [Function],
     },
@@ -62,6 +66,7 @@ Array [
   Object {
     "args": Array [],
     "context": [Function],
+    "meta": Object {},
     "object": Object {
       "staticMethod": [Function],
     },
@@ -76,6 +81,7 @@ Array [
   Object {
     "args": Array [],
     "context": [Function],
+    "meta": Object {},
     "object": Object {
       "staticMethod": [Function],
     },
@@ -91,6 +97,7 @@ Array [
   Object {
     "args": Array [],
     "context": [Function],
+    "meta": Object {},
     "object": Object {
       "staticMethod": [Function],
       "staticMethod2": [Function],
@@ -106,6 +113,7 @@ Array [
   Object {
     "args": Array [],
     "context": [Function],
+    "meta": Object {},
     "object": Object {
       "staticMethod": [Function],
       "staticMethod2": [Function],
@@ -122,6 +130,7 @@ Array [
   Object {
     "args": Array [],
     "context": [Function],
+    "meta": Object {},
     "object": Object {
       "staticMethod": [Function],
       "staticMethod2": [Function],
@@ -137,6 +146,7 @@ Array [
   Object {
     "args": Array [],
     "context": [Function],
+    "meta": Object {},
     "object": Object {
       "staticMethod": [Function],
       "staticMethod2": [Function],
@@ -152,6 +162,7 @@ exports[`aopForStatic method should call pattern.beforeSetter and pattern.afterS
 Array [
   Object {
     "context": undefined,
+    "meta": Object {},
     "object": Object {
       "staticMethod": [Function],
       "staticMethod2": [Function],
@@ -167,6 +178,7 @@ exports[`aopForStatic method should call pattern.beforeSetter and pattern.afterS
 Array [
   Object {
     "context": undefined,
+    "meta": Object {},
     "object": Object {
       "staticMethod": [Function],
       "staticMethod2": [Function],
