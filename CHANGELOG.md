@@ -1,3 +1,13 @@
+# [0.5.0](https://github.com/mjancarik/to-aop/compare/v0.4.1...v0.5.0) (2020-10-04)
+
+
+### Features
+
+* **aroundmethod:** call only last aroundMethod hook ([bcf42f9](https://github.com/mjancarik/to-aop/commit/bcf42f980427e9078e71b3a669c29b1003641948))
+* **trap:** added new meta property to argument for all trap ([fa9d314](https://github.com/mjancarik/to-aop/commit/fa9d3149baccc922a61fd617bd184e0270f22566))
+
+
+
 ## [0.4.1](https://github.com/mjancarik/to-aop/compare/v0.4.0...v0.4.1) (2020-09-19)
 
 
