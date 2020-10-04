@@ -204,7 +204,7 @@ describe('aopForStatic method', () => {
   it('should create meta information from pattern.beforeSetter and pass to pattern.afterSetter', () => {
     const value = 'value';
     beforeSetter = ({ meta }) => (meta.information = 'value');
-    afterSetter = ({ meta }) => (expect(meta.information).toEqual(value));
+    afterSetter = ({ meta }) => expect(meta.information).toEqual(value);
     pattern = createPattern(undefined, {
       [hookName.beforeSetter]: beforeSetter,
       [hookName.afterSetter]: afterSetter,
