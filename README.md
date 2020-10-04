@@ -25,7 +25,21 @@ npm i to-aop --save
 
 ## Usage
 
-You have some common class. For example:
+Easy example for native Date.now method.
+
+``` javascript
+import { aop, hookName, createHook } from 'to-aop';
+
+const nowHook = createHook(hookName.aroundMethod, 'now', (args) => {
+    return 1;
+});
+
+aop(Date, nowHook);
+
+Date.now() // returns 1
+```
+
+Other example with more hooks for your defined class.
 
 ``` javascript
 // a.js
@@ -55,8 +69,9 @@ import A from './a';
 const classHookBefore = createHook(
   hookName.beforeMethod,
   /^(method)$/,
-  ({ target, object, property, context, args }) => {
+  ({ target, object, property, context, args, meta }) => {
     //call your own hook
+    meta.startTime = performance.now();
     console.log(
       `Instance of ${target.name} call "${property}"
 with arguments ${args && args.length ? args : '[]'}.`
@@ -67,12 +82,12 @@ with arguments ${args && args.length ? args : '[]'}.`
 const classHookAfter = createHook(
   hookName.afterMethod,
   /^(method)$/,
-  ({ target, object, property, context, args, payload }) => {
+  ({ target, object, property, context, args, payload, meta }) => {
     //call your own hook
     console.log(
       `Instance of ${target.name} call "${property}"
 with arguments ${args && args.length ? args : '[]'}
-and return value is "${payload}".`
+and return value is "${payload}" took ${performance.now() - meta.startTime}.`
     );
   }
 );
@@ -99,7 +114,7 @@ import A from './a';
 const instanceHook = createHook(
   hookName.afterMethod,
   /^(method)$/,
-  ({ target, object, property, context, args, payload }) => {
+  ({ target, object, property, context, args, payload, meta }) => {
     console.log(
       `Instance of ${object.constructor.name} call "${property}"
 with arguments ${args && args.length ? args : '[]'}

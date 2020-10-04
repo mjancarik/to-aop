@@ -1,7 +1,7 @@
 {
   "name": "to-aop",
   "version": "0.4.1",
-  "description": "Library for AOP(aspect-oriented programming) or creating hooks using ES6 Proxy|Class Prototype",
+  "description": "AOP(aspect-oriented programming) library or creating hooks for debug and monkey patch function using ES6 Proxy|Class Prototype.",
   "main": "dist/toAop",
   "module": "dist/toAop",
   "scripts": {
@@ -19,15 +19,15 @@
     "url": "git+https://github.com/mjancarik/to-aop.git"
   },
   "keywords": [
+    "hook",
+    "aop",
     "aspect",
     "advice",
+    "debug",
+    "monkey-patch",
     "pointcut",
     "join-point",
-    "aspect-oriented",
     "aspect-oriented-programming",
-    "aspects",
-    "aop",
-    "hook",
     "javascript",
     "ES6",
     "Proxy"
