@@ -1,3 +1,12 @@
+## [0.5.1](https://github.com/mjancarik/to-aop/compare/v0.5.0...v0.5.1) (2020-12-05)
+
+
+### Features
+
+* added new method unAop ([cd8494c](https://github.com/mjancarik/to-aop/commit/cd8494ca325c8a1f675e0b0e36af5756b11171a1))
+
+
+
 # [0.5.0](https://github.com/mjancarik/to-aop/compare/v0.4.1...v0.5.0) (2020-10-04)
 
 
