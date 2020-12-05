@@ -43,6 +43,19 @@ export function aop(target, pattern) {
   );
 }
 
+export function unAop(target) {
+  if (target[AOP_PATTERN]) {
+    target[AOP_PATTERN] = Object.keys(target[AOP_PATTERN]).reduce(
+      (pattern, hookName) => {
+        pattern[hookName] = undefined;
+
+        return pattern;
+      },
+      target[AOP_PATTERN]
+    );
+  }
+}
+
 function applyAopToInstance(instance) {
   return createProxy(instance);
 }

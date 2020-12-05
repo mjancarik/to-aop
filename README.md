@@ -63,7 +63,7 @@ export default class A {
 You can use it for creating hook to your favorite framework or your own application without modification source code.
 
 ``` javascript
-import { aop, hookName, createHook } from 'to-aop';
+import { aop, hookName, createHook, unAop } from 'to-aop';
 import A from './a';
 
 const classHookBefore = createHook(
@@ -100,15 +100,19 @@ aop(
 ); // bind hook to class
 const a = new A('my hook');
 
-a.method(); // Instance of A call "method" with arguments [] and return value is "my hook".
-a.notHookedClassMethod(); // not hook
+a.method(); // log: 'Instance of A call "method" with arguments [] and return value is "my hook".', returns: 'my hook'
+a.notHookedClassMethod(); // returns: 'not hook'
+
+unAop(A);
+a.method(); // returns: 'my hook'
+a.notHookedClassMethod(); // returns: 'not hook'
 
 ```
 
 #### Applying AOP to instance or object
 
 ```javascript
-import { aop, hookName, createHook } from 'to-aop';
+import { aop, hookName, createHook, unAop } from 'to-aop';
 import A from './a';
 
 const instanceHook = createHook(
@@ -126,8 +130,12 @@ and return value is "${payload}".`
 const a = new A('my hook');
 const hookedInstance = aop(a, instanceHook); // bind hook to instance
 
-hookedInstance.method(); // "Instance of A call "method" with arguments [] and return value is "my hook".
-hookedInstance.notHookedClassMethod(); // not hook
+hookedInstance.method(); // log: 'Instance of A call "method" with arguments [] and return value is "my hook.', returns: 'my hook'
+hookedInstance.notHookedClassMethod(); // returns: 'not hook'
+
+unAop(a);
+a.method(); // returns: 'my hook'
+a.notHookedClassMethod(); // returns: 'not hook'
 ```
 
 ## Documentation
@@ -142,6 +150,10 @@ hookedInstance.notHookedClassMethod(); // not hook
 
   - (class, object) - target for hooks
   - (Object<string, Array<function>>) - pattern of hooks
+
+### unAop(target, pattern)
+
+  - (class, object) - target for hooks
 
 ## Hooks API
 

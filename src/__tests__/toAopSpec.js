@@ -1,4 +1,4 @@
-import { createAspect } from '../toAop';
+import { createAspect, unAop } from '../toAop';
 import { hookName } from '../hook';
 import createClasses from './createClasses';
 import createPattern from './createPattern';
@@ -39,6 +39,22 @@ describe('createAspect method', () => {
       expect(beforeMethod.mock.calls.length).toEqual(1);
       expect(beforeMethod.mock.calls[0]).toMatchSnapshot();
       expect(afterMethod.mock.calls.length).toEqual(1);
+      expect(afterMethod.mock.calls[0]).toMatchSnapshot();
+
+      expect(result).toEqual(undefined);
+    });
+
+    it('should not call pattern.beforeMethod and pattern.afterMethod after unAop method is called', () => {
+      let { A } = createClasses();
+      withAspect(A);
+      unAop(A);
+
+      let instance = new A();
+      let result = instance.method({}, 1);
+
+      expect(beforeMethod.mock.calls.length).toEqual(0);
+      expect(beforeMethod.mock.calls[0]).toMatchSnapshot();
+      expect(afterMethod.mock.calls.length).toEqual(0);
       expect(afterMethod.mock.calls[0]).toMatchSnapshot();
 
       expect(result).toEqual(undefined);
@@ -114,6 +130,21 @@ describe('createAspect method', () => {
       expect(beforeMethod.mock.calls.length).toEqual(1);
       expect(beforeMethod.mock.calls[0]).toMatchSnapshot();
       expect(afterMethod.mock.calls.length).toEqual(1);
+      expect(afterMethod.mock.calls[0]).toMatchSnapshot();
+
+      expect(result).toEqual(undefined);
+    });
+
+    it('should not call pattern.beforeMethod and pattern.afterMethod after unAop method is called', () => {
+      let { A } = createClasses();
+      let a = new A();
+      let instance = withAspect(a);
+      unAop(a);
+      let result = instance.method({}, 1);
+
+      expect(beforeMethod.mock.calls.length).toEqual(0);
+      expect(beforeMethod.mock.calls[0]).toMatchSnapshot();
+      expect(afterMethod.mock.calls.length).toEqual(0);
       expect(afterMethod.mock.calls[0]).toMatchSnapshot();
 
       expect(result).toEqual(undefined);

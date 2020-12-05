@@ -86,6 +86,10 @@ Array [
 ]
 `;
 
+exports[`createAspect method for class should not call pattern.beforeMethod and pattern.afterMethod after unAop method is called 1`] = `undefined`;
+
+exports[`createAspect method for class should not call pattern.beforeMethod and pattern.afterMethod after unAop method is called 2`] = `undefined`;
+
 exports[`createAspect method for instance should call pattern.beforeMethod and pattern.afterMethod 1`] = `
 Array [
   Object {
@@ -126,3 +130,7 @@ Array [
   },
 ]
 `;
+
+exports[`createAspect method for instance should not call pattern.beforeMethod and pattern.afterMethod after unAop method is called 1`] = `undefined`;
+
+exports[`createAspect method for instance should not call pattern.beforeMethod and pattern.afterMethod after unAop method is called 2`] = `undefined`;
