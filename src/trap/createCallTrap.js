@@ -1,5 +1,6 @@
 import invokePattern from './invokePattern';
 import { AOP_HOOKS } from '../symbol';
+import { isConstructable } from '../util';
 
 export default function createCallTrap({
   target,
@@ -52,7 +53,11 @@ export default function createCallTrap({
         ];
 
         if (typeof object[property] === 'function') {
-          payload = Reflect.apply(object[property], context || self, rest);
+          if (property === 'constructor' && isConstructable(object)) {
+            payload = Reflect.construct(object, rest);
+          } else {
+            payload = Reflect.apply(object[property], context || self, rest);
+          }
         } else {
           payload = Reflect.apply(method, context || self, rest);
         }

@@ -86,6 +86,72 @@ Array [
 ]
 `;
 
+exports[`createAspect method for class should call pattern.beforeMethod and pattern.afterMethod for settings constructor: true 1`] = `
+Array [
+  Object {
+    "args": Array [
+      1,
+    ],
+    "context": A {},
+    "meta": Object {},
+    "object": [Function],
+    "property": "constructor",
+    "target": [Function],
+  },
+]
+`;
+
+exports[`createAspect method for class should call pattern.beforeMethod and pattern.afterMethod for settings constructor: true 2`] = `
+Array [
+  Object {
+    "args": Array [
+      1,
+    ],
+    "context": A {},
+    "meta": Object {},
+    "object": [Function],
+    "payload": A {
+      "variable": 1,
+    },
+    "property": "constructor",
+    "target": [Function],
+  },
+]
+`;
+
+exports[`createAspect method for class should call pattern.beforeMethod and pattern.afterMethod for settings constructor: true and extended class 1`] = `
+Array [
+  Object {
+    "args": Array [
+      1,
+    ],
+    "context": B {},
+    "meta": Object {},
+    "object": [Function],
+    "property": "constructor",
+    "target": [Function],
+  },
+]
+`;
+
+exports[`createAspect method for class should call pattern.beforeMethod and pattern.afterMethod for settings constructor: true and extended class 2`] = `
+Array [
+  Object {
+    "args": Array [
+      1,
+    ],
+    "context": B {},
+    "meta": Object {},
+    "object": [Function],
+    "payload": B {
+      "variable": 1,
+    },
+    "property": "constructor",
+    "target": [Function],
+  },
+]
+`;
+
 exports[`createAspect method for class should not call pattern.beforeMethod and pattern.afterMethod after unAop method is called 1`] = `undefined`;
 
 exports[`createAspect method for class should not call pattern.beforeMethod and pattern.afterMethod after unAop method is called 2`] = `undefined`;

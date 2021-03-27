@@ -1,4 +1,4 @@
-import { createAspect, unAop } from '../toAop';
+import { aop, createAspect, unAop } from '../toAop';
 import { hookName } from '../hook';
 import createClasses from './createClasses';
 import createPattern from './createPattern';
@@ -34,14 +34,14 @@ describe('createAspect method', () => {
       withAspect(A);
 
       let instance = new A();
-      let result = instance.method({}, 1);
+      instance.method({}, 1);
 
       expect(beforeMethod.mock.calls.length).toEqual(1);
       expect(beforeMethod.mock.calls[0]).toMatchSnapshot();
       expect(afterMethod.mock.calls.length).toEqual(1);
       expect(afterMethod.mock.calls[0]).toMatchSnapshot();
 
-      expect(result).toEqual(undefined);
+      //expect(result).toEqual(undefined);
     });
 
     it('should not call pattern.beforeMethod and pattern.afterMethod after unAop method is called', () => {
@@ -100,6 +100,32 @@ describe('createAspect method', () => {
 
       expect(E.$dependencies).toEqual(['E']);
       expect(F.$dependencies).toEqual(['F']);
+    });
+
+    it('should call pattern.beforeMethod and pattern.afterMethod for settings constructor: true', () => {
+      let { A } = createClasses();
+      let AA = aop(A, pattern, { constructor: true });
+      let instance = new AA(1);
+      let result = instance.method({}, 1);
+
+      expect(beforeMethod.mock.calls.length).toEqual(2);
+      expect(beforeMethod.mock.calls[0]).toMatchSnapshot();
+      expect(afterMethod.mock.calls.length).toEqual(2);
+      expect(afterMethod.mock.calls[0]).toMatchSnapshot();
+      expect(result).toEqual(1);
+    });
+
+    it('should call pattern.beforeMethod and pattern.afterMethod for settings constructor: true and extended class', () => {
+      let { B } = createClasses();
+      let BB = aop(B, pattern, { constructor: true });
+      let instance = new BB(1);
+      let result = instance.method({}, 1);
+
+      expect(beforeMethod.mock.calls.length).toEqual(2);
+      expect(beforeMethod.mock.calls[0]).toMatchSnapshot();
+      expect(afterMethod.mock.calls.length).toEqual(2);
+      expect(afterMethod.mock.calls[0]).toMatchSnapshot();
+      expect(result).toEqual('B 1');
     });
   });
 

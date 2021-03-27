@@ -1,16 +1,13 @@
 import createCallTrap from './trap/createCallTrap';
 import { AOP_HOOKS } from './symbol';
 import { hookName, hasToRegisterHook } from './hook';
+import { isConstructable } from './util';
 
 const hasToRegisterMethodHook = hasToRegisterHook([
   hookName.beforeMethod,
   hookName.afterMethod,
   hookName.aroundMethod,
 ]);
-
-function isConstructable(func) {
-  return !!(func && func.prototype && func.prototype.constructor);
-}
 
 export default function overOwnProperty({ target, pattern, original, object }) {
   Object.entries(Object.getOwnPropertyDescriptors(object)).forEach(function ([
