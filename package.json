@@ -1,6 +1,6 @@
 {
   "name": "to-aop",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "AOP(aspect-oriented programming) library or creating hooks for debug and monkey patch function using ES6 Proxy|Class Prototype.",
   "main": "dist/toAop",
   "module": "dist/toAop",

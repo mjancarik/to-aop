@@ -1,3 +1,12 @@
+## [0.5.2](https://github.com/mjancarik/to-aop/compare/v0.5.1...v0.5.2) (2021-03-27)
+
+
+### Features
+
+* **aop:** added support for hooking constructor ([6fc48c7](https://github.com/mjancarik/to-aop/commit/6fc48c766cfac3c37992474ccbd86682c1a376c3))
+
+
+
 ## [0.5.1](https://github.com/mjancarik/to-aop/compare/v0.5.0...v0.5.1) (2020-12-05)
 
 
