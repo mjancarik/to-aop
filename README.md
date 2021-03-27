@@ -146,10 +146,12 @@ a.notHookedClassMethod(); // returns: 'not hook'
   - (string, regexp, Array, function) regular - condition for filtering
   - (function) callbackHook - your defined action
 
-### aop(target, pattern)
+### aop(target, pattern, settings)
 
   - (class, object) - target for hooks
   - (Object<string, Array<function>>) - pattern of hooks
+  - {Object} settings
+  - {booelan} [settings.constructor=false] - allow hook class constructor
 
 ### unAop(target, pattern)
 
