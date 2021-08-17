@@ -153,7 +153,7 @@ a.notHookedClassMethod(); // returns: 'not hook'
   - {Object} settings
   - {booelan} [settings.constructor=false] - allow hook class constructor
 
-### unAop(target, pattern)
+### unAop(target)
 
   - (class, object) - target for hooks
 
