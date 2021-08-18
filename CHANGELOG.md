@@ -1,3 +1,12 @@
+## [0.5.3](https://github.com/mjancarik/to-aop/compare/v0.5.2...v0.5.3) (2021-08-18)
+
+
+### Bug Fixes
+
+* **unaop:** fixed reinitialization of aop hook after it was cleared by unaop ([#3](https://github.com/mjancarik/to-aop/issues/3)) ([5fccd3c](https://github.com/mjancarik/to-aop/commit/5fccd3c824f4fcfa353c4203a8f189cd38607902))
+
+
+
 ## [0.5.2](https://github.com/mjancarik/to-aop/compare/v0.5.1...v0.5.2) (2021-03-27)
 
 
