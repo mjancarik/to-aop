@@ -29,9 +29,8 @@ export default function createCallTrap({
     );
 
     {
-      const { target, object, property, pattern, context } = callTrap[
-        AOP_HOOKS
-      ][callTrap[AOP_HOOKS].length - 1];
+      const { target, object, property, pattern, context } =
+        callTrap[AOP_HOOKS][callTrap[AOP_HOOKS].length - 1];
       const aroundPattern = Array.isArray(pattern.aroundMethod)
         ? pattern.aroundMethod[pattern.aroundMethod.length - 1]
         : pattern.aroundMethod;
@@ -48,9 +47,8 @@ export default function createCallTrap({
           meta,
         });
       } else {
-        const { object, property, context } = callTrap[AOP_HOOKS][
-          callTrap[AOP_HOOKS].length - 1
-        ];
+        const { object, property, context } =
+          callTrap[AOP_HOOKS][callTrap[AOP_HOOKS].length - 1];
 
         if (typeof object[property] === 'function') {
           if (property === 'constructor' && isConstructable(object)) {

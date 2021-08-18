@@ -298,7 +298,7 @@ describe('createAspect method', () => {
     });
 
     it('should call pattern.beforeMethod and pattern.afterMethod for global console', () => {
-      spyOn(console, 'log');
+      jest.spyOn(console, 'log').mockImplementation();
 
       let xconsole = withAspect(console);
       xconsole.log('works');

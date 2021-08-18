@@ -37,9 +37,8 @@ export default function createGetTrap({
       }
     );
 
-    const { target, object, property, pattern, context } = getTrap[AOP_HOOKS][
-      getTrap[AOP_HOOKS].length - 1
-    ];
+    const { target, object, property, pattern, context } =
+      getTrap[AOP_HOOKS][getTrap[AOP_HOOKS].length - 1];
     const aroundGetter = Array.isArray(pattern.aroundGetter)
       ? pattern.aroundGetter[pattern.aroundGetter.length - 1]
       : pattern.aroundGetter;

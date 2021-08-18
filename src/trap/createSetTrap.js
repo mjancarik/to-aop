@@ -24,9 +24,8 @@ export default function createSetTrap({
       }
     );
 
-    const { target, object, property, pattern, context } = setTrap[AOP_HOOKS][
-      setTrap[AOP_HOOKS].length - 1
-    ];
+    const { target, object, property, pattern, context } =
+      setTrap[AOP_HOOKS][setTrap[AOP_HOOKS].length - 1];
     const aroundSetter = Array.isArray(pattern.aroundSetter)
       ? pattern.aroundSetter[pattern.aroundSetter.length - 1]
       : pattern.aroundSetter;
