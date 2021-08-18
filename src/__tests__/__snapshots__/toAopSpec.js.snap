@@ -49,7 +49,7 @@ Array [
       1,
     ],
     "context": A {
-      "variable": undefined,
+      "variable": "variableValue",
     },
     "meta": Object {},
     "object": Object {
@@ -71,7 +71,7 @@ Array [
       1,
     ],
     "context": A {
-      "variable": undefined,
+      "variable": "variableValue",
     },
     "meta": Object {},
     "object": Object {
@@ -79,7 +79,52 @@ Array [
       "method": [Function],
       "superMethod": [Function],
     },
-    "payload": undefined,
+    "payload": "variableValue",
+    "property": "method",
+    "target": [Function],
+  },
+]
+`;
+
+exports[`createAspect method for class should call pattern.beforeMethod and pattern.afterMethod after aop hooks are added, removed and added again to the same class 1`] = `
+Array [
+  Object {
+    "args": Array [
+      Object {},
+      1,
+    ],
+    "context": A {
+      "variable": "variableValue",
+    },
+    "meta": Object {},
+    "object": Object {
+      "_privateMethod": [Function],
+      "method": [Function],
+      "superMethod": [Function],
+    },
+    "property": "method",
+    "target": [Function],
+  },
+]
+`;
+
+exports[`createAspect method for class should call pattern.beforeMethod and pattern.afterMethod after aop hooks are added, removed and added again to the same class 2`] = `
+Array [
+  Object {
+    "args": Array [
+      Object {},
+      1,
+    ],
+    "context": A {
+      "variable": "variableValue",
+    },
+    "meta": Object {},
+    "object": Object {
+      "_privateMethod": [Function],
+      "method": [Function],
+      "superMethod": [Function],
+    },
+    "payload": "variableValue",
     "property": "method",
     "target": [Function],
   },
@@ -152,6 +197,10 @@ Array [
 ]
 `;
 
+exports[`createAspect method for class should not call pattern.beforeMethod and pattern.afterMethod after aop hooks are added, removed, added and removed again from the same class 1`] = `undefined`;
+
+exports[`createAspect method for class should not call pattern.beforeMethod and pattern.afterMethod after aop hooks are added, removed, added and removed again from the same class 2`] = `undefined`;
+
 exports[`createAspect method for class should not call pattern.beforeMethod and pattern.afterMethod after unAop method is called 1`] = `undefined`;
 
 exports[`createAspect method for class should not call pattern.beforeMethod and pattern.afterMethod after unAop method is called 2`] = `undefined`;
@@ -164,11 +213,11 @@ Array [
       1,
     ],
     "context": A {
-      "variable": undefined,
+      "variable": "variableValue",
     },
     "meta": Object {},
     "object": A {
-      "variable": undefined,
+      "variable": "variableValue",
     },
     "property": "method",
     "target": [Function],
@@ -184,18 +233,63 @@ Array [
       1,
     ],
     "context": A {
-      "variable": undefined,
+      "variable": "variableValue",
     },
     "meta": Object {},
     "object": A {
-      "variable": undefined,
+      "variable": "variableValue",
     },
-    "payload": undefined,
+    "payload": "variableValue",
     "property": "method",
     "target": [Function],
   },
 ]
 `;
+
+exports[`createAspect method for instance should call pattern.beforeMethod and pattern.afterMethod after aop hooks are added, removed and added again to the same method 1`] = `
+Array [
+  Object {
+    "args": Array [
+      Object {},
+      1,
+    ],
+    "context": A {
+      "variable": "variableValue",
+    },
+    "meta": Object {},
+    "object": A {
+      "variable": "variableValue",
+    },
+    "property": "method",
+    "target": [Function],
+  },
+]
+`;
+
+exports[`createAspect method for instance should call pattern.beforeMethod and pattern.afterMethod after aop hooks are added, removed and added again to the same method 2`] = `
+Array [
+  Object {
+    "args": Array [
+      Object {},
+      1,
+    ],
+    "context": A {
+      "variable": "variableValue",
+    },
+    "meta": Object {},
+    "object": A {
+      "variable": "variableValue",
+    },
+    "payload": "variableValue",
+    "property": "method",
+    "target": [Function],
+  },
+]
+`;
+
+exports[`createAspect method for instance should not call pattern.beforeMethod and pattern.afterMethod after aop hooks are added, removed, added and removed again from the same method 1`] = `undefined`;
+
+exports[`createAspect method for instance should not call pattern.beforeMethod and pattern.afterMethod after aop hooks are added, removed, added and removed again from the same method 2`] = `undefined`;
 
 exports[`createAspect method for instance should not call pattern.beforeMethod and pattern.afterMethod after unAop method is called 1`] = `undefined`;
 

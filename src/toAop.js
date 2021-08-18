@@ -50,6 +50,8 @@ export function unAop(target) {
       },
       target[AOP_PATTERN]
     );
+
+    target[AOP_PATTERN] = undefined;
   }
 }
 
