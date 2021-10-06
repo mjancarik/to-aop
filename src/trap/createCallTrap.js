@@ -50,7 +50,7 @@ export default function createCallTrap({
         const { object, property, context } =
           callTrap[AOP_HOOKS][callTrap[AOP_HOOKS].length - 1];
 
-        if (typeof object[property] === 'function') {
+        if (object && typeof object[property] === 'function') {
           if (property === 'constructor' && isConstructable(object)) {
             payload = Reflect.construct(object, rest);
           } else {
