@@ -1,3 +1,17 @@
+## [0.5.4](https://github.com/mjancarik/to-aop/compare/v0.5.3...v0.5.4) (2021-10-06)
+
+
+### Bug Fixes
+
+* error property of undefined ([62beec3](https://github.com/mjancarik/to-aop/commit/62beec38721b2a18136c1f2bfdbfe00272c3d68e))
+
+
+### Features
+
+* **console:** turn off console warnings for static getters ([f59fce4](https://github.com/mjancarik/to-aop/commit/f59fce40b2abc805df3623622b6e22cd226c1064))
+
+
+
 ## [0.5.3](https://github.com/mjancarik/to-aop/compare/v0.5.2...v0.5.3) (2021-08-18)
 
 
