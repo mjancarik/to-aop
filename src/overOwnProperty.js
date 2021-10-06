@@ -57,7 +57,7 @@ export default function overOwnProperty({ target, pattern, original, object }) {
         });
       }
     } catch (_) {
-      console.warn(`The '${property}' property is not hooked.`, _);
+      //console.warn(`The '${property}' property is not hooked.`, _);
     } // eslint-disable-line no-empty
   });
 }
