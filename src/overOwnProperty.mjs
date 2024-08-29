@@ -1,7 +1,7 @@
-import createCallTrap from './trap/createCallTrap';
-import { AOP_HOOKS } from './symbol';
-import { hookName, hasToRegisterHook } from './hook';
-import { isConstructable } from './util';
+import createCallTrap from './trap/createCallTrap.mjs';
+import { AOP_HOOKS } from './symbol.mjs';
+import { hookName, hasToRegisterHook } from './hook.mjs';
+import { isConstructable } from './util.mjs';
 
 const hasToRegisterMethodHook = hasToRegisterHook([
   hookName.beforeMethod,

@@ -1,16 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`createAspect method for class call pattern.beforeMethod and pattern.afterMethod with multiple aspect 1`] = `
-Array [
-  Object {
-    "args": Array [],
+[
+  {
+    "args": [],
     "context": F {
-      "_value": Object {
+      "_value": {
         "x": [Function],
       },
     },
-    "meta": Object {},
-    "object": Object {
+    "meta": {},
+    "object": {
       "getValue": [Function],
     },
     "property": "getValue",
@@ -20,19 +20,19 @@ Array [
 `;
 
 exports[`createAspect method for class call pattern.beforeMethod and pattern.afterMethod with multiple aspect 2`] = `
-Array [
-  Object {
-    "args": Array [],
+[
+  {
+    "args": [],
     "context": F {
-      "_value": Object {
+      "_value": {
         "x": [Function],
       },
     },
-    "meta": Object {},
-    "object": Object {
+    "meta": {},
+    "object": {
       "getValue": [Function],
     },
-    "payload": Object {
+    "payload": {
       "x": [Function],
     },
     "property": "getValue",
@@ -42,17 +42,17 @@ Array [
 `;
 
 exports[`createAspect method for class should call pattern.beforeMethod and pattern.afterMethod 1`] = `
-Array [
-  Object {
-    "args": Array [
-      Object {},
+[
+  {
+    "args": [
+      {},
       1,
     ],
     "context": A {
       "variable": "variableValue",
     },
-    "meta": Object {},
-    "object": Object {
+    "meta": {},
+    "object": {
       "_privateMethod": [Function],
       "method": [Function],
       "superMethod": [Function],
@@ -64,17 +64,17 @@ Array [
 `;
 
 exports[`createAspect method for class should call pattern.beforeMethod and pattern.afterMethod 2`] = `
-Array [
-  Object {
-    "args": Array [
-      Object {},
+[
+  {
+    "args": [
+      {},
       1,
     ],
     "context": A {
       "variable": "variableValue",
     },
-    "meta": Object {},
-    "object": Object {
+    "meta": {},
+    "object": {
       "_privateMethod": [Function],
       "method": [Function],
       "superMethod": [Function],
@@ -87,17 +87,17 @@ Array [
 `;
 
 exports[`createAspect method for class should call pattern.beforeMethod and pattern.afterMethod after aop hooks are added, removed and added again to the same class 1`] = `
-Array [
-  Object {
-    "args": Array [
-      Object {},
+[
+  {
+    "args": [
+      {},
       1,
     ],
     "context": A {
       "variable": "variableValue",
     },
-    "meta": Object {},
-    "object": Object {
+    "meta": {},
+    "object": {
       "_privateMethod": [Function],
       "method": [Function],
       "superMethod": [Function],
@@ -109,17 +109,17 @@ Array [
 `;
 
 exports[`createAspect method for class should call pattern.beforeMethod and pattern.afterMethod after aop hooks are added, removed and added again to the same class 2`] = `
-Array [
-  Object {
-    "args": Array [
-      Object {},
+[
+  {
+    "args": [
+      {},
       1,
     ],
     "context": A {
       "variable": "variableValue",
     },
-    "meta": Object {},
-    "object": Object {
+    "meta": {},
+    "object": {
       "_privateMethod": [Function],
       "method": [Function],
       "superMethod": [Function],
@@ -132,13 +132,13 @@ Array [
 `;
 
 exports[`createAspect method for class should call pattern.beforeMethod and pattern.afterMethod for settings constructor: true 1`] = `
-Array [
-  Object {
-    "args": Array [
+[
+  {
+    "args": [
       1,
     ],
     "context": A {},
-    "meta": Object {},
+    "meta": {},
     "object": [Function],
     "property": "constructor",
     "target": [Function],
@@ -147,13 +147,13 @@ Array [
 `;
 
 exports[`createAspect method for class should call pattern.beforeMethod and pattern.afterMethod for settings constructor: true 2`] = `
-Array [
-  Object {
-    "args": Array [
+[
+  {
+    "args": [
       1,
     ],
     "context": A {},
-    "meta": Object {},
+    "meta": {},
     "object": [Function],
     "payload": A {
       "variable": 1,
@@ -165,13 +165,13 @@ Array [
 `;
 
 exports[`createAspect method for class should call pattern.beforeMethod and pattern.afterMethod for settings constructor: true and extended class 1`] = `
-Array [
-  Object {
-    "args": Array [
+[
+  {
+    "args": [
       1,
     ],
     "context": B {},
-    "meta": Object {},
+    "meta": {},
     "object": [Function],
     "property": "constructor",
     "target": [Function],
@@ -180,13 +180,13 @@ Array [
 `;
 
 exports[`createAspect method for class should call pattern.beforeMethod and pattern.afterMethod for settings constructor: true and extended class 2`] = `
-Array [
-  Object {
-    "args": Array [
+[
+  {
+    "args": [
       1,
     ],
     "context": B {},
-    "meta": Object {},
+    "meta": {},
     "object": [Function],
     "payload": B {
       "variable": 1,
@@ -206,16 +206,16 @@ exports[`createAspect method for class should not call pattern.beforeMethod and 
 exports[`createAspect method for class should not call pattern.beforeMethod and pattern.afterMethod after unAop method is called 2`] = `undefined`;
 
 exports[`createAspect method for instance should call pattern.beforeMethod and pattern.afterMethod 1`] = `
-Array [
-  Object {
-    "args": Array [
-      Object {},
+[
+  {
+    "args": [
+      {},
       1,
     ],
     "context": A {
       "variable": "variableValue",
     },
-    "meta": Object {},
+    "meta": {},
     "object": A {
       "variable": "variableValue",
     },
@@ -226,16 +226,16 @@ Array [
 `;
 
 exports[`createAspect method for instance should call pattern.beforeMethod and pattern.afterMethod 2`] = `
-Array [
-  Object {
-    "args": Array [
-      Object {},
+[
+  {
+    "args": [
+      {},
       1,
     ],
     "context": A {
       "variable": "variableValue",
     },
-    "meta": Object {},
+    "meta": {},
     "object": A {
       "variable": "variableValue",
     },
@@ -247,16 +247,16 @@ Array [
 `;
 
 exports[`createAspect method for instance should call pattern.beforeMethod and pattern.afterMethod after aop hooks are added, removed and added again to the same method 1`] = `
-Array [
-  Object {
-    "args": Array [
-      Object {},
+[
+  {
+    "args": [
+      {},
       1,
     ],
     "context": A {
       "variable": "variableValue",
     },
-    "meta": Object {},
+    "meta": {},
     "object": A {
       "variable": "variableValue",
     },
@@ -267,16 +267,16 @@ Array [
 `;
 
 exports[`createAspect method for instance should call pattern.beforeMethod and pattern.afterMethod after aop hooks are added, removed and added again to the same method 2`] = `
-Array [
-  Object {
-    "args": Array [
-      Object {},
+[
+  {
+    "args": [
+      {},
       1,
     ],
     "context": A {
       "variable": "variableValue",
     },
-    "meta": Object {},
+    "meta": {},
     "object": A {
       "variable": "variableValue",
     },

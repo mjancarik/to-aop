@@ -1,6 +1,6 @@
-import invokePattern from './invokePattern';
-import createCallTrap from './createCallTrap';
-import { AOP_HOOKS } from '../symbol';
+import invokePattern from './invokePattern.mjs';
+import createCallTrap from './createCallTrap.mjs';
+import { AOP_HOOKS } from '../symbol.mjs';
 
 export default function createGetTrap({
   target,
@@ -15,7 +15,7 @@ export default function createGetTrap({
       (result, { object, property }) => {
         return result && Reflect.has(object, property);
       },
-      true
+      true,
     );
 
     if (!hasProperty) {
@@ -34,7 +34,7 @@ export default function createGetTrap({
           context,
           meta,
         });
-      }
+      },
     );
 
     const { target, object, property, pattern, context } =
@@ -63,7 +63,7 @@ export default function createGetTrap({
           payload,
           meta,
         });
-      }
+      },
     );
 
     if (typeof payload === 'function') {

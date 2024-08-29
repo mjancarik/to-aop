@@ -1,6 +1,8 @@
-import { createHook, hookFor, hookName, hasToRegisterHook } from '../hook';
-import { AOP_FILTER_FUNCTION } from '../symbol';
-import createPattern from './createPattern';
+import { expect, jest, describe, beforeEach, it } from '@jest/globals';
+
+import { createHook, hookFor, hookName, hasToRegisterHook } from '../hook.mjs';
+import { AOP_FILTER_FUNCTION } from '../symbol.mjs';
+import createPattern from './createPattern.mjs';
 
 describe('hook', () => {
   describe('method createHook', () => {
@@ -16,7 +18,7 @@ describe('hook', () => {
       expect(
         hook[hookName.beforeMethod][AOP_FILTER_FUNCTION]({
           property: 'setMethod',
-        })
+        }),
       ).toEqual(true);
     });
 
@@ -26,7 +28,7 @@ describe('hook', () => {
       expect(
         hook[hookName.beforeMethod][AOP_FILTER_FUNCTION]({
           property: 'getMethod',
-        })
+        }),
       ).toEqual(false);
     });
   });
@@ -93,7 +95,7 @@ describe('hook', () => {
         },
         {
           [hookName.beforeGetter]: () => {},
-        }
+        },
       );
 
       hasToRegisterGetterHook = hasToRegisterHook([hookName.beforeGetter]);
@@ -101,13 +103,13 @@ describe('hook', () => {
 
     it('should return true if hook has to be registered', () => {
       expect(
-        hasToRegisterGetterHook(pattern, { property: 'staticGetter' })
+        hasToRegisterGetterHook(pattern, { property: 'staticGetter' }),
       ).toEqual(true);
     });
 
     it('should return false if hook has not to be registered', () => {
       expect(
-        hasToRegisterGetterHook(pattern, { property: 'staticGetter2' })
+        hasToRegisterGetterHook(pattern, { property: 'staticGetter2' }),
       ).toEqual(false);
     });
   });

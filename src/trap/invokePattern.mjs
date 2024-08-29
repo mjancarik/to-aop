@@ -9,6 +9,7 @@ export default function invokePattern(pattern, meta) {
     });
   } else {
     const method = typeof pattern === 'function' ? pattern : pattern.method;
+
     return Reflect.apply(method, pattern.context, [meta]);
   }
 }

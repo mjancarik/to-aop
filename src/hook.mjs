@@ -1,4 +1,4 @@
-import { AOP_FILTER_FUNCTION } from './symbol';
+import { AOP_FILTER_FUNCTION } from './symbol.mjs';
 
 export function createHook(name, regular, callback) {
   function hook(meta) {
@@ -50,7 +50,7 @@ export function hookFor(meta, regular, callback) {
   }
 
   throw new TypeError(
-    `Invalid rule type ${typeof regular}. Method accept string, regexp, function and array.`
+    `Invalid rule type ${typeof regular}. Method accept string, regexp, function and array.`,
   );
 }
 

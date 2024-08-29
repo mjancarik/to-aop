@@ -1,35 +1,38 @@
 module.exports = {
+  root: true,
   extends: ['eslint:recommended', 'prettier'],
-  parser: 'babel-eslint',
   rules: {
     'prettier/prettier': [
       'error',
       {
         singleQuote: true,
+        bracketSameLine: false,
       },
     ],
 
     'no-console': [
       'error',
       {
-        allow: ['warn', 'error'],
+        allow: ['warn', 'error', 'log'],
       },
     ],
   },
   plugins: ['prettier', 'jest', 'jasmine'],
   settings: {
-    ecmascript: 2015,
+    ecmascript: 2020,
   },
   parserOptions: {
     sourceType: 'module',
-    ecmaVersion: 6,
+    ecmaVersion: 11,
   },
   env: {
-    browser: true,
     node: true,
+    browser: true,
     es6: true,
+    jest: true,
     jasmine: true,
-    'jest/globals': true,
   },
-  globals: {},
+  globals: {
+    globalThis: false,
+  },
 };

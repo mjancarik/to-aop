@@ -1,11 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`aopForStatic method should call pattern.beforeGetter and pattern.afterGetter for inhereted static getter 2`] = `
-Array [
-  Object {
+[
+  {
     "context": undefined,
-    "meta": Object {},
-    "object": Object {
+    "meta": {},
+    "object": {
       "staticMethod": [Function],
       "staticMethod2": [Function],
     },
@@ -16,11 +16,11 @@ Array [
 `;
 
 exports[`aopForStatic method should call pattern.beforeGetter and pattern.afterGetter for inhereted static getter 3`] = `
-Array [
-  Object {
+[
+  {
     "context": undefined,
-    "meta": Object {},
-    "object": Object {
+    "meta": {},
+    "object": {
       "staticMethod": [Function],
       "staticMethod2": [Function],
     },
@@ -32,11 +32,11 @@ Array [
 `;
 
 exports[`aopForStatic method should call pattern.beforeGetter and pattern.afterGetter for inhereted static getter with multiple aspect 2`] = `
-Array [
-  Object {
+[
+  {
     "context": undefined,
-    "meta": Object {},
-    "object": Object {
+    "meta": {},
+    "object": {
       "staticMethod": [Function],
       "staticMethod2": [Function],
     },
@@ -47,11 +47,11 @@ Array [
 `;
 
 exports[`aopForStatic method should call pattern.beforeGetter and pattern.afterGetter for inhereted static getter with multiple aspect 3`] = `
-Array [
-  Object {
+[
+  {
     "context": undefined,
-    "meta": Object {},
-    "object": Object {
+    "meta": {},
+    "object": {
       "staticMethod": [Function],
     },
     "payload": "static getter",
@@ -62,12 +62,12 @@ Array [
 `;
 
 exports[`aopForStatic method should call pattern.beforeMethod and pattern.afterMethod for inhereted static method with multiple aspect 1`] = `
-Array [
-  Object {
-    "args": Array [],
+[
+  {
+    "args": [],
     "context": [Function],
-    "meta": Object {},
-    "object": Object {
+    "meta": {},
+    "object": {
       "staticMethod": [Function],
     },
     "property": "staticMethod",
@@ -77,12 +77,12 @@ Array [
 `;
 
 exports[`aopForStatic method should call pattern.beforeMethod and pattern.afterMethod for inhereted static method with multiple aspect 2`] = `
-Array [
-  Object {
-    "args": Array [],
+[
+  {
+    "args": [],
     "context": [Function],
-    "meta": Object {},
-    "object": Object {
+    "meta": {},
+    "object": {
       "staticMethod": [Function],
     },
     "payload": "static method",
@@ -93,12 +93,12 @@ Array [
 `;
 
 exports[`aopForStatic method should call pattern.beforeMethod and pattern.afterMethod for own static method with multiple aspect 1`] = `
-Array [
-  Object {
-    "args": Array [],
+[
+  {
+    "args": [],
     "context": [Function],
-    "meta": Object {},
-    "object": Object {
+    "meta": {},
+    "object": {
       "staticMethod": [Function],
       "staticMethod2": [Function],
     },
@@ -109,12 +109,12 @@ Array [
 `;
 
 exports[`aopForStatic method should call pattern.beforeMethod and pattern.afterMethod for own static method with multiple aspect 2`] = `
-Array [
-  Object {
-    "args": Array [],
+[
+  {
+    "args": [],
     "context": [Function],
-    "meta": Object {},
-    "object": Object {
+    "meta": {},
+    "object": {
       "staticMethod": [Function],
       "staticMethod2": [Function],
     },
@@ -126,12 +126,12 @@ Array [
 `;
 
 exports[`aopForStatic method should call pattern.beforeMethod and pattern.afterMethod with multiple aspect 1`] = `
-Array [
-  Object {
-    "args": Array [],
+[
+  {
+    "args": [],
     "context": [Function],
-    "meta": Object {},
-    "object": Object {
+    "meta": {},
+    "object": {
       "staticMethod": [Function],
       "staticMethod2": [Function],
     },
@@ -142,12 +142,12 @@ Array [
 `;
 
 exports[`aopForStatic method should call pattern.beforeMethod and pattern.afterMethod with multiple aspect 2`] = `
-Array [
-  Object {
-    "args": Array [],
+[
+  {
+    "args": [],
     "context": [Function],
-    "meta": Object {},
-    "object": Object {
+    "meta": {},
+    "object": {
       "staticMethod": [Function],
       "staticMethod2": [Function],
     },
@@ -159,11 +159,11 @@ Array [
 `;
 
 exports[`aopForStatic method should call pattern.beforeSetter and pattern.afterSetter for inhereted static setter 2`] = `
-Array [
-  Object {
+[
+  {
     "context": undefined,
-    "meta": Object {},
-    "object": Object {
+    "meta": {},
+    "object": {
       "staticMethod": [Function],
       "staticMethod2": [Function],
     },
@@ -175,11 +175,11 @@ Array [
 `;
 
 exports[`aopForStatic method should call pattern.beforeSetter and pattern.afterSetter for inhereted static setter 3`] = `
-Array [
-  Object {
+[
+  {
     "context": undefined,
-    "meta": Object {},
-    "object": Object {
+    "meta": {},
+    "object": {
       "staticMethod": [Function],
       "staticMethod2": [Function],
     },

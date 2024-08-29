@@ -1,7 +1,9 @@
-import aopForMethods from '../aopForMethods';
-import { hookName, createHook } from '../hook';
-import createClasses from './createClasses';
-import createPattern from './createPattern';
+import { expect, jest, describe, beforeEach, it } from '@jest/globals';
+
+import aopForMethods from '../aopForMethods.mjs';
+import { hookName, createHook } from '../hook.mjs';
+import createClasses from './createClasses.mjs';
+import createPattern from './createPattern.mjs';
 
 describe('aopForMethods', () => {
   let pattern = null;
@@ -180,7 +182,7 @@ describe('aopForMethods', () => {
         {
           [hookName.beforeMethod]: beforeMethod,
           [hookName.afterMethod]: afterMethod,
-        }
+        },
       );
 
       aopForMethods(C, pattern);

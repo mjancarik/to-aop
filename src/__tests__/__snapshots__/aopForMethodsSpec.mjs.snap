@@ -1,17 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`aopForMethods class method should call pattern.aroundMethod 1`] = `
-Array [
-  Object {
-    "args": Array [
-      Object {},
+[
+  {
+    "args": [
+      {},
       1,
     ],
     "context": A {
       "variable": "method",
     },
-    "meta": Object {},
-    "object": Object {
+    "meta": {},
+    "object": {
       "_privateMethod": [Function],
       "method": [Function],
       "superMethod": [Function],
@@ -24,15 +24,15 @@ Array [
 `;
 
 exports[`aopForMethods class method should call pattern.aroundMethod for super.superMethod 1`] = `
-Array [
-  Object {
-    "args": Array [],
+[
+  {
+    "args": [],
     "context": C {
       "map": Map {},
       "variable": "super method",
     },
-    "meta": Object {},
-    "object": Object {
+    "meta": {},
+    "object": {
       "_privateMethod": [Function],
       "method": [Function],
       "method2": [Function],
@@ -46,17 +46,17 @@ Array [
 `;
 
 exports[`aopForMethods class method should call pattern.aroundMethod three times and modify payload 1`] = `
-Array [
-  Object {
-    "args": Array [
-      Object {},
+[
+  {
+    "args": [
+      {},
       1,
     ],
     "context": A {
       "variable": "method",
     },
-    "meta": Object {},
-    "object": Object {
+    "meta": {},
+    "object": {
       "_privateMethod": [Function],
       "method": [Function],
       "superMethod": [Function],
@@ -69,18 +69,18 @@ Array [
 `;
 
 exports[`aopForMethods class method should call pattern.arroundMethod for extended class with multiple aspect 1`] = `
-Array [
-  Object {
-    "args": Array [
-      Object {},
+[
+  {
+    "args": [
+      {},
       1,
     ],
     "context": C {
       "map": Map {},
       "variable": "method",
     },
-    "meta": Object {},
-    "object": Object {
+    "meta": {},
+    "object": {
       "_privateMethod": [Function],
       "method": [Function],
       "method2": [Function],
@@ -94,17 +94,17 @@ Array [
 `;
 
 exports[`aopForMethods class method should call pattern.beforeMethod and pattern.afterMethod 1`] = `
-Array [
-  Object {
-    "args": Array [
-      Object {},
+[
+  {
+    "args": [
+      {},
       1,
     ],
     "context": A {
       "variable": "method",
     },
-    "meta": Object {},
-    "object": Object {
+    "meta": {},
+    "object": {
       "_privateMethod": [Function],
       "method": [Function],
       "superMethod": [Function],
@@ -116,17 +116,17 @@ Array [
 `;
 
 exports[`aopForMethods class method should call pattern.beforeMethod and pattern.afterMethod 2`] = `
-Array [
-  Object {
-    "args": Array [
-      Object {},
+[
+  {
+    "args": [
+      {},
       1,
     ],
     "context": A {
       "variable": "method",
     },
-    "meta": Object {},
-    "object": Object {
+    "meta": {},
+    "object": {
       "_privateMethod": [Function],
       "method": [Function],
       "superMethod": [Function],
@@ -139,17 +139,17 @@ Array [
 `;
 
 exports[`aopForMethods class method should call pattern.beforeMethod and pattern.afterMethod after class is instanced 1`] = `
-Array [
-  Object {
-    "args": Array [
-      Object {},
+[
+  {
+    "args": [
+      {},
       1,
     ],
     "context": B {
       "variable": "method",
     },
-    "meta": Object {},
-    "object": Object {
+    "meta": {},
+    "object": {
       "_privateMethod": [Function],
       "method": [Function],
       "superMethod": [Function],
@@ -161,17 +161,17 @@ Array [
 `;
 
 exports[`aopForMethods class method should call pattern.beforeMethod and pattern.afterMethod after class is instanced 2`] = `
-Array [
-  Object {
-    "args": Array [
-      Object {},
+[
+  {
+    "args": [
+      {},
       1,
     ],
     "context": B {
       "variable": "method",
     },
-    "meta": Object {},
-    "object": Object {
+    "meta": {},
+    "object": {
       "_privateMethod": [Function],
       "method": [Function],
       "superMethod": [Function],
@@ -184,17 +184,17 @@ Array [
 `;
 
 exports[`aopForMethods class method should call pattern.beforeMethod and pattern.afterMethod for extended class 1`] = `
-Array [
-  Object {
-    "args": Array [
-      Object {},
+[
+  {
+    "args": [
+      {},
       1,
     ],
     "context": B {
       "variable": "method",
     },
-    "meta": Object {},
-    "object": Object {
+    "meta": {},
+    "object": {
       "_privateMethod": [Function],
       "method": [Function],
       "superMethod": [Function],
@@ -206,17 +206,17 @@ Array [
 `;
 
 exports[`aopForMethods class method should call pattern.beforeMethod and pattern.afterMethod for extended class 2`] = `
-Array [
-  Object {
-    "args": Array [
-      Object {},
+[
+  {
+    "args": [
+      {},
       1,
     ],
     "context": B {
       "variable": "method",
     },
-    "meta": Object {},
-    "object": Object {
+    "meta": {},
+    "object": {
       "_privateMethod": [Function],
       "method": [Function],
       "superMethod": [Function],
@@ -229,18 +229,18 @@ Array [
 `;
 
 exports[`aopForMethods class method should call pattern.beforeMethod and pattern.afterMethod for extended class with multiple aspect 1`] = `
-Array [
-  Object {
-    "args": Array [
-      Object {},
+[
+  {
+    "args": [
+      {},
       1,
     ],
     "context": C {
       "map": Map {},
       "variable": "method",
     },
-    "meta": Object {},
-    "object": Object {
+    "meta": {},
+    "object": {
       "_privateMethod": [Function],
       "method": [Function],
       "method2": [Function],
@@ -253,18 +253,18 @@ Array [
 `;
 
 exports[`aopForMethods class method should call pattern.beforeMethod and pattern.afterMethod for extended class with multiple aspect 2`] = `
-Array [
-  Object {
-    "args": Array [
-      Object {},
+[
+  {
+    "args": [
+      {},
       1,
     ],
     "context": C {
       "map": Map {},
       "variable": "method",
     },
-    "meta": Object {},
-    "object": Object {
+    "meta": {},
+    "object": {
       "_privateMethod": [Function],
       "method": [Function],
       "method2": [Function],
@@ -278,17 +278,17 @@ Array [
 `;
 
 exports[`aopForMethods class method should call pattern.beforeMethod and pattern.afterMethod for extended classes with same ancestor 1`] = `
-Array [
-  Object {
-    "args": Array [
-      Object {},
+[
+  {
+    "args": [
+      {},
       1,
     ],
     "context": B {
       "variable": "method",
     },
-    "meta": Object {},
-    "object": Object {
+    "meta": {},
+    "object": {
       "_privateMethod": [Function],
       "method": [Function],
       "superMethod": [Function],
@@ -300,17 +300,17 @@ Array [
 `;
 
 exports[`aopForMethods class method should call pattern.beforeMethod and pattern.afterMethod for extended classes with same ancestor 2`] = `
-Array [
-  Object {
-    "args": Array [
-      Object {},
+[
+  {
+    "args": [
+      {},
       1,
     ],
     "context": B {
       "variable": "method",
     },
-    "meta": Object {},
-    "object": Object {
+    "meta": {},
+    "object": {
       "_privateMethod": [Function],
       "method": [Function],
       "superMethod": [Function],
@@ -323,15 +323,15 @@ Array [
 `;
 
 exports[`aopForMethods class method should call pattern.beforeMethod and pattern.afterMethod for super.superMethod 1`] = `
-Array [
-  Object {
-    "args": Array [],
+[
+  {
+    "args": [],
     "context": C {
       "map": Map {},
       "variable": "super method",
     },
-    "meta": Object {},
-    "object": Object {
+    "meta": {},
+    "object": {
       "__defineGetter__": [Function],
       "__defineSetter__": [Function],
       "__lookupGetter__": [Function],
@@ -355,15 +355,15 @@ Array [
 `;
 
 exports[`aopForMethods class method should call pattern.beforeMethod and pattern.afterMethod for super.superMethod 2`] = `
-Array [
-  Object {
-    "args": Array [],
+[
+  {
+    "args": [],
     "context": C {
       "map": Map {},
       "variable": "super method",
     },
-    "meta": Object {},
-    "object": Object {
+    "meta": {},
+    "object": {
       "__defineGetter__": [Function],
       "__defineSetter__": [Function],
       "__lookupGetter__": [Function],

@@ -1,7 +1,9 @@
-import aopForStatic from '../aopForStatic';
-import { hookName } from '../hook';
-import createClasses from './createClasses';
-import createPattern from './createPattern';
+import { expect, jest, describe, beforeEach, it } from '@jest/globals';
+
+import aopForStatic from '../aopForStatic.mjs';
+import { hookName } from '../hook.mjs';
+import createClasses from './createClasses.mjs';
+import createPattern from './createPattern.mjs';
 
 describe('aopForStatic method', () => {
   let pattern = null;
@@ -146,7 +148,7 @@ describe('aopForStatic method', () => {
         [hookName.afterGetter]: afterGetter,
         [hookName.beforeSetter]: beforeSetter,
         [hookName.afterSetter]: afterSetter,
-      }
+      },
     );
     let { C } = createClasses();
 

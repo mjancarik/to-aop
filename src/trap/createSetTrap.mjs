@@ -1,5 +1,5 @@
-import invokePattern from './invokePattern';
-import { AOP_HOOKS } from '../symbol';
+import invokePattern from './invokePattern.mjs';
+import { AOP_HOOKS } from '../symbol.mjs';
 
 export default function createSetTrap({
   target,
@@ -21,7 +21,7 @@ export default function createSetTrap({
           context,
           meta,
         });
-      }
+      },
     );
 
     const { target, object, property, pattern, context } =
@@ -51,7 +51,7 @@ export default function createSetTrap({
           context,
           meta,
         });
-      }
+      },
     );
 
     return result;

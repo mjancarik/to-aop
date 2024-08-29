@@ -1,8 +1,8 @@
-import createGetTrap from './trap/createGetTrap';
-import createSetTrap from './trap/createSetTrap';
-import overOwnProperty from './overOwnProperty';
-import { AOP_STATIC_ALLOW, AOP_HOOKS } from './symbol';
-import { hookName, hasToRegisterHook } from './hook';
+import createGetTrap from './trap/createGetTrap.mjs';
+import createSetTrap from './trap/createSetTrap.mjs';
+import overOwnProperty from './overOwnProperty.mjs';
+import { AOP_STATIC_ALLOW, AOP_HOOKS } from './symbol.mjs';
+import { hookName, hasToRegisterHook } from './hook.mjs';
 
 const hasToRegisterGetterSetterHook = hasToRegisterHook([
   hookName.beforeGetter,
@@ -94,10 +94,10 @@ export default function aopForStatic(target, pattern) {
                   })(payload);
                 }
               },
-            })
+            }),
           );
         }
-      }
+      },
     );
 
     overOwnProperty({ target, pattern, original, object: target });

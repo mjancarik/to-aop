@@ -1,4 +1,4 @@
-import overOwnProperty from './overOwnProperty';
+import overOwnProperty from './overOwnProperty.mjs';
 
 export default function aopForMethods(target, pattern) {
   let original = {};

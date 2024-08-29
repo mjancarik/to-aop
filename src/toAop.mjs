@@ -1,10 +1,10 @@
 'use strict';
 
-import { AOP_PATTERN } from './symbol';
-import aopForMethods from './aopForMethods';
-import aopForStatic from './aopForStatic';
-import createProxy from './trap/createProxy';
-import createCallTrap from './trap/createCallTrap';
+import { AOP_PATTERN } from './symbol.mjs';
+import aopForMethods from './aopForMethods.mjs';
+import aopForStatic from './aopForStatic.mjs';
+import createProxy from './trap/createProxy.mjs';
+import createCallTrap from './trap/createCallTrap.mjs';
 
 export function createAspect(pattern) {
   return function applyAop(target) {
@@ -48,7 +48,7 @@ export function unAop(target) {
 
         return pattern;
       },
-      target[AOP_PATTERN]
+      target[AOP_PATTERN],
     );
 
     target[AOP_PATTERN] = undefined;
@@ -61,12 +61,12 @@ function applyAop(target, pattern) {
       aopForStatic(target, pattern);
       aopForMethods(target, pattern);
 
-      return;
+      return target;
     }
 
     mergePattern(target, pattern);
 
-    return;
+    return target;
   }
 
   Reflect.defineProperty(target, AOP_PATTERN, {
@@ -84,7 +84,7 @@ function applyAop(target, pattern) {
   }
 
   throw new TypeError(
-    `aop accept only object and class. You gave type of ${typeof target}.`
+    `aop accept only object and class. You gave type of ${typeof target}.`,
   );
 }
 
@@ -121,6 +121,6 @@ function mergePattern(target, pattern) {
 
       return resultPattern;
     },
-    currentTargetPattern
+    currentTargetPattern,
   );
 }

@@ -1,5 +1,5 @@
 const config = {
-  input: 'src/main.js',
+  input: 'src/main.mjs',
   output: [
     {
       file: `./dist/toAop.js`,

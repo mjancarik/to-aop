@@ -1,7 +1,9 @@
-import { aop, createAspect, unAop } from '../toAop';
-import { hookName } from '../hook';
-import createClasses from './createClasses';
-import createPattern from './createPattern';
+import { expect, jest, describe, beforeEach, it } from '@jest/globals';
+
+import { aop, createAspect, unAop } from '../toAop.mjs';
+import { hookName } from '../hook.mjs';
+import createClasses from './createClasses.mjs';
+import createPattern from './createPattern.mjs';
 
 describe('createAspect method', () => {
   let withAspect = null;

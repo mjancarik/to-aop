@@ -1,7 +1,7 @@
-import createCallTrap from './createCallTrap';
-import createGetTrap from './createGetTrap';
-import createSetTrap from './createSetTrap';
-import { AOP_PATTERN } from '../symbol';
+import createCallTrap from './createCallTrap.mjs';
+import createGetTrap from './createGetTrap.mjs';
+import createSetTrap from './createSetTrap.mjs';
+import { AOP_PATTERN } from '../symbol.mjs';
 
 export default function createProxy(target, pattern, context) {
   pattern = pattern || target[AOP_PATTERN] || {};

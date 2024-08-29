@@ -1,6 +1,6 @@
-import invokePattern from './invokePattern';
-import { AOP_HOOKS } from '../symbol';
-import { isConstructable } from '../util';
+import invokePattern from './invokePattern.mjs';
+import { AOP_HOOKS } from '../symbol.mjs';
+import { isConstructable } from '../util.mjs';
 
 export default function createCallTrap({
   target,
@@ -25,7 +25,7 @@ export default function createCallTrap({
           args: rest,
           meta,
         });
-      }
+      },
     );
 
     {
@@ -73,7 +73,7 @@ export default function createCallTrap({
           payload,
           meta,
         });
-      }
+      },
     );
 
     return payload;
