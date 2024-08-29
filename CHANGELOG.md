@@ -1,3 +1,10 @@
+## <small>0.5.5 (2024-08-29)</small>
+
+* docs: fix readme ([15d1e36](https://github.com/mjancarik/to-aop/commit/15d1e36))
+* chore: update dependencies ([536b8f5](https://github.com/mjancarik/to-aop/commit/536b8f5))
+
+
+
 ## [0.5.4](https://github.com/mjancarik/to-aop/compare/v0.5.3...v0.5.4) (2021-10-06)
 
 
